@@ -1,0 +1,29 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $em: '@sfs_shop.entity_manager'
+
+#    Softspring\ShopBundle\Controller\:
+#        resource: '../../../Controller/*'
+#        public: true
+
+    Softspring\ShopBundle\Form\:
+        resource: '../../../Form/*'
+
+    Softspring\ShopBundle\Manager\:
+        resource: '../../../Manager/*'
+
+#    Softspring\ShopBundle\Request\ParamConverter\:
+#        resource: '../../../Request/ParamConverter/*'
+#        tags: ['request.param_converter']
+
+#    Softspring\ShopBundle\Manager\CustomerManager: ~
+#    Softspring\ShopBundle\Manager\CustomerManagerInterface:
+#        alias: 'Softspring\ShopBundle\Manager\CustomerManager'
+#
+#    Softspring\ShopBundle\Manager\OrderManager: ~
+#    Softspring\ShopBundle\Manager\OrderManagerInterface:
+#        alias: 'Softspring\ShopBundle\Manager\OrderManager'

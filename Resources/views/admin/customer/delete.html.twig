@@ -1,0 +1,12 @@
+{% trans_default_domain 'sfs_shop' %}
+{% extends '@SfsShop/admin_layout.html.twig' %}
+{% block title %}{{ 'admin_customers.delete.page_title'|trans }}{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_rest(form) }}
+        <input type="submit" value="{{ 'admin_customers.delete.actions.delete.button'|trans }}" class="btn btn-danger btn-block" />
+        <a href="{{ url('sfs_shop_admin_customers_list') }}" class="btn btn-secondary btn-block">{{ 'admin_customers.delete.actions.cancel.button'|trans }}</a>
+    {{ form_end(form) }}
+{% endblock content %}

@@ -1,0 +1,13 @@
+{% trans_default_domain 'sfs_shop' %}
+
+{% for order in entities %}
+    <tr>
+        <td>
+            <a href="{{ url('sfs_shop_admin_orders_read', {'entity':order}) }}">{{ order.name }}</a>
+        </td>
+
+        <td>
+            <a href="{{ url('sfs_shop_admin_orders_update', {'entity':order}) }}">update</a>
+        </td>
+    </tr>
+{% endfor %}

@@ -1,0 +1,46 @@
+services:
+    sfs_shop.admin.customer.controller:
+        class: Softspring\AdminBundle\Controller\EntityController
+        public: true
+        arguments:
+            $manager: '@Softspring\ShopBundle\Manager\CustomerManagerInterface'
+            $eventDispatcher: '@event_dispatcher'
+            $listFilterForm: '@Softspring\ShopBundle\Form\Admin\CustomerListFilterFormInterface'
+            $createForm: '@Softspring\ShopBundle\Form\Admin\CustomerCreateFormInterface'
+            $updateForm: '@Softspring\ShopBundle\Form\Admin\CustomerUpdateFormInterface'
+            $deleteForm: '@Softspring\ShopBundle\Form\Admin\CustomerDeleteFormInterface'
+            $config:
+                list:
+                    view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_LIST_VIEW
+                    view: '@@SfsShop/admin/customer/list.html.twig'
+                    view_page: '@@SfsShop/admin/customer/list-page.html.twig'
+                create:
+                    initialize_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_CREATE_INITIALIZE
+                    form_valid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_CREATE_FORM_VALID
+                    success_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_CREATE_SUCCESS
+                    form_invalid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_CREATE_FORM_INVALID
+                    view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_CREATE_VIEW
+                    success_redirect_to: 'sfs_shop_admin_customers_list'
+                    view: '@@SfsShop/admin/customer/create.html.twig'
+                update:
+                    param_converter_key: 'id'
+                    initialize_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_UPDATE_INITIALIZE
+                    form_valid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_UPDATE_FORM_VALID
+                    success_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_UPDATE_SUCCESS
+                    form_invalid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_UPDATE_FORM_INVALID
+                    view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_UPDATE_VIEW
+                    success_redirect_to: 'sfs_shop_admin_customers_list'
+                    view: '@@SfsShop/admin/customer/update.html.twig'
+                delete:
+                    param_converter_key: 'id'
+                    initialize_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_DELETE_INITIALIZE
+                    form_valid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_DELETE_FORM_VALID
+                    success_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_DELETE_SUCCESS
+                    form_invalid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_DELETE_FORM_INVALID
+                    view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_DELETE_VIEW
+                    success_redirect_to: 'sfs_shop_admin_customers_list'
+                    view: '@@SfsShop/admin/customer/delete.html.twig'
+                read:
+                    param_converter_key: 'id'
+                    view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_READ_VIEW
+                    view: '@@SfsShop/admin/customer/read.html.twig'
