@@ -25,10 +25,23 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
 
+                ->arrayNode('salable')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->defaultValue('App\Entity\Product')->end()
+                    ->end()
+                ->end()
+
                 ->arrayNode('order')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('class')->defaultValue('App\Entity\Order')->end()
+                        ->arrayNode('item')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('class')->defaultValue('App\Entity\OrderItem')->end()
+                            ->end()
+                        ->end()
                     ->end()
                 ->end()
 

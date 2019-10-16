@@ -27,7 +27,9 @@ class SfsShopExtension extends Extension implements PrependExtensionInterface
         $container->setParameter('sfs_shop.entity_manager_name', $config['entity_manager']);
         // configure model classes
         $container->setParameter('sfs_shop.customer.class', $config['customer']['class']);
+        $container->setParameter('sfs_shop.salable.class', $config['salable']['class']);
         $container->setParameter('sfs_shop.order.class', $config['order']['class']);
+        $container->setParameter('sfs_shop.order.item.class', $config['order']['item']['class']);
         $container->setParameter('sfs_shop.store.class', $config['store']['class'] ?? null);
         $container->setParameter('sfs_shop.store.route_param_name', $config['store']['route_param_name'] ?? null);
         $container->setParameter('sfs_shop.store.find_field_name', $config['store']['find_field_name'] ?? null);

@@ -1,2 +1,28 @@
 {% extends '@SfsShop/layout.html.twig' %}
 
+{% block content %}
+
+    {% if cart.items.count == 0 %}
+        The cart is empty
+    {% else %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for item in cart.items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.price }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock content %}

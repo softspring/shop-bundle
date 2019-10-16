@@ -109,6 +109,10 @@ abstract class Order implements OrderInterface
      */
     public function getItems(): Collection
     {
+        if (!$this->items instanceof Collection) {
+            $this->items = new ArrayCollection();
+        }
+
         return $this->items;
     }
 
@@ -131,5 +135,16 @@ abstract class Order implements OrderInterface
         if ($this->items->contains($item)) {
             $this->items->removeElement($item);
         }
+    }
+
+    public function getSalableItem(SalableInterface $salable): ?OrderItemInterface
+    {
+        $filteredItems = $this->getItems()->filter(function (OrderItemInterface $item) use ($salable) {
+            return $item->getItem() === $salable;
+        });
+
+        $item = $filteredItems->first();
+
+        return $item instanceof OrderItemInterface ? $item : null;
     }
 }

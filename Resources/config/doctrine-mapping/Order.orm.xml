@@ -6,10 +6,11 @@
 
     <mapped-superclass name="Softspring\ShopBundle\Model\Order" table="shop_order">
         <many-to-one field="customer" target-entity="Softspring\ShopBundle\Model\CustomerInterface">
+            <cascade><cascade-persist/></cascade>
             <join-column name="customer_id" referenced-column-name="id" on-delete="CASCADE" />
         </many-to-one>
 
-        <field name="number" column="number" type="string" nullable="false" length="20" unique="true" />
+        <field name="number" column="number" type="string" nullable="true" length="20" unique="true" />
         <field name="status" column="status" type="string" nullable="false" length="20" />
     </mapped-superclass>
 

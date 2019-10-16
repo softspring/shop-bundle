@@ -4,9 +4,9 @@ namespace Softspring\ShopBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use Softspring\ShopBundle\Model\OrderInterface;
+use Softspring\ShopBundle\Model\SalableInterface;
 
-class OrderManager implements OrderManagerInterface
+class SalableManager implements SalableManagerInterface
 {
     /**
      * @var EntityManagerInterface
@@ -14,7 +14,7 @@ class OrderManager implements OrderManagerInterface
     protected $em;
 
     /**
-     * OrderManager constructor.
+     * CustomerManager constructor.
      * @param EntityManagerInterface $em
      */
     public function __construct(EntityManagerInterface $em)
@@ -24,7 +24,7 @@ class OrderManager implements OrderManagerInterface
 
     public function getClass(): string
     {
-        return OrderInterface::class;
+        return SalableInterface::class;
     }
 
     public function getRepository(): EntityRepository
@@ -32,9 +32,6 @@ class OrderManager implements OrderManagerInterface
         return $this->em->getRepository($this->getClass());
     }
 
-    /**
-     * @return OrderInterface
-     */
     public function createEntity()
     {
         $metadata = $this->em->getClassMetadata($this->getClass());
@@ -44,8 +41,8 @@ class OrderManager implements OrderManagerInterface
 
     public function saveEntity($entity): void
     {
-        if (!$entity instanceof OrderInterface) {
-            throw new \InvalidArgumentException(sprintf('$entity must be an instance of %s', OrderInterface::class));
+        if (!$entity instanceof SalableInterface) {
+            throw new \InvalidArgumentException(sprintf('$entity must be an instance of %s', SalableInterface::class));
         }
 
         $this->em->persist($entity);
