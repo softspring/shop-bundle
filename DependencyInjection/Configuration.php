@@ -31,6 +31,15 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('class')->defaultValue('App\Entity\Order')->end()
                     ->end()
                 ->end()
+
+                ->arrayNode('store')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->defaultNull()->end()
+                        ->scalarNode('route_param_name')->defaultValue('_store')->end()
+                        ->scalarNode('find_field_name')->defaultValue('id')->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

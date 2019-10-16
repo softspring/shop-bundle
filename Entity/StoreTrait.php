@@ -1,14 +1,16 @@
 <?php
 
-namespace Softspring\ShopBundle\Twig;
+namespace Softspring\ShopBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Softspring\ShopBundle\Model\StoreInterface;
-use Symfony\Bridge\Twig\AppVariable as BaseAppVariable;
 
-class AppVariable extends BaseAppVariable
+trait StoreTrait
 {
     /**
      * @var StoreInterface|null
+     * @ORM\ManyToOne(targetEntity="Softspring\ShopBundle\Model\StoreInterface")
+     * @ORM\JoinColumn(name="store_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $store;
 

@@ -4,7 +4,7 @@ namespace Softspring\ShopBundle\EventListener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Softspring\ShopBundle\Model\StoreInterface;
-use Softspring\ShopBundle\Twig\AppVariable;
+use Symfony\Bridge\Twig\AppVariable;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;

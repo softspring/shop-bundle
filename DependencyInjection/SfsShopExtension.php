@@ -28,11 +28,20 @@ class SfsShopExtension extends Extension implements PrependExtensionInterface
         // configure model classes
         $container->setParameter('sfs_shop.customer.class', $config['customer']['class']);
         $container->setParameter('sfs_shop.order.class', $config['order']['class']);
+        $container->setParameter('sfs_shop.store.class', $config['store']['class'] ?? null);
+        $container->setParameter('sfs_shop.store.route_param_name', $config['store']['route_param_name'] ?? null);
+        $container->setParameter('sfs_shop.store.find_field_name', $config['store']['find_field_name'] ?? null);
 
         // load services
         $loader->load('services.yaml');
         $loader->load('controller/admin_customers.yaml');
         $loader->load('controller/admin_orders.yaml');
+
+        if ($container->getParameter('sfs_shop.store.class')) {
+            // load store controllers and additional things
+            // $loader->load('controller/admin_stores.yaml');
+            $loader->load('doctrine_filter.yaml');
+        }
     }
 
     public function prepend(ContainerBuilder $container)

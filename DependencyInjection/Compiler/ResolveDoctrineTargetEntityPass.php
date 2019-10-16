@@ -4,6 +4,7 @@ namespace Softspring\ShopBundle\DependencyInjection\Compiler;
 
 use Softspring\ShopBundle\Model\CustomerInterface;
 use Softspring\ShopBundle\Model\OrderInterface;
+use Softspring\ShopBundle\Model\StoreInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\LogicException;
@@ -28,6 +29,14 @@ class ResolveDoctrineTargetEntityPass implements CompilerPassInterface
             throw new LogicException(sprintf('%s class must implements %s interface', $orderClass, OrderInterface::class));
         }
         $this->setTargetEntity($container, OrderInterface::class, $orderClass);
+
+        // configure store
+        if ($storeClass = $container->getParameter('sfs_shop.store.class')) {
+            if (!class_implements($storeClass, StoreInterface::class)) {
+                throw new LogicException(sprintf('%s class must implements %s interface', $storeClass, StoreInterface::class));
+            }
+            $this->setTargetEntity($container, StoreInterface::class, $storeClass);
+        }
     }
 
     private function setTargetEntity(ContainerBuilder $container, string $interface, string $class)
