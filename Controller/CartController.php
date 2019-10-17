@@ -4,9 +4,11 @@ namespace Softspring\ShopBundle\Controller;
 
 use Softspring\ExtraBundle\Controller\AbstractController;
 use Softspring\ShopBundle\Manager\CartManagerInterface;
+use Softspring\ShopBundle\Model\OrderInterface;
 use Softspring\ShopBundle\Model\SalableItemInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class CartController extends AbstractController
 {
@@ -41,23 +43,10 @@ class CartController extends AbstractController
         return $this->render('@SfsShop/cart/view.html.twig', $viewData->getArrayCopy());
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function reset(Request $request): Response
-    {
-        $this->cartManager->reset($request);
-
-        return $this->redirectToRoute('sfs_shop_cart_view');
-    }
-
     public function addItem(SalableItemInterface $item, Request $request): Response
     {
-        $cart = $this->cartManager->getCart($request);
-        $this->cartManager->addItem($cart, $item);
-        $this->cartManager->saveEntity($cart);
+        $this->cartManager->addItem($request, $item);
+        $this->cartManager->saveEntity($this->cartManager->getCart($request));
 
         return $this->redirect($request->headers->get('Referer'));
     }
@@ -67,23 +56,46 @@ class CartController extends AbstractController
         throw new \Exception('Not yet implemented');
     }
 
-    public function purchase()
+    public function transition(string $transition, Request $request): Response
     {
+        $cart = $this->cartManager->getCart($request);
+        $transitionMetadata = $this->cartManager->getCartTransitionMetadata($transition, $request);
 
+        if (!empty($transitionMetadata['is_granted'])) {
+            $this->denyAccessUnlessGranted($transitionMetadata['is_granted'], $cart);
+        }
+
+        if (empty($transitionMetadata['form'])) {
+            $this->cartManager->transition($transition, $request);
+
+            if (!empty($transitionMetadata['redirect_on_terminate'])) {
+                return $this->redirectToRoute($transitionMetadata['redirect_on_terminate']);
+            }
+
+            return new Response('');
+        }
+
+        $form = $this->createForm($transitionMetadata['form'], $cart)->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->cartManager->transition($transition, $request);
+        }
+
+        $viewData = new \ArrayObject([
+            'cart' => $cart,
+            'form' => $form->createView(),
+        ]);
+
+        return $this->render('@SfsShop/cart/'.$transition.'.html.twig', $viewData->getArrayCopy());
     }
 
-    public function shippingAddress()
+
+    public function finished(OrderInterface $order, Request $request): Response
     {
+        $viewData = new \ArrayObject([
+            'order' => $order,
+        ]);
 
-    }
-
-    public function paymentMethod()
-    {
-
-    }
-
-    public function confirm()
-    {
-
+        return $this->render('@SfsShop/cart/finished.html.twig', $viewData->getArrayCopy());
     }
 }

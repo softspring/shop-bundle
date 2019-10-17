@@ -9,9 +9,15 @@ use Symfony\Component\HttpFoundation\Request;
 
 interface CartManagerInterface extends AdminEntityManagerInterface
 {
+    public function close(Request $request): void;
+
     public function reset(Request $request): ?OrderInterface;
 
     public function getCart(Request $request): ?OrderInterface;
 
-    public function addItem(OrderInterface $cart, SalableItemInterface $item): void;
+    public function getCartTransitionMetadata(string $transition, Request $request): array;
+
+    public function transition(string $transition, Request $request): bool;
+
+    public function addItem(Request $request, SalableItemInterface $item): void;
 }

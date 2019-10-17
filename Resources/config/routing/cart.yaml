@@ -2,10 +2,6 @@ sfs_shop_cart_view:
     controller: Softspring\ShopBundle\Controller\CartController::view
     path: /
 
-sfs_shop_cart_reset:
-    controller: Softspring\ShopBundle\Controller\CartController::reset
-    path: /reset
-
 sfs_shop_cart_add:
     controller: Softspring\ShopBundle\Controller\CartController::addItem
     path: /{item}/add
@@ -14,4 +10,10 @@ sfs_shop_cart_remove:
     controller: Softspring\ShopBundle\Controller\CartController::removeItem
     path: /{item}/remove
 
+sfs_shop_cart_finished:
+    controller: Softspring\ShopBundle\Controller\CartController::finished
+    path: /{order}/finished
 
+sfs_shop_cart_transition:
+    controller: Softspring\ShopBundle\Controller\CartController::transition
+    path: /{transition}

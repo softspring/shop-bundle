@@ -74,11 +74,7 @@ class CartManager implements CartManagerInterface
 
     public function getCart(Request $request): ?OrderInterface
     {
-        $session = $request->getSession();
-
-        if (!$session instanceof Session) {
-            throw new \RuntimeException('User session is not started');
-        }
+        $session = $this->getSession($request);
 
         $cart = $session->get('cart');
         $cart = $cart ? $this->getRepository()->findOneById($cart) : null;
@@ -86,7 +82,7 @@ class CartManager implements CartManagerInterface
         if (!$cart instanceof OrderInterface) {
             $cart = $this->createEntity();
 
-            $workflow = $this->workflows->get($cart, 'checkout_state_machine');
+            $workflow = $this->workflows->get($cart, 'checkout');
             $cart->setStatus($workflow->getDefinition()->getInitialPlaces()[0]);
         }
 
@@ -96,21 +92,68 @@ class CartManager implements CartManagerInterface
         return $cart;
     }
 
+    public function getCartTransitionMetadata(string $transition, Request $request): array
+    {
+        $cart = $this->getCart($request);
+        $workflow = $this->workflows->get($cart, 'checkout');
+
+        if (!$workflow->can($cart, $transition)) {
+            throw new \Exception('Transition is not enabled');
+        }
+
+        foreach ($workflow->getEnabledTransitions($cart) as $transitionItem) {
+            if ($transitionItem->getName() == $transition) {
+                break;
+            }
+        }
+
+        return $workflow->getMetadataStore()->getTransitionMetadata($transitionItem);
+    }
+
+    public function transition(string $transition, Request $request): bool
+    {
+        $cart = $this->getCart($request);
+        $workflow = $this->workflows->get($cart, 'checkout');
+        $transitionMetadata = $this->getCartTransitionMetadata($transition, $request);
+
+        if (!$workflow->can($cart, $transition)) {
+            return false;
+        }
+
+        $workflow->apply($cart, $transition);
+        $this->saveEntity($cart);
+
+        if ($transitionMetadata['close_cart']??false == true) {
+            $this->close($request);
+        }
+
+        if ($transitionMetadata['reset_cart']??false == true) {
+            $this->reset($request);
+        }
+
+        return true;
+    }
+
     public function reset(Request $request): ?OrderInterface
     {
-        $session = $request->getSession();
-
-        if (!$session instanceof Session) {
-            throw new \RuntimeException('User session is not started');
-        }
+        $session = $this->getSession($request);
 
         $session->set('cart', null);
 
         return $this->getCart($request);
     }
 
-    public function addItem(OrderInterface $cart, SalableItemInterface $item): void
+    public function close(Request $request): void
     {
+        $session = $this->getSession($request);
+
+        $session->set('cart', null);
+    }
+
+    public function addItem(Request $request, SalableItemInterface $item): void
+    {
+        $cart = $this->getCart($request);
+
         $entry = $cart->getEntryByItem($item);
         if (!$entry) {
             /** @var OrderEntryInterface $entry */
@@ -121,5 +164,16 @@ class CartManager implements CartManagerInterface
         $cart->addEntry($entry);
 
         $this->em->persist($entry); // TODO REMOVE WHEN CASCADE PERSIST WORKS
+    }
+
+    protected function getSession(Request $request): Session
+    {
+        $session = $request->getSession();
+
+        if (!$session instanceof Session) {
+            throw new \RuntimeException('User session is not started');
+        }
+
+        return $session;
     }
 }

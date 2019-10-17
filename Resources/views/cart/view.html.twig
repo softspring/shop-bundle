@@ -26,5 +26,13 @@
             {% endfor %}
             </tbody>
         </table>
+
+        {% for transition in workflow_transitions(cart, 'checkout') %}
+            <a class="btn btn-primary" href="{{ url('sfs_shop_cart_transition', {'transition':transition.name}) }}">{{ transition.name }}</a>
+            <br/>
+        {% else %}
+            No actions available.
+        {% endfor %}
+
     {% endif %}
 {% endblock content %}
