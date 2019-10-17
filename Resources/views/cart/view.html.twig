@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    {% if cart.items.count == 0 %}
+    {% if cart.entries.count == 0 %}
         The cart is empty
     {% else %}
         <table class="table">
@@ -16,10 +16,12 @@
             </thead>
 
             <tbody>
-            {% for item in cart.items %}
+            {% for entry in cart.entries %}
                 <tr>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.price }}</td>
+                    <td>{{ entry.item.name }}</td>
+                    <td>{{ entry.item.price }}</td>
+                    <td>{{ entry.quantity }}</td>
+                    <td>{{ entry.totalPrice }}</td>
                 </tr>
             {% endfor %}
             </tbody>

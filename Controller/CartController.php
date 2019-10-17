@@ -4,7 +4,7 @@ namespace Softspring\ShopBundle\Controller;
 
 use Softspring\ExtraBundle\Controller\AbstractController;
 use Softspring\ShopBundle\Manager\CartManagerInterface;
-use Softspring\ShopBundle\Model\SalableInterface;
+use Softspring\ShopBundle\Model\SalableItemInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -53,7 +53,7 @@ class CartController extends AbstractController
         return $this->redirectToRoute('sfs_shop_cart_view');
     }
 
-    public function addItem(SalableInterface $item, Request $request): Response
+    public function addItem(SalableItemInterface $item, Request $request): Response
     {
         $cart = $this->cartManager->getCart($request);
         $this->cartManager->addItem($cart, $item);
@@ -62,7 +62,7 @@ class CartController extends AbstractController
         return $this->redirect($request->headers->get('Referer'));
     }
 
-    public function removeItem(SalableInterface $item, Request $request): Response
+    public function removeItem(SalableItemInterface $item, Request $request): Response
     {
         throw new \Exception('Not yet implemented');
     }

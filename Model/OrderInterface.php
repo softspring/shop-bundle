@@ -44,24 +44,24 @@ interface OrderInterface
     public function setDate(?\DateTime $date): void;
 
     /**
-     * @return Collection|OrderItemInterface[]
+     * @return Collection|OrderEntryInterface[]
      */
-    public function getItems(): Collection;
+    public function getEntries(): Collection;
 
     /**
-     * @param OrderItemInterface $item
+     * @param OrderEntryInterface $entry
      */
-    public function addItem(OrderItemInterface $item): void;
+    public function addEntry(OrderEntryInterface $entry): void;
 
     /**
-     * @param OrderItemInterface $item
+     * @param OrderEntryInterface $entry
      */
-    public function removeItem(OrderItemInterface $item): void;
+    public function removeEntry(OrderEntryInterface $entry): void;
 
     /**
-     * @param SalableInterface $salable
+     * @param SalableItemInterface $item
      *
-     * @return OrderItemInterface|null
+     * @return OrderEntryInterface|null
      */
-    public function getSalableItem(SalableInterface $salable): ?OrderItemInterface;
+    public function getEntryByItem(SalableItemInterface $item): ?OrderEntryInterface;
 }

@@ -28,16 +28,16 @@ abstract class Order implements OrderInterface
     protected $date;
 
     /**
-     * @var Collection|OrderItemInterface[]
+     * @var Collection|OrderEntryInterface[]
      */
-    protected $items;
+    protected $entries;
 
     /**
      * Order constructor.
      */
     public function __construct()
     {
-        $this->items = new ArrayCollection();
+        $this->entries = new ArrayCollection();
     }
 
     /**
@@ -105,46 +105,46 @@ abstract class Order implements OrderInterface
     }
 
     /**
-     * @return Collection|OrderItemInterface[]
+     * @return Collection|OrderEntryInterface[]
      */
-    public function getItems(): Collection
+    public function getEntries(): Collection
     {
-        if (!$this->items instanceof Collection) {
-            $this->items = new ArrayCollection();
+        if (!$this->entries instanceof Collection) {
+            $this->entries = new ArrayCollection();
         }
 
-        return $this->items;
+        return $this->entries;
     }
 
     /**
-     * @param OrderItemInterface $item
+     * @param OrderEntryInterface $entry
      */
-    public function addItem(OrderItemInterface $item): void
+    public function addEntry(OrderEntryInterface $entry): void
     {
-        if (!$this->items->contains($item)) {
-            $this->items->add($item);
-            $item->setOrder($this);
+        if (!$this->entries->contains($entry)) {
+            $this->entries->add($entry);
+            $entry->setOrder($this);
         }
     }
 
     /**
-     * @param OrderItemInterface $item
+     * @param OrderEntryInterface $entry
      */
-    public function removeItem(OrderItemInterface $item): void
+    public function removeEntry(OrderEntryInterface $entry): void
     {
-        if ($this->items->contains($item)) {
-            $this->items->removeElement($item);
+        if ($this->entries->contains($entry)) {
+            $this->entries->removeElement($entry);
         }
     }
 
-    public function getSalableItem(SalableInterface $salable): ?OrderItemInterface
+    public function getEntryByItem(SalableItemInterface $item): ?OrderEntryInterface
     {
-        $filteredItems = $this->getItems()->filter(function (OrderItemInterface $item) use ($salable) {
-            return $item->getItem() === $salable;
+        $filteredEntries = $this->getEntries()->filter(function (OrderEntryInterface $entry) use ($item) {
+            return $entry->getItem() === $item;
         });
 
-        $item = $filteredItems->first();
+        $item = $filteredEntries->first();
 
-        return $item instanceof OrderItemInterface ? $item : null;
+        return $item instanceof OrderEntryInterface ? $item : null;
     }
 }

@@ -4,8 +4,8 @@ namespace Softspring\ShopBundle\DependencyInjection\Compiler;
 
 use Softspring\ShopBundle\Model\CustomerInterface;
 use Softspring\ShopBundle\Model\OrderInterface;
-use Softspring\ShopBundle\Model\OrderItemInterface;
-use Softspring\ShopBundle\Model\SalableInterface;
+use Softspring\ShopBundle\Model\OrderEntryInterface;
+use Softspring\ShopBundle\Model\SalableItemInterface;
 use Softspring\ShopBundle\Model\StoreInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -26,11 +26,11 @@ class ResolveDoctrineTargetEntityPass implements CompilerPassInterface
         $this->setTargetEntity($container, CustomerInterface::class, $customerClass);
 
         // configure salable
-        $salableClass = $container->getParameter('sfs_shop.salable.class');
-        if (!class_implements($salableClass, SalableInterface::class)) {
-            throw new LogicException(sprintf('%s class must implements %s interface', $salableClass, SalableInterface::class));
+        $salableItemClass = $container->getParameter('sfs_shop.salable_item.class');
+        if (!class_implements($salableItemClass, SalableItemInterface::class)) {
+            throw new LogicException(sprintf('%s class must implements %s interface', $salableItemClass, SalableItemInterface::class));
         }
-        $this->setTargetEntity($container, SalableInterface::class, $salableClass);
+        $this->setTargetEntity($container, SalableItemInterface::class, $salableItemClass);
 
         // configure order
         $orderClass = $container->getParameter('sfs_shop.order.class');
@@ -40,11 +40,11 @@ class ResolveDoctrineTargetEntityPass implements CompilerPassInterface
         $this->setTargetEntity($container, OrderInterface::class, $orderClass);
 
         // configure order item
-        $orderItemClass = $container->getParameter('sfs_shop.order.item.class');
-        if (!class_implements($orderItemClass, OrderItemInterface::class)) {
-            throw new LogicException(sprintf('%s class must implements %s interface', $orderItemClass, OrderItemInterface::class));
+        $orderEntryClass = $container->getParameter('sfs_shop.order.entry.class');
+        if (!class_implements($orderEntryClass, OrderEntryInterface::class)) {
+            throw new LogicException(sprintf('%s class must implements %s interface', $orderEntryClass, OrderEntryInterface::class));
         }
-        $this->setTargetEntity($container, OrderItemInterface::class, $orderItemClass);
+        $this->setTargetEntity($container, OrderEntryInterface::class, $orderEntryClass);
 
         // configure store
         if ($storeClass = $container->getParameter('sfs_shop.store.class')) {

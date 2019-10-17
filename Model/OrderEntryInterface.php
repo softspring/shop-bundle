@@ -2,7 +2,7 @@
 
 namespace Softspring\ShopBundle\Model;
 
-interface OrderItemInterface
+interface OrderEntryInterface
 {
     /**
      * @return OrderInterface|null
@@ -25,14 +25,14 @@ interface OrderItemInterface
     public function setQuantity(?int $quantity): void;
 
     /**
-     * @return SalableInterface|null
+     * @return SalableItemInterface|null
      */
-    public function getItem(): ?SalableInterface;
+    public function getItem(): ?SalableItemInterface;
 
     /**
-     * @param SalableInterface|null $item
+     * @param SalableItemInterface|null $item
      */
-    public function setItem(?SalableInterface $item): void;
+    public function setItem(?SalableItemInterface $item): void;
 
     /**
      * @return float

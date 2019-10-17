@@ -2,7 +2,7 @@
 
 namespace Softspring\ShopBundle\Model;
 
-abstract class OrderItem implements OrderItemInterface
+abstract class OrderEntry implements OrderEntryInterface
 {
     /**
      * @var OrderInterface|null
@@ -10,7 +10,7 @@ abstract class OrderItem implements OrderItemInterface
     protected $order;
 
     /**
-     * @var SalableInterface|null
+     * @var SalableItemInterface|null
      */
     protected $item;
 
@@ -36,17 +36,17 @@ abstract class OrderItem implements OrderItemInterface
     }
 
     /**
-     * @return SalableInterface|null
+     * @return SalableItemInterface|null
      */
-    public function getItem(): ?SalableInterface
+    public function getItem(): ?SalableItemInterface
     {
         return $this->item;
     }
 
     /**
-     * @param SalableInterface|null $item
+     * @param SalableItemInterface|null $item
      */
-    public function setItem(?SalableInterface $item): void
+    public function setItem(?SalableItemInterface $item): void
     {
         $this->item = $item;
     }

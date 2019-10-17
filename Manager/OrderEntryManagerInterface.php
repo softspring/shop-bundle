@@ -6,7 +6,7 @@ use Softspring\AdminBundle\Manager\AdminEntityManagerInterface;
 use Softspring\ShopBundle\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-interface OrderItemManagerInterface extends AdminEntityManagerInterface
+interface OrderEntryManagerInterface extends AdminEntityManagerInterface
 {
 
 }

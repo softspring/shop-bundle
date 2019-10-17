@@ -2,7 +2,7 @@
 
 namespace Softspring\ShopBundle\Model;
 
-interface SalableInterface
+interface SalableItemInterface
 {
     /**
      * @return float|null

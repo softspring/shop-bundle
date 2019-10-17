@@ -4,9 +4,9 @@ namespace Softspring\ShopBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use Softspring\ShopBundle\Model\SalableInterface;
+use Softspring\ShopBundle\Model\SalableItemInterface;
 
-class SalableManager implements SalableManagerInterface
+class SalableItemManager implements SalableItemManagerInterface
 {
     /**
      * @var EntityManagerInterface
@@ -24,7 +24,7 @@ class SalableManager implements SalableManagerInterface
 
     public function getClass(): string
     {
-        return SalableInterface::class;
+        return SalableItemInterface::class;
     }
 
     public function getRepository(): EntityRepository
@@ -41,8 +41,8 @@ class SalableManager implements SalableManagerInterface
 
     public function saveEntity($entity): void
     {
-        if (!$entity instanceof SalableInterface) {
-            throw new \InvalidArgumentException(sprintf('$entity must be an instance of %s', SalableInterface::class));
+        if (!$entity instanceof SalableItemInterface) {
+            throw new \InvalidArgumentException(sprintf('$entity must be an instance of %s', SalableItemInterface::class));
         }
 
         $this->em->persist($entity);

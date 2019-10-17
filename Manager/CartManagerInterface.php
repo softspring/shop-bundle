@@ -4,7 +4,7 @@ namespace Softspring\ShopBundle\Manager;
 
 use Softspring\AdminBundle\Manager\AdminEntityManagerInterface;
 use Softspring\ShopBundle\Model\OrderInterface;
-use Softspring\ShopBundle\Model\SalableInterface;
+use Softspring\ShopBundle\Model\SalableItemInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 interface CartManagerInterface extends AdminEntityManagerInterface
@@ -13,5 +13,5 @@ interface CartManagerInterface extends AdminEntityManagerInterface
 
     public function getCart(Request $request): ?OrderInterface;
 
-    public function addItem(OrderInterface $cart, SalableInterface $item): void;
+    public function addItem(OrderInterface $cart, SalableItemInterface $item): void;
 }

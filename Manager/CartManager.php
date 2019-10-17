@@ -5,8 +5,8 @@ namespace Softspring\ShopBundle\Manager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Softspring\ShopBundle\Model\OrderInterface;
-use Softspring\ShopBundle\Model\OrderItemInterface;
-use Softspring\ShopBundle\Model\SalableInterface;
+use Softspring\ShopBundle\Model\OrderEntryInterface;
+use Softspring\ShopBundle\Model\SalableItemInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Workflow\Registry;
@@ -24,22 +24,22 @@ class CartManager implements CartManagerInterface
     protected $workflows;
 
     /**
-     * @var OrderItemManagerInterface
+     * @var OrderEntryManagerInterface
      */
-    protected $orderItemManager;
+    protected $orderEntryManager;
 
     /**
      * CartManager constructor.
      *
      * @param EntityManagerInterface    $em
      * @param Registry                  $workflows
-     * @param OrderItemManagerInterface $orderItemManager
+     * @param OrderEntryManagerInterface $orderEntryManager
      */
-    public function __construct(EntityManagerInterface $em, Registry $workflows, OrderItemManagerInterface $orderItemManager)
+    public function __construct(EntityManagerInterface $em, Registry $workflows, OrderEntryManagerInterface $orderEntryManager)
     {
         $this->em = $em;
         $this->workflows = $workflows;
-        $this->orderItemManager = $orderItemManager;
+        $this->orderEntryManager = $orderEntryManager;
     }
 
     public function getClass(): string
@@ -109,17 +109,17 @@ class CartManager implements CartManagerInterface
         return $this->getCart($request);
     }
 
-    public function addItem(OrderInterface $cart, SalableInterface $salable): void
+    public function addItem(OrderInterface $cart, SalableItemInterface $item): void
     {
-        $item = $cart->getSalableItem($salable);
-        if (!$item) {
-            /** @var OrderItemInterface $item */
-            $item = $this->orderItemManager->createEntity();
-            $item->setItem($salable);
+        $entry = $cart->getEntryByItem($item);
+        if (!$entry) {
+            /** @var OrderEntryInterface $entry */
+            $entry = $this->orderEntryManager->createEntity();
+            $entry->setItem($item);
         }
-        $item->setQuantity(1 + (int)$item->getQuantity());
-        $cart->addItem($item);
+        $entry->setQuantity(1 + (int)$entry->getQuantity());
+        $cart->addEntry($entry);
 
-        $this->em->persist($item); // TODO REMOVE WHEN CASCADE PERSIST WORKS
+        $this->em->persist($entry); // TODO REMOVE WHEN CASCADE PERSIST WORKS
     }
 }

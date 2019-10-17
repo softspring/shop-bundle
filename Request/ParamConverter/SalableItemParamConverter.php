@@ -4,22 +4,22 @@ namespace Softspring\ShopBundle\Request\ParamConverter;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
-use Softspring\ShopBundle\Manager\SalableManagerInterface;
-use Softspring\ShopBundle\Model\SalableInterface;
+use Softspring\ShopBundle\Manager\SalableItemManagerInterface;
+use Softspring\ShopBundle\Model\SalableItemInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class SalableParamConverter implements ParamConverterInterface
+class SalableItemParamConverter implements ParamConverterInterface
 {
     /**
-     * @var SalableManagerInterface
+     * @var SalableItemManagerInterface
      */
     protected $manager;
 
     /**
      * ModelParamConverter constructor.
-     * @param SalableManagerInterface $manager
+     * @param SalableItemManagerInterface $manager
      */
-    public function __construct(SalableManagerInterface $manager)
+    public function __construct(SalableItemManagerInterface $manager)
     {
         $this->manager = $manager;
     }
@@ -33,6 +33,6 @@ class SalableParamConverter implements ParamConverterInterface
 
     public function supports(ParamConverter $configuration)
     {
-        return $configuration->getClass() === SalableInterface::class;
+        return $configuration->getClass() === SalableItemInterface::class;
     }
 }
