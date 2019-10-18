@@ -2,8 +2,10 @@
 
 namespace Softspring\ShopBundle\Controller;
 
+use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\ExtraBundle\Controller\AbstractController;
+use Softspring\ShopBundle\Event\GetResponseCartTransitionEvent;
 use Softspring\ShopBundle\Manager\CartManagerInterface;
 use Softspring\ShopBundle\Model\OrderInterface;
 use Softspring\ShopBundle\Model\SalableItemInterface;
@@ -90,37 +92,74 @@ class CartController extends AbstractController
         $cart = $this->cartManager->getCart($request);
         $transitionMetadata = $this->cartManager->getCartTransitionMetadata($transition, $request);
 
+        if ($response = $this->dispatchGetResponse("sfs_shop.cart.transition.{$transition}.initialize", new GetResponseCartTransitionEvent($transition, $transitionMetadata, $cart, $request))) {
+            return $response;
+        }
+
         // if configured, check user role before running the transition
         if (!empty($transitionMetadata['is_granted'])) {
             $this->denyAccessUnlessGranted($transitionMetadata['is_granted'], $cart);
         }
 
-        $viewData = new \ArrayObject([
-            'cart' => $cart,
-        ]);
+        $viewData = new \ArrayObject(['cart' => $cart]);
 
         if (!empty($transitionMetadata['form'])) {
             $form = $this->createForm($transitionMetadata['form'], $cart)->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                $this->cartManager->transition($transition, $request);
+            if ($form->isSubmitted()) {
+                if ($form->isValid()) {
+                    if ($response = $this->dispatchGetResponse("sfs_shop.cart.transition.{$transition}.form_valid", new GetResponseFormEvent($form, $request))) {
+                        return $response;
+                    }
 
-                if (!empty($transitionMetadata['redirect_on_terminate'])) {
-                    return $this->redirectToRoute($transitionMetadata['redirect_on_terminate']);
+                    if ($response = $this->applyTransition($transition, $transitionMetadata, $cart, $request)) {
+                        return $response;
+                    }
+                } else {
+                    if ($response = $this->dispatchGetResponse("sfs_shop.cart.transition.{$transition}.form_invalid", new GetResponseFormEvent($form, $request))) {
+                        return $response;
+                    }
                 }
             }
 
             $viewData['form'] = $form->createView();
         } else {
-            // if no form is required, apply transition directly
-            $this->cartManager->transition($transition, $request);
-
-            if (!empty($transitionMetadata['redirect_on_terminate'])) {
-                return $this->redirectToRoute($transitionMetadata['redirect_on_terminate']);
+            if ($response = $this->applyTransition($transition, $transitionMetadata, $cart, $request)) {
+                return $response;
             }
         }
 
+        $this->eventDispatcher->dispatch(new ViewEvent($viewData), "sfs_shop.cart.transition.{$transition}.view");
+
         return $this->render('@SfsShop/cart/'.$transition.'.html.twig', $viewData->getArrayCopy());
+    }
+
+    /**
+     * @param string         $transition
+     * @param array          $transitionMetadata
+     * @param OrderInterface $cart
+     * @param Request        $request
+     *
+     * @return Response|null
+     */
+    private function applyTransition(string $transition, array $transitionMetadata, OrderInterface $cart, Request $request): ?Response
+    {
+        if ($response = $this->dispatchGetResponse("sfs_shop.cart.transition.{$transition}.before", new GetResponseCartTransitionEvent($transition, $transitionMetadata, $cart, $request))) {
+            return $response;
+        }
+
+        // if no form is required, apply transition directly
+        if (!$this->cartManager->transition($transition, $request)) {
+            // error
+        }
+
+        if ($response = $this->dispatchGetResponse("sfs_shop.cart.transition.{$transition}.after", new GetResponseCartTransitionEvent($transition, $transitionMetadata, $cart, $request))) {
+            return $response;
+        }
+
+        if (!empty($transitionMetadata['redirect_on_terminate'])) {
+            return $this->redirectToRoute($transitionMetadata['redirect_on_terminate']);
+        }
     }
 
     /**

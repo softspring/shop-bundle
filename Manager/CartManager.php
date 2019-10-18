@@ -110,6 +110,13 @@ class CartManager implements CartManagerInterface
         return $workflow->getMetadataStore()->getTransitionMetadata($transitionItem);
     }
 
+    /**
+     * @param string  $transition
+     * @param Request $request
+     *
+     * @return bool
+     * @throws \Exception
+     */
     public function transition(string $transition, Request $request): bool
     {
         $cart = $this->getCart($request);
@@ -134,6 +141,11 @@ class CartManager implements CartManagerInterface
         return true;
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return OrderInterface|null
+     */
     public function reset(Request $request): ?OrderInterface
     {
         $session = $this->getSession($request);
@@ -143,6 +155,9 @@ class CartManager implements CartManagerInterface
         return $this->getCart($request);
     }
 
+    /**
+     * @param Request $request
+     */
     public function close(Request $request): void
     {
         $session = $this->getSession($request);
@@ -150,6 +165,10 @@ class CartManager implements CartManagerInterface
         $session->set('cart', null);
     }
 
+    /**
+     * @param Request              $request
+     * @param SalableItemInterface $item
+     */
     public function addItem(Request $request, SalableItemInterface $item): void
     {
         $cart = $this->getCart($request);
@@ -166,6 +185,12 @@ class CartManager implements CartManagerInterface
         $this->saveEntity($cart);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return Session
+     * @throws \RuntimeException
+     */
     protected function getSession(Request $request): Session
     {
         $session = $request->getSession();
