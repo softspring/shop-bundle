@@ -173,4 +173,13 @@ class SfsShopEvents
      * @Event("Softspring\AdminBundle\Event\ViewEvent")
      */
     const ADMIN_ORDERS_DELETE_VIEW = 'sfs_shop.admin.orders.delete_view';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     */
+    const CART_VIEW_VIEW = 'sfs_shop.cart.view_view';
+    /**
+     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     */
+    const CART_FINISHED_VIEW = 'sfs_shop.cart.finished_view';
 }

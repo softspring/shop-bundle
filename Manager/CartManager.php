@@ -163,7 +163,7 @@ class CartManager implements CartManagerInterface
         $entry->setQuantity(1 + (int)$entry->getQuantity());
         $cart->addEntry($entry);
 
-        $this->em->persist($entry); // TODO REMOVE WHEN CASCADE PERSIST WORKS
+        $this->saveEntity($cart);
     }
 
     protected function getSession(Request $request): Session
