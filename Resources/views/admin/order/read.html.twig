@@ -1,7 +1,51 @@
+{% set order = entity %}
+
 {% trans_default_domain 'sfs_shop' %}
 {% extends '@SfsShop/admin_layout.html.twig' %}
-{% block title %}{{ 'admin_orders.read.page_title'|trans }}{% endblock %}
+{% block title %}{{ 'admin_orders.read.page_title'|trans({'%orderNumber%':order.number|default(order.id)}) }}{% endblock %}
 
 {% block content %}
-    <h1>{{ entity.name }}</h1>
+    <h1>{{ 'admin_orders.read.title'|trans({'%orderNumber%':order.number|default(order.id)}) }}</h1>
+
+    Status: {{ order.status }}
+
+    {% if order.customer|default(false) %}
+    <br/>
+    Customer:
+        <a href="{{ url('sfs_shop_admin_customers_read', {'entity': order.customer}) }}">
+        {{ order.customer.name|default('') }}
+        {{ order.customer.surname|default('') }}
+        ({{ order.customer.email|default('') }})</a>
+    {% endif %}
+
+    <br/>
+    <br/>
+
+    {% for transition in workflow_transitions(order, 'order') %}
+        <a class="btn btn-primary" href="{{ url('sfs_shop_admin_orders_transition', {'order': order, 'transition': transition.name}) }}">{{ transition.name }}</a>
+        <br/>
+    {% endfor %}
+
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th>{{ 'admin_orders.read.entries.table.product.header'|trans }}</th>
+            <th>{{ 'admin_orders.read.entries.table.price.header'|trans }}</th>
+            <th>{{ 'admin_orders.read.entries.table.quantity.header'|trans }}</th>
+            <th>{{ 'admin_orders.read.entries.table.total.header'|trans }}</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for entry in order.entries %}
+            <tr>
+                <td>{{ entry.item.name }}</td>
+                <td>{{ entry.item.price }}€</td>
+                <td>{{ entry.quantity }}</td>
+                <td>{{ entry.totalPrice }}€</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
 {% endblock content %}

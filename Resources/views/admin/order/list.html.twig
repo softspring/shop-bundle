@@ -3,11 +3,11 @@
 {% block title %}{{ 'admin_orders.list.page_title'|trans }}{% endblock %}
 
 {% block content %}
+    <h2>{{ 'admin_orders.list.title'|trans }}</h2>
 
     <div class="text-right">
-        <a href="{{ url('sfs_shop_admin_orders_create') }}">Create order</a>
+        <a class="btn btn-primary" href="{{ url('sfs_shop_admin_orders_create') }}">{{ 'admin_orders.list.actions.create.button'|trans }}</a>
     </div>
-
 
     {{ form_start(filterForm) }}
     {{ form_widget(filterForm) }}
@@ -17,9 +17,10 @@
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">{{ 'admin_orders.list.fields.name.header'|trans }}</th>
-            <th scope="col">{{ 'admin_orders.list.actions.header'|trans }}</th>
-{#            <th>&nbsp;</th>#}
+            <th scope="col">{{ 'admin_orders.list.table.id.header'|trans }}</th>
+            <th scope="col">{{ 'admin_orders.list.table.number.header'|trans }}</th>
+            <th scope="col">{{ 'admin_orders.list.table.status.header'|trans }}</th>
+            <th scope="col">{{ 'admin_orders.list.table.actions.header'|trans }}</th>
         </tr>
         </thead>
 

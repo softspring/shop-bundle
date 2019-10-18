@@ -178,6 +178,7 @@ class SfsShopEvents
      * @Event("Softspring\AdminBundle\Event\ViewEvent")
      */
     const CART_VIEW_VIEW = 'sfs_shop.cart.view_view';
+
     /**
      * @Event("Softspring\AdminBundle\Event\ViewEvent")
      */

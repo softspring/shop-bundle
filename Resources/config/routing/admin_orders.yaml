@@ -17,3 +17,7 @@ sfs_shop_admin_orders_delete:
 sfs_shop_admin_orders_read:
     controller: sfs_shop.admin.order.controller::read
     path: /{entity}
+
+sfs_shop_admin_orders_transition:
+    controller: Softspring\ShopBundle\Controller\Admin\OrderController::transition
+    path: /{order}/{transition}

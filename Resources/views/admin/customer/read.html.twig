@@ -1,7 +1,40 @@
+{% set customer = entity %}
 {% trans_default_domain 'sfs_shop' %}
 {% extends '@SfsShop/admin_layout.html.twig' %}
 {% block title %}{{ 'admin_customers.read.page_title'|trans }}{% endblock %}
 
 {% block content %}
-    <h1>{{ entity.name }}</h1>
+    <h1>{{ customer.name }}</h1>
+
+    <h2>Orders</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">{{ 'admin_orders.list.table.id.header'|trans }}</th>
+            <th scope="col">{{ 'admin_orders.list.table.number.header'|trans }}</th>
+            <th scope="col">{{ 'admin_orders.list.table.status.header'|trans }}</th>
+            <th scope="col">{{ 'admin_orders.list.table.actions.header'|trans }}</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% include '@SfsShop/admin/order/list-page.html.twig' with  {'entities': customer.orders} %}
+        </tbody>
+
+        {% if customer.orders.pages|default(false) %}
+            <tfoot>
+            <tr>
+                <td colspan="20">
+                    {% if customer.orders.prevPage %}
+                        <a href="{{ url('sfs_shop_admin_orders_list', app.request.query.all|merge({ page: customer.orders.prevPage })) }}">Prev page</a>
+                    {% endif %}
+
+                    {% if customer.orders.nextPage %}
+                        <a class="float-right" href="{{ url('sfs_shop_admin_orders_list', app.request.query.all|merge({ page: customer.orders.nextPage })) }}">Next page</a>
+                    {% endif %}
+                </td>
+            </tr>
+            </tfoot>
+        {% endif %}
+    </table>
 {% endblock content %}

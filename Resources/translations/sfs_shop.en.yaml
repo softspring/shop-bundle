@@ -1,0 +1,22 @@
+admin_orders:
+    list:
+        page_title: "Orders"
+        title: "Orders"
+        table:
+            id.header: "Id"
+            number.header: "Number"
+            status.header: "Status"
+            actions.header: ""
+        actions:
+            create.button: "Create order"
+            update.button: "Update"
+
+    read:
+        page_title: "Order #%orderNumber%"
+        title: "Order #%orderNumber%"
+        entries:
+            table:
+                product.header: "Product"
+                price.header: "Price"
+                quantity.header: "Quantity"
+                total.header: "Total"
