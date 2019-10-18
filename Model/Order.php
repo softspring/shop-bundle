@@ -8,11 +8,6 @@ use Doctrine\Common\Collections\Collection;
 abstract class Order implements OrderInterface
 {
     /**
-     * @var CustomerInterface|null
-     */
-    protected $customer;
-
-    /**
      * @var string|null
      */
     protected $number;
@@ -33,27 +28,16 @@ abstract class Order implements OrderInterface
     protected $entries;
 
     /**
+     * @var int|null
+     */
+    protected $checkoutAt;
+
+    /**
      * Order constructor.
      */
     public function __construct()
     {
         $this->entries = new ArrayCollection();
-    }
-
-    /**
-     * @return CustomerInterface|null
-     */
-    public function getCustomer(): ?CustomerInterface
-    {
-        return $this->customer;
-    }
-
-    /**
-     * @param CustomerInterface|null $customer
-     */
-    public function setCustomer(?CustomerInterface $customer): void
-    {
-        $this->customer = $customer;
     }
 
     /**
@@ -146,5 +130,21 @@ abstract class Order implements OrderInterface
         $item = $filteredEntries->first();
 
         return $item instanceof OrderEntryInterface ? $item : null;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getCheckoutAt(): ?\DateTime
+    {
+        return $this->checkoutAt ? \DateTime::createFromFormat("U", $this->checkoutAt) : null;
+    }
+
+    /**
+     * @param \DateTime|null $checkoutAt
+     */
+    public function setCheckoutAt(?\DateTime $checkoutAt): void
+    {
+        $this->checkoutAt = $checkoutAt ? $checkoutAt->format('U') : null;
     }
 }

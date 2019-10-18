@@ -7,13 +7,6 @@ use Doctrine\Common\Collections\Collection;
 interface OrderInterface
 {
     /**
-     * @return CustomerInterface|null
-     */
-    public function getCustomer(): ?CustomerInterface;
-
-    public function setCustomer(?CustomerInterface $customer): void;
-
-    /**
      * @return string|null
      */
     public function getNumber(): ?string;
@@ -64,4 +57,14 @@ interface OrderInterface
      * @return OrderEntryInterface|null
      */
     public function getEntryByItem(SalableItemInterface $item): ?OrderEntryInterface;
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getCheckoutAt(): ?\DateTime;
+
+    /**
+     * @param \DateTime|null $checkoutAt
+     */
+    public function setCheckoutAt(?\DateTime $checkoutAt): void;
 }

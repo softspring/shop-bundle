@@ -1,21 +1,19 @@
 <?php
 
-namespace Softspring\ShopBundle\Model;
+namespace Softspring\ShopBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use Softspring\ShopBundle\Model\OrderHasCustomerInterface;
+use Softspring\ShopBundle\Model\OrderInterface;
 
-abstract class Customer implements CustomerInterface
+trait CustomerTrait
 {
     /**
      * @var Collection|OrderInterface[]
+     * @ORM\OneToMany(targetEntity="Softspring\ShopBundle\Model\OrderInterface", mappedBy="customer", cascade={"persist"})
      */
     protected $orders;
-
-    public function __construct()
-    {
-        $this->orders = new ArrayCollection();
-    }
 
     /**
      * @return Collection|OrderInterface[]

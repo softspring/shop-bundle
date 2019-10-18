@@ -10,4 +10,14 @@ interface CustomerInterface
      * @return Collection|OrderInterface[]
      */
     public function getOrders(): Collection;
+
+    /**
+     * @param OrderInterface $order
+     */
+    public function addOrder(OrderInterface $order): void;
+
+    /**
+     * @param OrderInterface $order
+     */
+    public function removeOrder(OrderInterface $order): void;
 }
