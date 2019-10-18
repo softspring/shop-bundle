@@ -4,8 +4,8 @@ namespace Softspring\ShopBundle\Doctrine\Filter;
 
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Filter\SQLFilter;
-use Softspring\ShopBundle\Model\MultiStoreFilterInterface;
-use Softspring\ShopBundle\Model\StoreFilterInterface;
+use Softspring\ShopBundle\Model\Filters\MultiStoreFilterInterface;
+use Softspring\ShopBundle\Model\Filters\StoreFilterInterface;
 
 class StoreFilter extends SQLFilter
 {

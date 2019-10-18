@@ -1,8 +1,9 @@
 <?php
 
-namespace Softspring\ShopBundle\Model;
+namespace Softspring\ShopBundle\Model\Filters;
 
 use Doctrine\Common\Collections\Collection;
+use Softspring\ShopBundle\Model\StoreInterface;
 
 interface MultiStoreFilterInterface
 {

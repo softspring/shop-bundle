@@ -1,6 +1,8 @@
 <?php
 
-namespace Softspring\ShopBundle\Model;
+namespace Softspring\ShopBundle\Model\Filters;
+
+use Softspring\ShopBundle\Model\StoreInterface;
 
 interface StoreFilterInterface
 {
