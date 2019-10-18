@@ -19,3 +19,7 @@ services:
     Softspring\ShopBundle\Request\ParamConverter\:
         resource: '../../../Request/ParamConverter/*'
         tags: ['request.param_converter']
+
+    Softspring\ShopBundle\Twig\Extension\:
+        resource: '../../../Twig/Extension/*'
+        tags: ['twig.extension']
