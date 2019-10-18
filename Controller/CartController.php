@@ -157,9 +157,27 @@ class CartController extends AbstractController
             return $response;
         }
 
-        if (!empty($transitionMetadata['redirect_on_terminate'])) {
-            return $this->redirectToRoute($transitionMetadata['redirect_on_terminate']);
+        if (!empty($transitionMetadata['on_terminate_goto_transition'])) {
+            return $this->redirectToRoute('sfs_shop_cart_transition', [
+                'transition' => $transitionMetadata['on_terminate_goto_transition'],
+            ]);
         }
+
+        if (!empty($transitionMetadata['on_terminate_redirect'])) {
+            if (!empty($transitionMetadata['on_terminate_redirect_params'])) {
+                foreach ($transitionMetadata['on_terminate_redirect_params'] as $param => $value) {
+                    switch ($value) {
+                        case '__cart_object__':
+                            $transitionMetadata['on_terminate_redirect_params'][$param] = $cart;
+                            break;
+                    }
+                }
+            }
+
+            return $this->redirectToRoute($transitionMetadata['on_terminate_redirect'], $transitionMetadata['on_terminate_redirect_params'] ?? []);
+        }
+
+        return null;
     }
 
     /**
