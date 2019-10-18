@@ -2,6 +2,8 @@ services:
     sfs_shop.admin.customer.controller:
         class: Softspring\AdminBundle\Controller\EntityController
         public: true
+        calls:
+            - { method: setContainer, arguments: ['@service_container'] }
         arguments:
             $manager: '@Softspring\ShopBundle\Manager\CustomerManagerInterface'
             $eventDispatcher: '@event_dispatcher'
