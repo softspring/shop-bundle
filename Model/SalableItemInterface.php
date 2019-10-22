@@ -13,4 +13,14 @@ interface SalableItemInterface
      * @param float|null $price
      */
     public function setPrice(?float $price): void;
+
+    /**
+     * @return string|null
+     */
+    public function getCurrency(): ?string;
+
+    /**
+     * @param string|null $currency
+     */
+    public function setCurrency(?string $currency): void;
 }

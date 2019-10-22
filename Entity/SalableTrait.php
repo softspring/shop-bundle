@@ -13,6 +13,12 @@ trait SalableTrait
     protected $price;
 
     /**
+     * @var string|null
+     * @ORM\Column(name="currency", type="string", length=3, nullable=false, options={"default":"EUR"})
+     */
+    protected $currency;
+
+    /**
      * @return float|null
      */
     public function getPrice(): ?float
@@ -26,5 +32,21 @@ trait SalableTrait
     public function setPrice(?float $price): void
     {
         $this->price = $price;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCurrency(): ?string
+    {
+        return $this->currency;
+    }
+
+    /**
+     * @param string|null $currency
+     */
+    public function setCurrency(?string $currency): void
+    {
+        $this->currency = $currency;
     }
 }
