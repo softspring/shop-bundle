@@ -1,6 +1,12 @@
 sfs_shop_cart_view:
     controller: Softspring\ShopBundle\Controller\CartController::view
     path: /
+    methods: ['GET']
+
+sfs_shop_cart_update:
+    controller: Softspring\ShopBundle\Controller\CartController::update
+    path: /
+    methods: ['POST']
 
 sfs_shop_cart_add:
     controller: Softspring\ShopBundle\Controller\CartController::addItem

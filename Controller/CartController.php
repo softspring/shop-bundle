@@ -6,11 +6,13 @@ use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\ExtraBundle\Controller\AbstractController;
 use Softspring\ShopBundle\Event\GetResponseCartTransitionEvent;
+use Softspring\ShopBundle\Form\CartUpdateForm;
 use Softspring\ShopBundle\Manager\CartManagerInterface;
 use Softspring\ShopBundle\Model\OrderInterface;
 use Softspring\ShopBundle\Model\SalableItemInterface;
 use Softspring\ShopBundle\SfsShopEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -45,16 +47,52 @@ class CartController extends AbstractController
      */
     public function view(Request $request): Response
     {
-        $cart = $this->cartManager->getCart($request);
+        $form = $this->getCartForm($request);
 
         $viewData = new \ArrayObject([
-            'cart' => $cart,
+            'cart' => $form->getData(),
+            'form' => $form->createView(),
         ]);
 
         $this->eventDispatcher->dispatch(new ViewEvent($viewData), SfsShopEvents::CART_VIEW_VIEW);
 
         return $this->render('@SfsShop/cart/view.html.twig', $viewData->getArrayCopy());
     }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function update(Request $request): Response
+    {
+        $form = $this->getCartForm($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->cartManager->saveEntity($form->getData());
+            // $this->eventDispatcher->dispatch(new ViewEvent($viewData), SfsShopEvents::CART_UPDATE_SUCCESS;
+        }
+
+        return $this->redirectToRoute('sfs_shop_cart_view');
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return FormInterface
+     */
+    protected function getCartForm(Request $request): FormInterface
+    {
+        $cart = $this->cartManager->getCart($request);
+
+        $form = $this->createForm(CartUpdateForm::class, $cart, [
+            'action' => $this->generateUrl('sfs_shop_cart_update'),
+            'method' => 'POST',
+        ])->handleRequest($request);
+
+        return $form;
+    }
+
 
     /**
      * @param SalableItemInterface $item

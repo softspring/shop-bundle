@@ -5,6 +5,7 @@
     {% if cart.entries.count == 0 %}
         The cart is empty
     {% else %}
+        {{ form_start(form) }}
         <table class="table">
             <thead>
             <tr>
@@ -20,13 +21,17 @@
                 <tr>
                     <td>{{ entry.item.name }}</td>
                     <td>{{ entry.item.price }}</td>
-                    <td>{{ entry.quantity }}</td>
+                    <td>
+                        {{ form_widget(form.entries[loop.index0].quantity, {'attr':{'onchange':'submit()'}}) }}
+                    </td>
                     <td>{{ entry.totalPrice }}</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-
+        {{ form_rest(form) }}
+        <input type="submit" value="Update cart" class="btn btn-primary" />
+        {{ form_end(form) }}
         {% for transition in workflow_transitions(cart, 'checkout') %}
             <a class="btn btn-primary" href="{{ url('sfs_shop_cart_transition', {'transition':transition.name}) }}">{{ transition.name }}</a>
             <br/>
