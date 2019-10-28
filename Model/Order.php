@@ -147,4 +147,14 @@ abstract class Order implements OrderInterface
     {
         $this->checkoutAt = $checkoutAt ? $checkoutAt->format('U') : null;
     }
+
+    /**
+     * @return float
+     */
+    public function getTotal(): float
+    {
+        return array_sum($this->entries->map(function (OrderEntryInterface $entry) {
+            return $entry->getTotalPrice();
+        })->toArray());
+    }
 }

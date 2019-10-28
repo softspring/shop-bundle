@@ -67,4 +67,9 @@ interface OrderInterface
      * @param \DateTime|null $checkoutAt
      */
     public function setCheckoutAt(?\DateTime $checkoutAt): void;
+
+    /**
+     * @return float
+     */
+    public function getTotal(): float;
 }

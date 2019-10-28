@@ -1,0 +1,30 @@
+{% extends '@SfsShop/customer_layout.html.twig' %}
+
+{% block content %}
+
+    {% if orders|length == 0 %}
+        You have not any orders.
+    {% else %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Order No.</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.number }}</td>
+                    <td>{{ order.date|date('d-m-Y') }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>{{ order.total }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock content %}
