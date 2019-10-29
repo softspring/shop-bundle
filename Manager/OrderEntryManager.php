@@ -3,11 +3,13 @@
 namespace Softspring\ShopBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
+use Softspring\AdminBundle\Manager\AdminEntityManagerTrait;
 use Softspring\ShopBundle\Model\OrderEntryInterface;
 
 class OrderEntryManager implements OrderEntryManagerInterface
 {
+    use AdminEntityManagerTrait;
+
     /**
      * @var EntityManagerInterface
      */
@@ -22,30 +24,8 @@ class OrderEntryManager implements OrderEntryManagerInterface
         $this->em = $em;
     }
 
-    public function getClass(): string
+    public function getTargetClass(): string
     {
         return OrderEntryInterface::class;
-    }
-
-    public function getRepository(): EntityRepository
-    {
-        return $this->em->getRepository($this->getClass());
-    }
-
-    public function createEntity()
-    {
-        $metadata = $this->em->getClassMetadata($this->getClass());
-        $class = $metadata->getReflectionClass()->name;
-        return new $class;
-    }
-
-    public function saveEntity($entity): void
-    {
-        if (!$entity instanceof OrderEntryInterface) {
-            throw new \InvalidArgumentException(sprintf('$entity must be an instance of %s', OrderEntryInterface::class));
-        }
-
-        $this->em->persist($entity);
-        $this->em->flush();
     }
 }
