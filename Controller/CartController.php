@@ -2,9 +2,9 @@
 
 namespace Softspring\ShopBundle\Controller;
 
+use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\CoreBundle\Event\ViewEvent;
-use Softspring\ExtraBundle\Controller\AbstractController;
 use Softspring\ShopBundle\Event\GetResponseCartTransitionEvent;
 use Softspring\ShopBundle\Form\CartUpdateForm;
 use Softspring\ShopBundle\Manager\CartManagerInterface;

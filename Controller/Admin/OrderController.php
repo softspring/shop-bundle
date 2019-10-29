@@ -2,9 +2,9 @@
 
 namespace Softspring\ShopBundle\Controller\Admin;
 
+use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\CoreBundle\Event\ViewEvent;
-use Softspring\ExtraBundle\Controller\AbstractController;
 use Softspring\ShopBundle\Event\GetResponseOrderTransitionEvent;
 use Softspring\ShopBundle\Manager\OrderManagerInterface;
 use Softspring\ShopBundle\Model\OrderInterface;
