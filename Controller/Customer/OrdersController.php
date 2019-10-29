@@ -5,6 +5,8 @@ namespace Softspring\ShopBundle\Controller\Customer;
 use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\ShopBundle\Manager\OrderManagerInterface;
 use Softspring\ShopBundle\Model\CustomerInterface;
+use Softspring\ShopBundle\Model\OrderHasCustomerInterface;
+use Softspring\ShopBundle\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,6 +52,30 @@ class OrdersController extends AbstractController
         // $this->eventDispatcher->dispatch(new ViewEvent($viewData), SfsShopEvents::CUSTOMER_ORDER_LIST_VIEW);
 
         return $this->render('@SfsShop/customer/order/list.html.twig', $viewData->getArrayCopy());
+    }
+
+    /**
+     * @param OrderInterface|OrderHasCustomerInterface $order
+     * @param Request                                  $request
+     *
+     * @return Response
+     * @throws \Exception
+     */
+    public function details(OrderInterface $order, Request $request): Response
+    {
+        $customer = $this->getCustomer($request);
+
+        if ($order->getCustomer() != $customer) {
+            throw $this->createAccessDeniedException('You can not access this order');
+        }
+
+        $viewData = new \ArrayObject([
+            'order' => $order,
+        ]);
+
+        // $this->eventDispatcher->dispatch(new ViewEvent($viewData), SfsShopEvents::CUSTOMER_ORDER_LIST_VIEW);
+
+        return $this->render('@SfsShop/customer/order/details.html.twig', $viewData->getArrayCopy());
     }
 
     /**

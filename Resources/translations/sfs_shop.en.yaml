@@ -31,3 +31,15 @@ admin_stores:
             languages.header: "Languages"
             countries.header: "Countries"
         actions.header: "Actions"
+
+customer_orders:
+    details:
+        page_title: "Order #%orderNumber%"
+        title: "Order #%orderNumber%"
+        entries:
+            table:
+                product.header: "Product"
+                price.header: "Price"
+                quantity.header: "Quantity"
+                total.header: "Total"
+

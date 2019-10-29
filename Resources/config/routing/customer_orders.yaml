@@ -1,3 +1,7 @@
 sfs_shop_customer_orders_list:
     controller: Softspring\ShopBundle\Controller\Customer\OrdersController::list
     path: /
+
+sfs_shop_customer_orders_details:
+    controller: Softspring\ShopBundle\Controller\Customer\OrdersController::details
+    path: /{order}

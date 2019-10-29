@@ -12,6 +12,7 @@
                 <th>Date</th>
                 <th>Status</th>
                 <th>Price</th>
+                <th>Actions</th>
             </tr>
             </thead>
 
@@ -22,6 +23,9 @@
                     <td>{{ order.date|date('d-m-Y') }}</td>
                     <td>{{ order.status }}</td>
                     <td>{{ order.total }}</td>
+                    <td>
+                        <a href="{{ url('sfs_shop_customer_orders_details', {'order':order.id}) }}">details</a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
