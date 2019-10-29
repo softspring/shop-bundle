@@ -1,0 +1,8 @@
+{% set store = entity %}
+{% trans_default_domain 'sfs_shop' %}
+{% extends '@SfsShop/admin_layout.html.twig' %}
+{% block title %}{{ 'admin_stores.read.page_title'|trans }}{% endblock %}
+
+{% block content %}
+    <h1>{{ store.name }}</h1>
+{% endblock content %}

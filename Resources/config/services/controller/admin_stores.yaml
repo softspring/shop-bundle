@@ -1,0 +1,53 @@
+services:
+    sfs_shop.admin.store.controller:
+        class: Softspring\AdminBundle\Controller\EntityController
+        public: true
+        calls:
+            - { method: setContainer, arguments: ['@service_container'] }
+        arguments:
+            $manager: '@Softspring\ShopBundle\Manager\StoreManagerInterface'
+            $eventDispatcher: '@event_dispatcher'
+            $listFilterForm: '@Softspring\ShopBundle\Form\Admin\StoreListFilterFormInterface'
+            $createForm: '@Softspring\ShopBundle\Form\Admin\StoreCreateFormInterface'
+            $updateForm: '@Softspring\ShopBundle\Form\Admin\StoreUpdateFormInterface'
+            $deleteForm: '@Softspring\ShopBundle\Form\Admin\StoreDeleteFormInterface'
+            $config:
+                list:
+                    is_granted: 'ROLE_ADMIN_STORE_LIST'
+                    view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_STORES_LIST_VIEW
+                    view: '@@SfsShop/admin/store/list.html.twig'
+                    view_page: '@@SfsShop/admin/store/list-page.html.twig'
+                create:
+                    is_granted: 'ROLE_ADMIN_STORE_CREATE'
+                    initialize_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_STORES_CREATE_INITIALIZE
+                    form_valid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_STORES_CREATE_FORM_VALID
+                    success_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_STORES_CREATE_SUCCESS
+                    form_invalid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_STORES_CREATE_FORM_INVALID
+                    view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_STORES_CREATE_VIEW
+                    success_redirect_to: 'sfs_shop_admin_stores_list'
+                    view: '@@SfsShop/admin/store/create.html.twig'
+                update:
+                    is_granted: 'ROLE_ADMIN_STORE_UPDATE'
+                    param_converter_key: 'id'
+                    initialize_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_STORES_UPDATE_INITIALIZE
+                    form_valid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_STORES_UPDATE_FORM_VALID
+                    success_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_STORES_UPDATE_SUCCESS
+                    form_invalid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_STORES_UPDATE_FORM_INVALID
+                    view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_STORES_UPDATE_VIEW
+                    success_redirect_to: 'sfs_shop_admin_stores_list'
+                    view: '@@SfsShop/admin/store/update.html.twig'
+                delete:
+                    is_granted: 'ROLE_ADMIN_STORE_DELETE'
+                    param_converter_key: 'id'
+                    initialize_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_STORES_DELETE_INITIALIZE
+                    form_valid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_STORES_DELETE_FORM_VALID
+                    success_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_STORES_DELETE_SUCCESS
+                    form_invalid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_STORES_DELETE_FORM_INVALID
+                    view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_STORES_DELETE_VIEW
+                    success_redirect_to: 'sfs_shop_admin_stores_list'
+                    view: '@@SfsShop/admin/store/delete.html.twig'
+                read:
+                    is_granted: 'ROLE_ADMIN_STORE_READ'
+                    param_converter_key: 'id'
+                    view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_STORES_READ_VIEW
+                    view: '@@SfsShop/admin/store/read.html.twig'

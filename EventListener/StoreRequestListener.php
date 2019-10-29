@@ -7,6 +7,7 @@ use Softspring\ShopBundle\Model\StoreInterface;
 use Symfony\Bridge\Twig\AppVariable;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\RouterInterface;
@@ -76,15 +77,17 @@ class StoreRequestListener implements EventSubscriberInterface
             $store = $request->attributes->get($this->storeRouteParamName);
 
             if (!$store) {
-                // hide not found with an unauthorized response
-                throw new UnauthorizedHttpException('', 'Empty _store');
+                throw new NotFoundHttpException('Empty _store');
             }
 
             $store = $this->em->getRepository(StoreInterface::class)->findOneBy([$this->findParamName => $store]);
 
             if (!$store) {
-                // hide not found with an unauthorized response
-                throw new UnauthorizedHttpException('', 'Store not found');
+                throw new NotFoundHttpException('Store not found');
+            }
+
+            if (!$store->isEnabled()) {
+                throw new NotFoundHttpException('Store is not enabled');
             }
 
             $request->attributes->set($this->storeRouteParamName, $store);

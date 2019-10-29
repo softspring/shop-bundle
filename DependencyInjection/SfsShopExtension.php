@@ -40,8 +40,7 @@ class SfsShopExtension extends Extension implements PrependExtensionInterface
         $loader->load('controller/admin_orders.yaml');
 
         if ($container->getParameter('sfs_shop.store.class')) {
-            // load store controllers and additional things
-            // $loader->load('controller/admin_stores.yaml');
+            $loader->load('controller/admin_stores.yaml');
             $loader->load('doctrine_filter.yaml');
         }
     }

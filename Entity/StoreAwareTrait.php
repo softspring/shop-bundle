@@ -5,7 +5,7 @@ namespace Softspring\ShopBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Softspring\ShopBundle\Model\StoreInterface;
 
-trait StoreTrait
+trait StoreAwareTrait
 {
     /**
      * @var StoreInterface|null

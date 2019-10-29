@@ -20,3 +20,14 @@ admin_orders:
                 price.header: "Price"
                 quantity.header: "Quantity"
                 total.header: "Total"
+
+admin_stores:
+    list:
+        page_title: "Stores"
+        fields:
+            id.header: "Store"
+            name.header: "Name"
+            enabled.header: "Enabled"
+            languages.header: "Languages"
+            countries.header: "Countries"
+        actions.header: "Actions"

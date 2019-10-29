@@ -1,0 +1,53 @@
+{% trans_default_domain 'sfs_shop' %}
+{% extends '@SfsShop/admin_layout.html.twig' %}
+{% block title %}{{ 'admin_stores.list.page_title'|trans }}{% endblock %}
+
+{% block content %}
+
+    {% if is_granted('ROLE_ADMIN_STORE_CREATE') %}
+    <div class="text-right">
+        <a href="{{ url('sfs_shop_admin_stores_create') }}">Create store</a>
+    </div>
+    {% endif %}
+
+
+    {{ form_start(filterForm) }}
+    {{ form_widget(filterForm) }}
+    {{ form_rest(filterForm) }}
+    {{ form_end(filterForm) }}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">{{ 'admin_stores.list.fields.id.header'|trans }}</th>
+            <th scope="col">{{ 'admin_stores.list.fields.name.header'|trans }}</th>
+            <th scope="col">{{ 'admin_stores.list.fields.enabled.header'|trans }}</th>
+            {% if sfs_shop_store_has_languages() %}<th scope="col">{{ 'admin_stores.list.fields.languages.header'|trans }}</th>{% endif %}
+            {% if sfs_shop_store_has_countries() %}<th scope="col">{{ 'admin_stores.list.fields.countries.header'|trans }}</th>{% endif %}
+
+            <th scope="col">{{ 'admin_stores.list.actions.header'|trans }}</th>
+{#            <th>&nbsp;</th>#}
+        </tr>
+        </thead>
+
+        <tbody>
+        {% include '@SfsShop/admin/store/list-page.html.twig' %}
+        </tbody>
+
+        {% if entities.pages|default(false) %}
+            <tfoot>
+            <tr>
+                <td colspan="20">
+                    {% if entities.prevPage %}
+                        <a href="{{ url('sfs_shop_admin_stores_list', app.request.query.all|merge({ page: entities.prevPage })) }}">Prev page</a>
+                    {% endif %}
+
+                    {% if entities.nextPage %}
+                        <a class="float-right" href="{{ url('sfs_shop_admin_stores_list', app.request.query.all|merge({ page: entities.nextPage })) }}">Next page</a>
+                    {% endif %}
+                </td>
+            </tr>
+            </tfoot>
+        {% endif %}
+    </table>
+{% endblock content %}

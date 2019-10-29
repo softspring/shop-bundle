@@ -1,0 +1,27 @@
+{% trans_default_domain 'sfs_shop' %}
+
+{% for store in entities %}
+    <tr>
+        <td>{{ store.id }}</td>
+        <td>{{ store.name }}</td>
+        <td>{{ store.enabled ? 'yes' : 'no' }}</td>
+
+        {% if store.languages is defined %}
+            <td>{{ store.languages|join(',') }}</td>
+        {% endif %}
+
+        {% if store.countries is defined %}
+            <td>{{ store.countries|join(',') }}</td>
+        {% endif %}
+
+        <td>
+            {% if is_granted('ROLE_ADMIN_STORE_READ', store) %}
+                <a href="{{ url('sfs_shop_admin_stores_read', {'entity':store}) }}">details</a>
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN_STORE_UPDATE', store) %}
+                <a href="{{ url('sfs_shop_admin_stores_update', {'entity':store}) }}">update</a>
+            {% endif %}
+        </td>
+    </tr>
+{% endfor %}

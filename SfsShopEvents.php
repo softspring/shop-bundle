@@ -183,4 +183,89 @@ class SfsShopEvents
      * @Event("Softspring\AdminBundle\Event\ViewEvent")
      */
     const CART_FINISHED_VIEW = 'sfs_shop.cart.finished_view';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     */
+    const ADMIN_STORES_LIST_VIEW = 'sfs_shop.admin.stores.list_view';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\GetResponseEntityEvent")
+     */
+    const ADMIN_STORES_CREATE_INITIALIZE = 'sfs_shop.admin.stores.create_initialize';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\GetResponseFormEvent")
+     */
+    const ADMIN_STORES_CREATE_FORM_VALID = 'sfs_shop.admin.stores.create_form_valid';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\GetResponseEntityEvent")
+     */
+    const ADMIN_STORES_CREATE_SUCCESS = 'sfs_shop.admin.stores.create_success';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\GetResponseFormEvent")
+     */
+    const ADMIN_STORES_CREATE_FORM_INVALID = 'sfs_shop.admin.stores.create_form_invalid';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     */
+    const ADMIN_STORES_CREATE_VIEW = 'sfs_shop.admin.stores.create_view';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     */
+    const ADMIN_STORES_READ_VIEW = 'sfs_shop.admin.stores.read_view';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\GetResponseEntityEvent")
+     */
+    const ADMIN_STORES_UPDATE_INITIALIZE = 'sfs_shop.admin.stores.update_initialize';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\GetResponseFormEvent")
+     */
+    const ADMIN_STORES_UPDATE_FORM_VALID = 'sfs_shop.admin.stores.update_form_valid';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\GetResponseEntityEvent")
+     */
+    const ADMIN_STORES_UPDATE_SUCCESS = 'sfs_shop.admin.stores.update_success';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\GetResponseFormEvent")
+     */
+    const ADMIN_STORES_UPDATE_FORM_INVALID = 'sfs_shop.admin.stores.update_form_invalid';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     */
+    const ADMIN_STORES_UPDATE_VIEW = 'sfs_shop.admin.stores.update_view';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\GetResponseEntityEvent")
+     */
+    const ADMIN_STORES_DELETE_INITIALIZE = 'sfs_shop.admin.stores.delete_initialize';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\GetResponseFormEvent")
+     */
+    const ADMIN_STORES_DELETE_FORM_VALID = 'sfs_shop.admin.stores.delete_form_valid';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\GetResponseEntityEvent")
+     */
+    const ADMIN_STORES_DELETE_SUCCESS = 'sfs_shop.admin.stores.delete_success';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\GetResponseFormEvent")
+     */
+    const ADMIN_STORES_DELETE_FORM_INVALID = 'sfs_shop.admin.stores.delete_form_invalid';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     */
+    const ADMIN_STORES_DELETE_VIEW = 'sfs_shop.admin.stores.delete_view';
 }
