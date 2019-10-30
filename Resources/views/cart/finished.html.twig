@@ -1,7 +1,10 @@
+{% trans_default_domain 'sfs_shop' %}
 {% extends '@SfsShop/layout.html.twig' %}
+{% block title %}{{ 'cart.finished.page_title'|trans }}{% endblock title %}
 
 {% block content %}
-
-    Your order {{ order.number }} is finished.
-
+    <h2>{{ 'cart.finished.title'|trans }}</h2>
+    <div class="text-center p-5">
+        {{ 'cart.finished.message'|trans({'%orderNumber%':order.number}) }}
+    </div>
 {% endblock content %}

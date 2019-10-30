@@ -1,3 +1,20 @@
+cart:
+    view:
+        page_title: "Cart"
+        title: "Cart"
+        table:
+            item.header: "Item"
+            price.header: "Price"
+            quantity.header: "Quantity"
+            total.header: "Total"
+        actions:
+            update.button: "Update cart"
+        empty_cart: "The cart is empty"
+    finished:
+        page_title: "Order confirmed"
+        title: "Order confirmed"
+        message: "Your order %orderNumber% is finished."
+
 admin_orders:
     list:
         page_title: "Orders"

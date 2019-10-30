@@ -1,43 +1,53 @@
+{% trans_default_domain 'sfs_shop' %}
 {% extends '@SfsShop/layout.html.twig' %}
+{% block title %}{{ 'cart.view.page_title'|trans }}{% endblock title %}
 
 {% block content %}
+    <h2>{{ 'cart.view.title'|trans }}</h2>
 
     {% if cart.entries.count == 0 %}
-        The cart is empty
+        <div class="text-center p-5">{{ 'cart.view.empty_cart'|trans }}</div>
     {% else %}
         {{ form_start(form) }}
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Item</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-            </tr>
-            </thead>
-
-            <tbody>
-            {% for entry in cart.entries %}
+            <table class="table">
+                <thead>
                 <tr>
-                    <td>{{ entry.item.name }}</td>
-                    <td>{{ entry.item.price }}</td>
-                    <td>
-                        {{ form_widget(form.entries[loop.index0].quantity, {'attr':{'onchange':'submit()'}}) }}
-                    </td>
-                    <td>{{ entry.totalPrice }}</td>
+                    <th>{{ 'cart.view.table.item.header'|trans }}</th>
+                    <th>{{ 'cart.view.table.price.header'|trans }}</th>
+                    <th>{{ 'cart.view.table.quantity.header'|trans }}</th>
+                    <th class="text-right">{{ 'cart.view.table.total.header'|trans }}</th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        {{ form_rest(form) }}
-        <input type="submit" value="Update cart" class="btn btn-primary" />
-        {{ form_end(form) }}
-        {% for transition in workflow_transitions(cart, 'checkout') %}
-            <a class="btn btn-primary" href="{{ url('sfs_shop_cart_transition', {'transition':transition.name}) }}">{{ transition.name }}</a>
-            <br/>
-        {% else %}
-            No actions available.
-        {% endfor %}
+                </thead>
 
+                <tbody>
+                {% for entry in cart.entries %}
+                    <tr>
+                        <td>{{ entry.item.name }}</td>
+                        <td>{{ entry.item.price|number_format(2) }} <small>EUR</small></td>
+                        <td>{{ form_widget(form.entries[loop.index0].quantity, {'attr':{'onchange':'submit()'}}) }}</td>
+                        <td class="text-right">{{ entry.totalPrice|number_format(2) }} <small>EUR</small></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            {{ form_rest(form) }}
+
+            <div class="row text-right">
+                <div class="col">
+                    <input type="submit" value="{{ 'cart.view.actions.update.button'|trans }}" class="btn btn-primary" />
+                </div>
+            </div>
+        {{ form_end(form) }}
+
+        <div class="row text-right mt-4">
+            <div class="col">
+                {% for transition in workflow_transitions(cart, 'checkout') %}
+                    <a class="btn btn-primary" href="{{ url('sfs_shop_cart_transition', {'transition':transition.name}) }}">{{ transition.name }}</a>
+                {% else %}
+                    {#No actions available.#}
+                {% endfor %}
+            </div>
+        </div>
     {% endif %}
 {% endblock content %}
