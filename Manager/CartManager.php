@@ -164,6 +164,22 @@ class CartManager implements CartManagerInterface
     }
 
     /**
+     * @param Request              $request
+     * @param SalableItemInterface $item
+     */
+    public function removeItem(Request $request, SalableItemInterface $item): void
+    {
+        $cart = $this->getCart($request);
+
+        $entry = $cart->getEntryByItem($item);
+        if ($entry) {
+            $cart->removeEntry($entry);
+        }
+
+        $this->saveEntity($cart);
+    }
+
+    /**
      * @param Request $request
      *
      * @return Session

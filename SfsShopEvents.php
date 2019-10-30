@@ -177,16 +177,6 @@ class SfsShopEvents
     /**
      * @Event("Softspring\AdminBundle\Event\ViewEvent")
      */
-    const CART_VIEW_VIEW = 'sfs_shop.cart.view_view';
-
-    /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
-     */
-    const CART_FINISHED_VIEW = 'sfs_shop.cart.finished_view';
-
-    /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
-     */
     const ADMIN_STORES_LIST_VIEW = 'sfs_shop.admin.stores.list_view';
 
     /**
@@ -268,4 +258,34 @@ class SfsShopEvents
      * @Event("Softspring\AdminBundle\Event\ViewEvent")
      */
     const ADMIN_STORES_DELETE_VIEW = 'sfs_shop.admin.stores.delete_view';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     */
+    const CART_VIEW_VIEW = 'sfs_shop.cart.view_view';
+
+    /**
+     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     */
+    const CART_FINISHED_VIEW = 'sfs_shop.cart.finished_view';
+
+    /**
+     * @Event("Softspring\ShopBundle\Event\GetCartItemEvent")
+     */
+    const CART_ADD_ITEM_INIT = 'sfs_shop.cart.add_item_init';
+
+    /**
+     * @Event("Softspring\ShopBundle\Event\GetCartItemEvent")
+     */
+    const CART_ADD_ITEM_SUCCESS = 'sfs_shop.cart.add_item_success';
+
+    /**
+     * @Event("Softspring\ShopBundle\Event\GetCartItemEvent")
+     */
+    const CART_REMOVE_ITEM_INIT = 'sfs_shop.cart.remove_item_init';
+
+    /**
+     * @Event("Softspring\ShopBundle\Event\GetCartItemEvent")
+     */
+    const CART_REMOVE_ITEM_SUCCESS = 'sfs_shop.cart.remove_item_success';
 }

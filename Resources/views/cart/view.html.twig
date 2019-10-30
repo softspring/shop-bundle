@@ -16,6 +16,7 @@
                     <th>{{ 'cart.view.table.price.header'|trans }}</th>
                     <th>{{ 'cart.view.table.quantity.header'|trans }}</th>
                     <th class="text-right">{{ 'cart.view.table.total.header'|trans }}</th>
+                    <th>&nbsp;</th>
                 </tr>
                 </thead>
 
@@ -26,6 +27,9 @@
                         <td>{{ entry.item.price|number_format(2) }} <small>EUR</small></td>
                         <td>{{ form_widget(form.entries[loop.index0].quantity, {'attr':{'onchange':'submit()'}}) }}</td>
                         <td class="text-right">{{ entry.totalPrice|number_format(2) }} <small>EUR</small></td>
+                        <td>
+                            <a href="{{ url('sfs_shop_cart_remove', {'item':entry.item}) }}">remove</a>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

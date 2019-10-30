@@ -20,4 +20,6 @@ interface CartManagerInterface extends AdminEntityManagerInterface
     public function transition(string $transition, Request $request): bool;
 
     public function addItem(Request $request, SalableItemInterface $item): void;
+
+    public function removeItem(Request $request, SalableItemInterface $item): void;
 }

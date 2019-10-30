@@ -5,6 +5,7 @@ namespace Softspring\ShopBundle\Controller;
 use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\CoreBundle\Event\ViewEvent;
+use Softspring\ShopBundle\Event\GetCartItemEvent;
 use Softspring\ShopBundle\Event\GetResponseCartTransitionEvent;
 use Softspring\ShopBundle\Form\CartUpdateForm;
 use Softspring\ShopBundle\Manager\CartManagerInterface;
@@ -69,7 +70,16 @@ class CartController extends AbstractController
         $form = $this->getCartForm($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->cartManager->saveEntity($form->getData());
+            /** @var OrderInterface $cart */
+            $cart = $form->getData();
+
+            foreach ($cart->getEntries() as $entry) {
+                if ($entry->getQuantity() <= 0) {
+                    $cart->removeEntry($entry);
+                }
+            }
+
+            $this->cartManager->saveEntity($cart);
             // $this->eventDispatcher->dispatch(new ViewEvent($viewData), SfsShopEvents::CART_UPDATE_SUCCESS;
         }
 
@@ -102,7 +112,17 @@ class CartController extends AbstractController
      */
     public function addItem(SalableItemInterface $item, Request $request): Response
     {
+        $cart = $this->cartManager->getCart($request);
+
+        if ($response = $this->dispatchGetResponse(SfsShopEvents::CART_ADD_ITEM_INIT, new GetCartItemEvent($cart, $item, $request))) {
+            return $response;
+        }
+
         $this->cartManager->addItem($request, $item);
+
+        if ($response = $this->dispatchGetResponse(SfsShopEvents::CART_ADD_ITEM_SUCCESS, new GetCartItemEvent($cart, $item, $request))) {
+            return $response;
+        }
 
         return $this->redirect($request->headers->get('Referer'));
     }
@@ -116,7 +136,19 @@ class CartController extends AbstractController
      */
     public function removeItem(SalableItemInterface $item, Request $request): Response
     {
-        throw new \Exception('Not yet implemented');
+        $cart = $this->cartManager->getCart($request);
+
+        if ($response = $this->dispatchGetResponse(SfsShopEvents::CART_REMOVE_ITEM_INIT, new GetCartItemEvent($cart, $item, $request))) {
+            return $response;
+        }
+
+        $this->cartManager->removeItem($request, $item);
+
+        if ($response = $this->dispatchGetResponse(SfsShopEvents::CART_REMOVE_ITEM_SUCCESS, new GetCartItemEvent($cart, $item, $request))) {
+            return $response;
+        }
+
+        return $this->redirect($request->headers->get('Referer'));
     }
 
     /**
