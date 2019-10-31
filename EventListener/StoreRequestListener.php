@@ -3,8 +3,10 @@
 namespace Softspring\ShopBundle\EventListener;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Softspring\CoreBundle\Twig\ExtensibleAppVariable;
 use Softspring\ShopBundle\Model\StoreInterface;
 use Symfony\Bridge\Twig\AppVariable;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -54,6 +56,10 @@ class StoreRequestListener implements EventSubscriberInterface
         $this->router = $router;
         $this->twigAppVariable = $twigAppVariable;
         $this->findParamName = $findParamName;
+
+        if (!$this->twigAppVariable instanceof ExtensibleAppVariable) {
+            throw new InvalidConfigurationException('You must configure SfsCoreBundle to extend twig app variable');
+        }
     }
 
     public static function getSubscribedEvents()
