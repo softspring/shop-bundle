@@ -6,8 +6,8 @@
             <a href="{{ url('sfs_shop_admin_customers_read', {'entity':customer}) }}">{{ customer.name }}</a>
         </td>
 
-        <td>
-            <a href="{{ url('sfs_shop_admin_customers_update', {'entity':customer}) }}">update</a>
+        <td align="right">
+            <a href="{{ url('sfs_shop_admin_customers_update', {'entity':customer}) }}">update <span class="mdi mdi-18px mdi-square-edit-outline align-middle"></span></a>
         </td>
     </tr>
 {% endfor %}

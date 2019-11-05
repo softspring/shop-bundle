@@ -6,7 +6,9 @@
     {{ form_start(form) }}
         {{ form_widget(form) }}
         {{ form_rest(form) }}
-        <input type="submit" value="{{ 'admin_customers.delete.actions.delete.button'|trans }}" class="btn btn-danger btn-block" />
-        <a href="{{ url('sfs_shop_admin_customers_list') }}" class="btn btn-secondary btn-block">{{ 'admin_customers.delete.actions.cancel.button'|trans }}</a>
+        <div class="d-flex justify-content-end align-items-center">
+            <a href="{{ url('sfs_shop_admin_customers_list') }}" class="btn btn-outline-secondary ml-3">{{ 'admin_customers.delete.actions.cancel.button'|trans }}</a>
+            <input type="submit" value="{{ 'admin_customers.delete.actions.delete.button'|trans }}" class="btn btn-danger ml-3" />
+        </div>
     {{ form_end(form) }}
 {% endblock content %}

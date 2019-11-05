@@ -24,6 +24,11 @@ admin_orders:
             number.header: "Number"
             status.header: "Status"
             actions.header: ""
+        filter_form:
+            number:
+                label: "Number"
+            status:
+                label: "Status"
         actions:
             create.button: "Create order"
             update.button: "Update"

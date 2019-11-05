@@ -6,7 +6,9 @@
     {{ form_start(form) }}
         {{ form_widget(form) }}
         {{ form_rest(form) }}
-        <input type="submit" value="{{ 'admin_orders.create.actions.create.button'|trans }}" class="btn btn-primary btn-block" />
-        <a href="{{ url('sfs_shop_admin_orders_list') }}" class="btn btn-secondary btn-block">{{ 'admin_orders.create.actions.cancel.button'|trans }}</a>
+        <div class="d-flex justify-content-end align-items-center">
+            <a href="{{ url('sfs_shop_admin_orders_list') }}" class="btn btn-outline-secondary ml-3">{{ 'admin_orders.create.actions.cancel.button'|trans }}</a>
+            <input type="submit" value="{{ 'admin_orders.create.actions.create.button'|trans }}" class="btn btn-primary ml-3" />
+        </div>
     {{ form_end(form) }}
 {% endblock content %}

@@ -9,8 +9,8 @@
         <td>{{ order.number }}</td>
         <td>{{ order.status }}</td>
 
-        <td>
-            <a href="{{ url('sfs_shop_admin_orders_update', {'entity':order}) }}">{{ 'admin_orders.list.actions.update.button'|trans }}</a>
+        <td align="right">
+            <a href="{{ url('sfs_shop_admin_orders_update', {'entity':order}) }}">{{ 'admin_orders.list.actions.update.button'|trans }} <span class="mdi mdi-18px mdi-square-edit-outline align-middle"></span></a>
         </td>
     </tr>
 {% endfor %}

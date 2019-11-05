@@ -16,11 +16,11 @@
 
         <td>
             {% if is_granted('ROLE_ADMIN_STORE_READ', store) %}
-                <a href="{{ url('sfs_shop_admin_stores_read', {'entity':store}) }}">details</a>
+                <a href="{{ url('sfs_shop_admin_stores_read', {'entity':store}) }}" class="ml-2">details <span class="mdi mdi-18px mdi-eye-outline align-middle"></span></a>
             {% endif %}
 
             {% if is_granted('ROLE_ADMIN_STORE_UPDATE', store) %}
-                <a href="{{ url('sfs_shop_admin_stores_update', {'entity':store}) }}">update</a>
+                <a href="{{ url('sfs_shop_admin_stores_update', {'entity':store}) }}" class="ml-2">update <span class="mdi mdi-18px mdi-square-edit-outline align-middle"></span></a>
             {% endif %}
         </td>
     </tr>

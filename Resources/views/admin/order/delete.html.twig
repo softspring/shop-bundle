@@ -3,10 +3,15 @@
 {% block title %}{{ 'admin_orders.delete.page_title'|trans }}{% endblock %}
 
 {% block content %}
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3">Create order</h1>
+    </div>
     {{ form_start(form) }}
         {{ form_widget(form) }}
         {{ form_rest(form) }}
-        <input type="submit" value="{{ 'admin_orders.delete.actions.delete.button'|trans }}" class="btn btn-danger btn-block" />
-        <a href="{{ url('sfs_shop_admin_orders_list') }}" class="btn btn-secondary btn-block">{{ 'admin_orders.delete.actions.cancel.button'|trans }}</a>
+        <div class="d-flex justify-content-end align-items-center">
+            <a href="{{ url('sfs_shop_admin_orders_list') }}" class="btn btn-outline-secondary ml-3">{{ 'admin_orders.delete.actions.cancel.button'|trans }}</a>
+            <input type="submit" value="{{ 'admin_orders.delete.actions.delete.button'|trans }}" class="btn btn-danger ml-3" />
+        </div>
     {{ form_end(form) }}
 {% endblock content %}

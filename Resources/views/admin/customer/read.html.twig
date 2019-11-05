@@ -26,11 +26,11 @@
             <tr>
                 <td colspan="20">
                     {% if customer.orders.prevPage %}
-                        <a href="{{ url('sfs_shop_admin_orders_list', app.request.query.all|merge({ page: customer.orders.prevPage })) }}">Prev page</a>
+                        <a href="{{ url('sfs_shop_admin_orders_list', app.request.query.all|merge({ page: customer.orders.prevPage })) }}" title="Prev page"><span class="mdi mdi-24px mdi-chevron-left"></span></a>
                     {% endif %}
 
                     {% if customer.orders.nextPage %}
-                        <a class="float-right" href="{{ url('sfs_shop_admin_orders_list', app.request.query.all|merge({ page: customer.orders.nextPage })) }}">Next page</a>
+                        <a class="float-right" href="{{ url('sfs_shop_admin_orders_list', app.request.query.all|merge({ page: customer.orders.nextPage })) }}" title="Next page"><span class="mdi mdi-24px mdi-chevron-right"></span></a>
                     {% endif %}
                 </td>
             </tr>
