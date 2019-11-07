@@ -21,25 +21,33 @@
                 </thead>
 
                 <tbody>
+                {% set totalPrice = 0 %}
                 {% for entry in cart.entries %}
+                    {%  set totalPrice = totalPrice + entry.totalPrice %}
                     <tr>
                         <td>{{ entry.item.name }}</td>
                         <td>{{ entry.item.price|number_format(2) }} <small>EUR</small></td>
-                        <td>{{ form_widget(form.entries[loop.index0].quantity, {'attr':{'onchange':'submit()'}}) }}</td>
+                        <td>{{ form_widget(form.entries[loop.index0].quantity, {'attr':{'onchange':'submit()', 'class': 'quantity'}}) }}</td>
                         <td class="text-right">{{ entry.totalPrice|number_format(2) }} <small>EUR</small></td>
                         <td>
-                            <a href="{{ url('sfs_shop_cart_remove', {'item':entry.item}) }}">remove</a>
+                            <a href="{{ url('sfs_shop_cart_remove', {'item':entry.item}) }}">remove <span class="mdi mdi-cart-remove"></span></a>
                         </td>
                     </tr>
                 {% endfor %}
                 </tbody>
+                <tfooter>
+                    <tr>
+                        <td colspan="4" align="right">Total <span class="font-weight-bold ml-3">{{ totalPrice|number_format(2) }}</span> <small>EUR</small></td>
+                        <td></td>
+                    </tr>
+                </tfooter>
             </table>
 
             {{ form_rest(form) }}
 
             <div class="row text-right">
                 <div class="col">
-                    <input type="submit" value="{{ 'cart.view.actions.update.button'|trans }}" class="btn btn-primary" />
+                    <input type="submit" value="{{ 'cart.view.actions.update.button'|trans }}" class="btn btn-outline-primary" />
                 </div>
             </div>
         {{ form_end(form) }}
@@ -47,7 +55,7 @@
         <div class="row text-right mt-4">
             <div class="col">
                 {% for transition in workflow_transitions(cart, 'checkout') %}
-                    <a class="btn btn-primary" href="{{ url('sfs_shop_cart_transition', {'transition':transition.name}) }}">{{ transition.name }}</a>
+                    <a class="btn btn-primary ml-2" href="{{ url('sfs_shop_cart_transition', {'transition':transition.name}) }}">{{ transition.name }}</a>
                 {% else %}
                     {#No actions available.#}
                 {% endfor %}
