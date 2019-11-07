@@ -30,7 +30,7 @@
                         <td>{{ form_widget(form.entries[loop.index0].quantity, {'attr':{'onchange':'submit()', 'class': 'quantity'}}) }}</td>
                         <td class="text-right">{{ entry.totalPrice|number_format(2) }} <small>EUR</small></td>
                         <td>
-                            <a href="{{ url('sfs_shop_cart_remove', {'item':entry.item}) }}">remove <span class="mdi mdi-cart-remove"></span></a>
+                            <a href="{{ url('sfs_shop_cart_remove', {'item':entry.item.id}) }}">remove <span class="mdi mdi-cart-remove"></span></a>
                         </td>
                     </tr>
                 {% endfor %}

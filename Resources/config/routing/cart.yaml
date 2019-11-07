@@ -10,11 +10,15 @@ sfs_shop_cart_update:
 
 sfs_shop_cart_add:
     controller: Softspring\ShopBundle\Controller\CartController::addItem
-    path: /{item}/add
+    path: /add
+    requirements:
+        item: ".+"
 
 sfs_shop_cart_remove:
     controller: Softspring\ShopBundle\Controller\CartController::removeItem
-    path: /{item}/remove
+    path: /remove
+    requirements:
+        item: ".+"
 
 sfs_shop_cart_finished:
     controller: Softspring\ShopBundle\Controller\CartController::finished

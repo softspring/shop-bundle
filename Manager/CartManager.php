@@ -146,8 +146,9 @@ class CartManager implements CartManagerInterface
     /**
      * @param Request              $request
      * @param SalableItemInterface $item
+     * @param int                  $quantity
      */
-    public function addItem(Request $request, SalableItemInterface $item): void
+    public function addItem(Request $request, SalableItemInterface $item, int $quantity = 1): void
     {
         $cart = $this->getCart($request);
 
@@ -157,7 +158,7 @@ class CartManager implements CartManagerInterface
             $entry = $this->orderEntryManager->createEntity();
             $entry->setItem($item);
         }
-        $entry->setQuantity(1 + (int)$entry->getQuantity());
+        $entry->setQuantity($quantity + (int)$entry->getQuantity());
         $cart->addEntry($entry);
 
         $this->saveEntity($cart);

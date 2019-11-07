@@ -103,22 +103,21 @@ class CartController extends AbstractController
         return $form;
     }
 
-
     /**
-     * @param SalableItemInterface $item
-     * @param Request              $request
+     * @param Request $request
      *
      * @return Response
      */
-    public function addItem(SalableItemInterface $item, Request $request): Response
+    public function addItem(Request $request): Response
     {
+        $item = $this->getRepository(SalableItemInterface::class)->findOneById($request->get('item'));
         $cart = $this->cartManager->getCart($request);
 
         if ($response = $this->dispatchGetResponse(SfsShopEvents::CART_ADD_ITEM_INIT, new GetCartItemEvent($cart, $item, $request))) {
             return $response;
         }
 
-        $this->cartManager->addItem($request, $item);
+        $this->cartManager->addItem($request, $item, (int)$request->get('quantity', 1));
 
         if ($response = $this->dispatchGetResponse(SfsShopEvents::CART_ADD_ITEM_SUCCESS, new GetCartItemEvent($cart, $item, $request))) {
             return $response;
@@ -128,14 +127,13 @@ class CartController extends AbstractController
     }
 
     /**
-     * @param SalableItemInterface $item
-     * @param Request              $request
+     * @param Request $request
      *
      * @return Response
-     * @throws \Exception
      */
-    public function removeItem(SalableItemInterface $item, Request $request): Response
+    public function removeItem(Request $request): Response
     {
+        $item = $this->getRepository(SalableItemInterface::class)->findOneById($request->get('item'));
         $cart = $this->cartManager->getCart($request);
 
         if ($response = $this->dispatchGetResponse(SfsShopEvents::CART_REMOVE_ITEM_INIT, new GetCartItemEvent($cart, $item, $request))) {
