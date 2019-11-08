@@ -3,7 +3,7 @@
 {% block title %}{{ 'cart.view.page_title'|trans }}{% endblock title %}
 
 {% block content %}
-    <h2>{{ 'cart.view.title'|trans }}</h2>
+    <h1>{{ 'cart.view.title'|trans }}</h1>
 
     {% if cart.entries.count == 0 %}
         <div class="text-center p-5">{{ 'cart.view.empty_cart'|trans }}</div>
