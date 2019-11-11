@@ -12,6 +12,7 @@ class StoreUpdateForm extends AbstractStoreForm implements StoreUpdateFormInterf
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'translation_domain' => 'sfs_shop',
             'label_format' => 'admin_stores.update.form.%name%.label',
         ]);
     }

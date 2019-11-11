@@ -32,7 +32,21 @@ admin_orders:
         actions:
             create.button: "Create order"
             update.button: "Update"
-
+    create:
+        page_title: "Create order"
+        title: "Create order"
+        form:
+        actions:
+            create.button: "Create"
+            cancel.button: "Cancel"
+    update:
+        page_title: "Update order"
+        title: "Update order"
+        form:
+        actions:
+            update.button: "Update"
+            cancel.button: "Cancel"
+            delete.button: "Delete"
     read:
         page_title: "Order #%orderNumber%"
         title: "Order #%orderNumber%"
@@ -53,6 +67,31 @@ admin_stores:
             languages.header: "Languages"
             countries.header: "Countries"
         actions.header: "Actions"
+    create:
+        page_title: "Create store"
+        title: "Create store"
+        form:
+            id.label: "ID"
+            enabled.label: "Enabled"
+            name.label: "Name"
+            languages.label: "Languages"
+            countries.label: "Countries"
+        actions:
+            create.button: "Create"
+            cancel.button: "Cancel"
+    update:
+        page_title: "Update store"
+        title: "Update store"
+        form:
+            id.label: "ID"
+            enabled.label: "Enabled"
+            name.label: "Name"
+            languages.label: "Languages"
+            countries.label: "Countries"
+        actions:
+            update.button: "Update"
+            cancel.button: "Cancel"
+            delete.button: "Delete"
 
 customer_orders:
     details:
@@ -64,4 +103,28 @@ customer_orders:
                 price.header: "Price"
                 quantity.header: "Quantity"
                 total.header: "Total"
+
+admin_customers:
+    list:
+        page_title: "Customers"
+        title: "Customers"
+        fields:
+            name.header: "Name"
+    create:
+        page_title: "Create customer"
+        title: "Create customer"
+        form:
+            name.label: "Name"
+        actions:
+            create.button: "Create"
+            cancel.button: "Cancel"
+    update:
+        page_title: "Update customer"
+        title: "Update customer"
+        form:
+            name.label: "Name"
+        actions:
+            update.button: "Update"
+            cancel.button: "Cancel"
+            delete.button: "Delete"
 

@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="d-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3">Create customer</h1>
+        <h1 class="h3">{{ 'admin_customers.create.title'|trans }}</h1>
     </div>
     {{ form_start(form) }}
         {{ form_widget(form) }}

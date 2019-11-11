@@ -3,6 +3,9 @@
 {% block title %}{{ 'admin_orders.update.page_title'|trans }}{% endblock %}
 
 {% block content %}
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3">{{ 'admin_orders.update.title'|trans }}</h1>
+    </div>
     {{ form_start(form) }}
         {{ form_widget(form) }}
         {{ form_rest(form) }}
