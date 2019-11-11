@@ -5,7 +5,7 @@ namespace Softspring\ShopBundle;
 class SfsShopEvents
 {
     /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_CUSTOMERS_LIST_VIEW = 'sfs_shop.admin.customers.list_view';
 
@@ -30,12 +30,12 @@ class SfsShopEvents
     const ADMIN_CUSTOMERS_CREATE_FORM_INVALID = 'sfs_shop.admin.customers.create_form_invalid';
 
     /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_CUSTOMERS_CREATE_VIEW = 'sfs_shop.admin.customers.create_view';
 
     /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_CUSTOMERS_READ_VIEW = 'sfs_shop.admin.customers.read_view';
 
@@ -60,7 +60,7 @@ class SfsShopEvents
     const ADMIN_CUSTOMERS_UPDATE_FORM_INVALID = 'sfs_shop.admin.customers.update_form_invalid';
 
     /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_CUSTOMERS_UPDATE_VIEW = 'sfs_shop.admin.customers.update_view';
 
@@ -85,12 +85,17 @@ class SfsShopEvents
     const ADMIN_CUSTOMERS_DELETE_FORM_INVALID = 'sfs_shop.admin.customers.delete_form_invalid';
 
     /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_CUSTOMERS_DELETE_VIEW = 'sfs_shop.admin.customers.delete_view';
 
     /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\GetResponseEvent")
+     */
+    const ADMIN_ORDERS_LIST_INITIALIZE = 'sfs_shop.admin.orders.list_initialize';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_ORDERS_LIST_VIEW = 'sfs_shop.admin.orders.list_view';
 
@@ -115,12 +120,12 @@ class SfsShopEvents
     const ADMIN_ORDERS_CREATE_FORM_INVALID = 'sfs_shop.admin.orders.create_form_invalid';
 
     /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_ORDERS_CREATE_VIEW = 'sfs_shop.admin.orders.create_view';
 
     /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_ORDERS_READ_VIEW = 'sfs_shop.admin.orders.read_view';
 
@@ -145,7 +150,7 @@ class SfsShopEvents
     const ADMIN_ORDERS_UPDATE_FORM_INVALID = 'sfs_shop.admin.orders.update_form_invalid';
 
     /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_ORDERS_UPDATE_VIEW = 'sfs_shop.admin.orders.update_view';
 
@@ -170,12 +175,12 @@ class SfsShopEvents
     const ADMIN_ORDERS_DELETE_FORM_INVALID = 'sfs_shop.admin.orders.delete_form_invalid';
 
     /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_ORDERS_DELETE_VIEW = 'sfs_shop.admin.orders.delete_view';
 
     /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_STORES_LIST_VIEW = 'sfs_shop.admin.stores.list_view';
 
@@ -200,12 +205,12 @@ class SfsShopEvents
     const ADMIN_STORES_CREATE_FORM_INVALID = 'sfs_shop.admin.stores.create_form_invalid';
 
     /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_STORES_CREATE_VIEW = 'sfs_shop.admin.stores.create_view';
 
     /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_STORES_READ_VIEW = 'sfs_shop.admin.stores.read_view';
 
@@ -230,7 +235,7 @@ class SfsShopEvents
     const ADMIN_STORES_UPDATE_FORM_INVALID = 'sfs_shop.admin.stores.update_form_invalid';
 
     /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_STORES_UPDATE_VIEW = 'sfs_shop.admin.stores.update_view';
 
@@ -255,17 +260,17 @@ class SfsShopEvents
     const ADMIN_STORES_DELETE_FORM_INVALID = 'sfs_shop.admin.stores.delete_form_invalid';
 
     /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_STORES_DELETE_VIEW = 'sfs_shop.admin.stores.delete_view';
 
     /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const CART_VIEW_VIEW = 'sfs_shop.cart.view_view';
 
     /**
-     * @Event("Softspring\AdminBundle\Event\ViewEvent")
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const CART_FINISHED_VIEW = 'sfs_shop.cart.finished_view';
 
@@ -288,4 +293,14 @@ class SfsShopEvents
      * @Event("Softspring\ShopBundle\Event\GetCartItemEvent")
      */
     const CART_REMOVE_ITEM_SUCCESS = 'sfs_shop.cart.remove_item_success';
+
+    /**
+     * @Event("Softspring\ShopBundle\Event\GetResponseCustomerEvent")
+     */
+    const CUSTOMER_ORDER_LIST_INITIALIZE = 'sfs_shop.customer.orders.list_initialize';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     */
+    const CUSTOMER_ORDER_LIST_VIEW = 'sfs_shop.customer.orders.list_view';
 }

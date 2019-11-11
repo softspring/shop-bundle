@@ -13,6 +13,7 @@ services:
             $deleteForm: '@Softspring\ShopBundle\Form\Admin\OrderDeleteFormInterface'
             $config:
                 list:
+                    initialize_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_LIST_INITIALIZE
                     view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_LIST_VIEW
                     view: '@@SfsShop/admin/order/list.html.twig'
                     view_page: '@@SfsShop/admin/order/list-page.html.twig'
