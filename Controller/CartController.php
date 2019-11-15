@@ -117,9 +117,10 @@ class CartController extends AbstractController
             return $response;
         }
 
-        $this->cartManager->addItem($request, $item, (int)$request->get('quantity', 1));
+        $quantity = (int)$request->get('quantity', 1);
+        $this->cartManager->addItem($request, $item, $quantity);
 
-        if ($response = $this->dispatchGetResponse(SfsShopEvents::CART_ADD_ITEM_SUCCESS, new GetCartItemEvent($cart, $item, $request))) {
+        if ($response = $this->dispatchGetResponse(SfsShopEvents::CART_ADD_ITEM_SUCCESS, new GetCartItemEvent($cart, $item, $request, ['quantity' => $quantity]))) {
             return $response;
         }
 
