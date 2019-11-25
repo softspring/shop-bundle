@@ -6,6 +6,7 @@ use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\ShopBundle\Event\GetCartItemEvent;
+use Softspring\ShopBundle\Event\GetResponseCartEvent;
 use Softspring\ShopBundle\Event\GetResponseCartTransitionEvent;
 use Softspring\ShopBundle\Form\CartUpdateForm;
 use Softspring\ShopBundle\Manager\CartManagerInterface;
@@ -49,6 +50,11 @@ class CartController extends AbstractController
     public function view(Request $request): Response
     {
         $form = $this->getCartForm($request);
+
+        $cart = $this->cartManager->getCart($request);
+        if ($response = $this->dispatchGetResponse(SfsShopEvents::CART_VIEW_INIT, new GetResponseCartEvent($cart, $request))) {
+            return $response;
+        }
 
         $viewData = new \ArrayObject([
             'cart' => $form->getData(),

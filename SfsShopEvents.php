@@ -265,6 +265,11 @@ class SfsShopEvents
     const ADMIN_STORES_DELETE_VIEW = 'sfs_shop.admin.stores.delete_view';
 
     /**
+     * @Event("Softspring\ShopBundle\Event\GetResponseCartEvent")
+     */
+    const CART_VIEW_INIT = 'sfs_shop.cart.view_init';
+
+    /**
      * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const CART_VIEW_VIEW = 'sfs_shop.cart.view_view';
