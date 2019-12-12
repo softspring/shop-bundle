@@ -13,7 +13,7 @@ interface CartManagerInterface extends AdminEntityManagerInterface
 
     public function reset(Request $request): ?OrderInterface;
 
-    public function getCart(Request $request): ?OrderInterface;
+    public function getCart(Request $request, bool $createIfNotExists = true): ?OrderInterface;
 
     public function getCartTransitionMetadata(string $transition, Request $request): array;
 

@@ -37,11 +37,12 @@ class CartExtension extends AbstractExtension
 
     /**
      * @param Request $request
+     * @param bool    $createIfNotExists
      *
      * @return OrderInterface|null
      */
-    public function getCart(Request $request): ?OrderInterface
+    public function getCart(Request $request, bool $createIfNotExists = true): ?OrderInterface
     {
-        return $this->cartManager->getCart($request);
+        return $this->cartManager->getCart($request, $createIfNotExists);
     }
 }

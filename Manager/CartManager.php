@@ -50,7 +50,7 @@ class CartManager implements CartManagerInterface
         return OrderInterface::class;
     }
 
-    public function getCart(Request $request): ?OrderInterface
+    public function getCart(Request $request, bool $createIfNotExists = true): ?OrderInterface
     {
         $session = $this->getSession($request);
 
@@ -58,6 +58,10 @@ class CartManager implements CartManagerInterface
         $cart = $cart ? $this->getRepository()->findOneById($cart) : null;
 
         if (!$cart instanceof OrderInterface) {
+            if (!$createIfNotExists) {
+                return null;
+            }
+
             $cart = $this->createEntity();
 
             $workflow = $this->workflows->get($cart, 'checkout');
