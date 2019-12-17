@@ -5,7 +5,7 @@ namespace Softspring\ShopBundle\Model;
 abstract class CustomerAddress implements CustomerAddressInterface
 {
     /**
-     * @var CustomerInterface|null
+     * @var ShopCustomerInterface|null
      */
     protected $customer;
 }

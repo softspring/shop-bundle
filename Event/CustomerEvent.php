@@ -2,14 +2,14 @@
 
 namespace Softspring\ShopBundle\Event;
 
-use Softspring\ShopBundle\Model\CustomerInterface;
+use Softspring\ShopBundle\Model\ShopCustomerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class CustomerEvent extends Event
 {
     /**
-     * @var CustomerInterface
+     * @var ShopCustomerInterface
      */
     protected $customer;
 
@@ -21,17 +21,17 @@ class CustomerEvent extends Event
     /**
      * CustomerEvent constructor.
      *
-     * @param CustomerInterface $customer
-     * @param Request|null      $request
+     * @param ShopCustomerInterface $customer
+     * @param Request|null          $request
      */
-    public function __construct(CustomerInterface $customer, ?Request $request)
+    public function __construct(ShopCustomerInterface $customer, ?Request $request)
     {
         $this->customer = $customer;
         $this->request = $request;
     }
 
     /**
-     * @return CustomerInterface
+     * @return ShopCustomerInterface
      */
     public function getCustomer()
     {

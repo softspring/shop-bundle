@@ -5,7 +5,7 @@ namespace Softspring\ShopBundle\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-abstract class Customer implements CustomerInterface
+abstract class ShopCustomer implements ShopCustomerInterface
 {
     /**
      * @var Collection|OrderInterface[]

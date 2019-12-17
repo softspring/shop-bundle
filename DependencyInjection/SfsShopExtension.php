@@ -2,7 +2,7 @@
 
 namespace Softspring\ShopBundle\DependencyInjection;
 
-use Softspring\ShopBundle\Model\CustomerInterface;
+use Softspring\ShopBundle\Model\ShopCustomerInterface;
 use Softspring\ShopBundle\Model\OrderInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
@@ -50,7 +50,7 @@ class SfsShopExtension extends Extension implements PrependExtensionInterface
         $doctrineConfig = [];
 
         // add a default config to force load target_entities, will be overwritten by ResolveDoctrineTargetEntityPass
-        $doctrineConfig['orm']['resolve_target_entities'][CustomerInterface::class] = 'App\Entity\Customer';
+        $doctrineConfig['orm']['resolve_target_entities'][ShopCustomerInterface::class] = 'App\Entity\Customer';
         $doctrineConfig['orm']['resolve_target_entities'][OrderInterface::class] = 'App\Entity\Order';
 
         // disable auto-mapping for this bundle to prevent mapping errors

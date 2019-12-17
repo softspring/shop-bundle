@@ -5,12 +5,12 @@ namespace Softspring\ShopBundle\Model;
 interface OrderHasCustomerInterface
 {
     /**
-     * @return CustomerInterface|null
+     * @return ShopCustomerInterface|null
      */
-    public function getCustomer(): ?CustomerInterface;
+    public function getCustomer(): ?ShopCustomerInterface;
 
     /**
-     * @param CustomerInterface|null $customer
+     * @param ShopCustomerInterface|null $customer
      */
-    public function setCustomer(?CustomerInterface $customer): void;
+    public function setCustomer(?ShopCustomerInterface $customer): void;
 }

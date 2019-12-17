@@ -6,7 +6,7 @@ use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\ShopBundle\Event\GetResponseCustomerEvent;
 use Softspring\ShopBundle\Manager\OrderManagerInterface;
-use Softspring\ShopBundle\Model\CustomerInterface;
+use Softspring\ShopBundle\Model\ShopCustomerInterface;
 use Softspring\ShopBundle\Model\OrderHasCustomerInterface;
 use Softspring\ShopBundle\Model\OrderInterface;
 use Softspring\ShopBundle\SfsShopEvents;
@@ -89,13 +89,13 @@ class OrdersController extends AbstractController
     /**
      * @param Request $request
      *
-     * @return CustomerInterface|null
+     * @return ShopCustomerInterface|null
      */
-    protected function getCustomer(Request $request): ?CustomerInterface
+    protected function getCustomer(Request $request): ?ShopCustomerInterface
     {
         $user = $this->getUser();
 
-        if ($user instanceof CustomerInterface) {
+        if ($user instanceof ShopCustomerInterface) {
             return $user;
         }
 

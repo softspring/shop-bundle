@@ -2,7 +2,6 @@
 
 namespace Softspring\ShopBundle\Twig\Extension;
 
-use Doctrine\Common\Collections\Collection;
 use Softspring\ShopBundle\Manager\StoreManagerInterface;
 use Softspring\ShopBundle\Model\StoreLanguagesInterface;
 use Softspring\ShopBundle\Model\StoreSimpleCountriesInterface;

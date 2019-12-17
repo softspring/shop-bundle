@@ -3,29 +3,29 @@
 namespace Softspring\ShopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Softspring\ShopBundle\Model\CustomerInterface;
+use Softspring\ShopBundle\Model\ShopCustomerInterface;
 
 trait OrderHasCustomerTrait
 {
     /**
-     * @var CustomerInterface|null
-     * @ORM\ManyToOne(targetEntity="Softspring\ShopBundle\Model\CustomerInterface", inversedBy="orders")
+     * @var ShopCustomerInterface|null
+     * @ORM\ManyToOne(targetEntity="Softspring\CustomerBundle\Model\CustomerInterface", inversedBy="orders")
      * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $customer;
 
     /**
-     * @return CustomerInterface|null
+     * @return ShopCustomerInterface|null
      */
-    public function getCustomer(): ?CustomerInterface
+    public function getCustomer(): ?ShopCustomerInterface
     {
         return $this->customer;
     }
 
     /**
-     * @param CustomerInterface|null $customer
+     * @param ShopCustomerInterface|null $customer
      */
-    public function setCustomer(?CustomerInterface $customer): void
+    public function setCustomer(?ShopCustomerInterface $customer): void
     {
         $this->customer = $customer;
     }

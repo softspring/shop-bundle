@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Softspring\ShopBundle\Model\OrderHasCustomerInterface;
 use Softspring\ShopBundle\Model\OrderInterface;
 
-trait CustomerTrait
+trait ShopCustomerTrait
 {
     /**
      * @var Collection|OrderInterface[]

@@ -4,7 +4,7 @@ namespace Softspring\ShopBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Softspring\AdminBundle\Manager\AdminEntityManagerTrait;
-use Softspring\ShopBundle\Model\CustomerInterface;
+use Softspring\ShopBundle\Model\ShopCustomerInterface;
 
 class CustomerManager implements CustomerManagerInterface
 {
@@ -26,6 +26,6 @@ class CustomerManager implements CustomerManagerInterface
 
     public function getTargetClass(): string
     {
-        return CustomerInterface::class;
+        return ShopCustomerInterface::class;
     }
 }
