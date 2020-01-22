@@ -3,6 +3,7 @@
 namespace Softspring\ShopBundle\DependencyInjection\Compiler;
 
 use Softspring\CoreBundle\DependencyInjection\Compiler\AbstractResolveDoctrineTargetEntityPass;
+use Softspring\ShopBundle\Model\OrderTransitionInterface;
 use Softspring\ShopBundle\Model\ShopCustomerInterface;
 use Softspring\ShopBundle\Model\OrderInterface;
 use Softspring\ShopBundle\Model\OrderEntryInterface;
@@ -29,6 +30,9 @@ class ResolveDoctrineTargetEntityPass extends AbstractResolveDoctrineTargetEntit
         $this->setTargetEntityFromParameter('sfs_shop.salable_item.class', SalableItemInterface::class, $container, true);
         $this->setTargetEntityFromParameter('sfs_shop.order.class', OrderInterface::class, $container, true);
         $this->setTargetEntityFromParameter('sfs_shop.order.entry.class', OrderEntryInterface::class, $container, true);
-        $this->setTargetEntityFromParameter('sfs_shop.store.class', StoreInterface::class, $container, false);
+        $this->setTargetEntityFromParameter('sfs_shop.store.class', StoreInterface::class, $container, true);
+
+        // optional entities
+        $this->setTargetEntityFromParameter('sfs_shop.order.transition.class', OrderTransitionInterface::class, $container, false);
     }
 }

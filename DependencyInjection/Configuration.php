@@ -42,6 +42,12 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('class')->defaultValue('App\Entity\OrderEntry')->end()
                             ->end()
                         ->end()
+                        ->arrayNode('transition')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('class')->defaultValue('App\Entity\OrderTransition')->end()
+                            ->end()
+                        ->end()
                     ->end()
                 ->end()
 

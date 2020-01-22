@@ -56,6 +56,10 @@ admin_orders:
                 price.header: "Price"
                 quantity.header: "Quantity"
                 total.header: "Total"
+        transitions:
+            table:
+                date.header: "Date"
+                status.header: "Status"
 
 admin_stores:
     list:

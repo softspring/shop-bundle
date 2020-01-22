@@ -33,11 +33,17 @@ abstract class Order implements OrderInterface
     protected $checkoutAt;
 
     /**
+     * @var Collection|OrderTransitionInterface[]
+     */
+    protected $transitions;
+
+    /**
      * Order constructor.
      */
     public function __construct()
     {
         $this->entries = new ArrayCollection();
+        $this->transitions = new ArrayCollection();
     }
 
     /**
@@ -156,5 +162,24 @@ abstract class Order implements OrderInterface
         return array_sum($this->entries->map(function (OrderEntryInterface $entry) {
             return $entry->getTotalPrice();
         })->toArray());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTransitions(): Collection
+    {
+        return $this->transitions;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function addTransition(OrderTransitionInterface $transition): void
+    {
+        if (!$this->getTransitions()->contains($transition)) {
+            $this->getTransitions()->add($transition);
+            $transition->setOrder($this);
+        }
     }
 }

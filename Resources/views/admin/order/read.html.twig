@@ -48,4 +48,26 @@
         </tbody>
     </table>
 
+    <br/>
+    <br/>
+    <h3>History</h3>
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th>{{ 'admin_orders.read.transitions.table.date.header'|trans }}</th>
+            <th>{{ 'admin_orders.read.transitions.table.status.header'|trans }}</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for transition in order.transitions %}
+            <tr>
+                <td>{{ transition.date|date('H:i:s d-m-Y') }}</td>
+                <td>{{ transition.status }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
 {% endblock content %}
