@@ -23,6 +23,10 @@ admin_orders:
             id.header: "Id"
             number.header: "Number"
             status.header: "Status"
+            date.header: "Date"
+            email.header: "Email"
+            address.header: "Address"
+            entries.header: "Items"
             actions.header: ""
         filter_form:
             number:

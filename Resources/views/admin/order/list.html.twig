@@ -7,13 +7,14 @@
 {% block content %}
     <div class="d-flex align-items-center justify-content-between mb-4">
         <h1 class="h3">{{ 'admin_orders.list.title'|trans }}</h1>
-        <a class="btn btn-primary" href="{{ url('sfs_shop_admin_orders_create') }}">{{ 'admin_orders.list.actions.create.button'|trans }}</a>
+        {#        <a class="btn btn-primary" href="{{ url('sfs_shop_admin_orders_create') }}">{{ 'admin_orders.list.actions.create.button'|trans }}</a>#}
     </div>
 
-    {{ form_start(filterForm, {'attr': {'class': 'form-inline mb-3 mx-3'}} )}}
-{#    {{ form_widget(filterForm) }}#}
+    {{ form_start(filterForm, {'attr': {'class': 'form-inline mx-3'}} )}}
     {{ form_row(filterForm.number) }}
-    {{ form_row(filterForm.status, {'label_attr': {'class': 'checkbox-inline'}, 'attr': {'class': 'd-flex h-100'}}) }}
+    <div class="my-3">
+        {{ form_row(filterForm.status, {'label_attr': {'class': 'checkbox-inline'}, 'attr': {'class': 'd-flex flex-wrap h-100'}}) }}
+    </div>
     {{ form_rest(filterForm) }}
     {{ form_end(filterForm) }}
 
@@ -24,6 +25,10 @@
             <th scope="col">{{ 'admin_orders.list.table.id.header'|trans }}</th>
             <th scope="col">{{ 'admin_orders.list.table.number.header'|trans }}</th>
             <th scope="col">{{ 'admin_orders.list.table.status.header'|trans }}</th>
+            <th scope="col">{{ 'admin_orders.list.table.date.header'|trans }}</th>
+            <th scope="col">{{ 'admin_orders.list.table.email.header'|trans }}</th>
+            <th scope="col">{{ 'admin_orders.list.table.address.header'|trans }}</th>
+            <th scope="col">{{ 'admin_orders.list.table.entries.header'|trans }}</th>
             <th scope="col">&nbsp; {#{{ 'admin_orders.list.table.actions.header'|trans }}#}</th>
         </tr>
         </thead>
