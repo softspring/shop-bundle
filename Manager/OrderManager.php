@@ -3,13 +3,13 @@
 namespace Softspring\ShopBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Softspring\AdminBundle\Manager\AdminEntityManagerTrait;
+use Softspring\CrudlBundle\Manager\CrudlEntityManagerTrait;
 use Softspring\ShopBundle\Model\OrderInterface;
 use Symfony\Component\Workflow\Registry;
 
 class OrderManager implements OrderManagerInterface
 {
-    use AdminEntityManagerTrait;
+    use CrudlEntityManagerTrait;
 
     /**
      * @var EntityManagerInterface

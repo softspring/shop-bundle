@@ -2,11 +2,11 @@
 
 namespace Softspring\ShopBundle\Form\Admin;
 
-use Softspring\AdminBundle\Form\AdminEntityListFilterForm;
+use Softspring\CrudlBundle\Form\EntityListFilterForm;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class StoreListFilterForm extends AdminEntityListFilterForm implements StoreListFilterFormInterface
+class StoreListFilterForm extends EntityListFilterForm implements StoreListFilterFormInterface
 {
     public function configureOptions(OptionsResolver $resolver)
     {

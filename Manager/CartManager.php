@@ -3,8 +3,7 @@
 namespace Softspring\ShopBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
-use Softspring\AdminBundle\Manager\AdminEntityManagerTrait;
+use Softspring\CrudlBundle\Manager\CrudlEntityManagerTrait;
 use Softspring\ShopBundle\Model\OrderInterface;
 use Softspring\ShopBundle\Model\OrderEntryInterface;
 use Softspring\ShopBundle\Model\SalableItemInterface;
@@ -14,7 +13,7 @@ use Symfony\Component\Workflow\Registry;
 
 class CartManager implements CartManagerInterface
 {
-    use AdminEntityManagerTrait;
+    use CrudlEntityManagerTrait;
 
     /**
      * @var EntityManagerInterface

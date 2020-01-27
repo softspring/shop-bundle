@@ -1,12 +1,11 @@
 services:
     sfs_shop.admin.order.controller:
-        class: Softspring\AdminBundle\Controller\EntityController
+        class: Softspring\CrudlBundle\Controller\CrudlController
         public: true
         calls:
             - { method: setContainer, arguments: ['@service_container'] }
         arguments:
             $manager: '@Softspring\ShopBundle\Manager\OrderManagerInterface'
-            $eventDispatcher: '@event_dispatcher'
             $listFilterForm: '@Softspring\ShopBundle\Form\Admin\OrderListFilterFormInterface'
             $createForm: '@Softspring\ShopBundle\Form\Admin\OrderCreateFormInterface'
             $updateForm: '@Softspring\ShopBundle\Form\Admin\OrderUpdateFormInterface'

@@ -5,8 +5,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
-        "softspring/core-bundle": "^1.0@dev",
         "softspring/catalog-bundle": "^1.0@dev",
+        "softspring/crudl-bundle": "^1.1",
         "softspring/doctrine-templates": "^1.1@dev",
         "symfony/workflow": "*"
     },
