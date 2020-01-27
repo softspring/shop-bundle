@@ -2,7 +2,7 @@
 {% extends '@SfsShop/customer_layout.html.twig' %}
 
 {% block content %}
-    <h1>{{ 'customer_orders.details.title'|trans({'%orderNumber%':order.number|default(order.id)}) }}</h1>
+    <h1>{{ 'customer.order.details.title'|trans({'%orderNumber%':order.number|default(order.id)}) }}</h1>
 
     Status: {{ order.status }}
     <br/>
@@ -10,10 +10,10 @@
     <table class="table mt-3">
         <thead>
         <tr>
-            <th>{{ 'customer_orders.details.entries.table.product.header'|trans }}</th>
-            <th>{{ 'customer_orders.details.entries.table.price.header'|trans }}</th>
-            <th>{{ 'customer_orders.details.entries.table.quantity.header'|trans }}</th>
-            <th>{{ 'customer_orders.details.entries.table.total.header'|trans }}</th>
+            <th>{{ 'customer.order.details.entries.table.product.header'|trans }}</th>
+            <th>{{ 'customer.order.details.entries.table.price.header'|trans }}</th>
+            <th>{{ 'customer.order.details.entries.table.quantity.header'|trans }}</th>
+            <th>{{ 'customer.order.details.entries.table.total.header'|trans }}</th>
         </tr>
         </thead>
 

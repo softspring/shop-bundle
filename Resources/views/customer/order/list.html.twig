@@ -1,18 +1,22 @@
+{% trans_default_domain 'sfs_shop' %}
 {% extends '@SfsShop/customer_layout.html.twig' %}
 
 {% block content %}
 
     {% if orders|length == 0 %}
-        You have not any orders.
+        <div class="text-center p-5">
+            <p>{{ 'customer.order.list.empty'|trans }}</p>
+            <a class="btn btn-primary" href="{{ url('index') }}">{{ 'customer.order.list.empty_button'|trans }}</a>
+        </div>
     {% else %}
         <table class="table table-striped table-hover">
             <thead>
             <tr>
-                <th>Order No.</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Price</th>
-                <th>Actions</th>
+                <th>{{ 'customer.order.list.table.order_number.header'|trans }}</th>
+                <th>{{ 'customer.order.list.table.date.header'|trans }}</th>
+                <th>{{ 'customer.order.list.table.status.header'|trans }}</th>
+                <th>{{ 'customer.order.list.table.price.header'|trans }}</th>
+                <th>&nbsp;</th>
             </tr>
             </thead>
 
@@ -24,7 +28,7 @@
                     <td>{{ order.status }}</td>
                     <td>{{ order.total }}</td>
                     <td>
-                        <a href="{{ url('sfs_shop_customer_orders_details', {'order':order.id}) }}">details</a>
+                        <a href="{{ url('sfs_shop_customer_orders_details', {'order':order.id}) }}"><span class="mdi mdi-eye-outline"></span> {{ 'customer.order.list.actions.details'|trans }}</a>
                     </td>
                 </tr>
             {% endfor %}

@@ -101,16 +101,44 @@ admin_stores:
             cancel.button: "Cancel"
             delete.button: "Delete"
 
-customer_orders:
-    details:
-        page_title: "Order #%orderNumber%"
-        title: "Order #%orderNumber%"
-        entries:
+customer:
+    order:
+        details:
+            page_title: "Order #%orderNumber%"
+            title: "Order #%orderNumber%"
+            entries:
+                table:
+                    product.header: "Product"
+                    price.header: "Price"
+                    quantity.header: "Quantity"
+                    total.header: "Total"
+        list:
+            page_title: "My orders"
+            empty: "You have not any orders."
+            empty_button: "Shopping"
             table:
-                product.header: "Product"
+                order_number.header: "Order No."
+                date.header: "Date"
+                status.header: "Status"
                 price.header: "Price"
-                quantity.header: "Quantity"
-                total.header: "Total"
+            actions:
+                details.button: "Details"
+    subscription:
+        list:
+            empty: "You have not any subscription."
+            empty_button: "Shopping"
+            table:
+                subscription.header: "Subscription"
+                plan.header: "Plan"
+                start_date.header: "Start Date"
+                end_date.header: "End Date"
+                status.header: "Status"
+                price.header: "Price"
+                link.header: "Link"
+                link.yes: "Linked"
+                link.no: "Not linked"
+            actions:
+                details.button: "Details"
 
 admin_customers:
     list:
