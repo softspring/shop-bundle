@@ -2,10 +2,9 @@
 
 namespace Softspring\ShopBundle\Form\Admin;
 
-use Softspring\AdminBundle\Form\AdminEntityDeleteFormInterface;
-use Symfony\Component\Form\FormTypeInterface;
+use Softspring\CrudlBundle\Form\EntityDeleteFormInterface;
 
-interface OrderDeleteFormInterface extends FormTypeInterface, AdminEntityDeleteFormInterface
+interface OrderDeleteFormInterface extends EntityDeleteFormInterface
 {
 
 }

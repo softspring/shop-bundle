@@ -2,12 +2,12 @@
 
 namespace Softspring\ShopBundle\Manager;
 
-use Softspring\AdminBundle\Manager\AdminEntityManagerInterface;
+use Softspring\CrudlBundle\Manager\CrudlEntityManagerInterface;
 use Softspring\ShopBundle\Model\OrderInterface;
 use Softspring\ShopBundle\Model\SalableItemInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-interface CartManagerInterface extends AdminEntityManagerInterface
+interface CartManagerInterface extends CrudlEntityManagerInterface
 {
     public function close(Request $request): void;
 

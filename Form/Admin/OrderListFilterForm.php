@@ -2,13 +2,13 @@
 
 namespace Softspring\ShopBundle\Form\Admin;
 
-use Softspring\AdminBundle\Form\AdminEntityListFilterForm;
+use Softspring\CrudlBundle\Form\EntityListFilterForm;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class OrderListFilterForm extends AdminEntityListFilterForm implements OrderListFilterFormInterface
+class OrderListFilterForm extends EntityListFilterForm implements OrderListFilterFormInterface
 {
     public function configureOptions(OptionsResolver $resolver)
     {

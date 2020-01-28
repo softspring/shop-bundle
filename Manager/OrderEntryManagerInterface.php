@@ -2,11 +2,9 @@
 
 namespace Softspring\ShopBundle\Manager;
 
-use Softspring\AdminBundle\Manager\AdminEntityManagerInterface;
-use Softspring\ShopBundle\Model\OrderInterface;
-use Symfony\Component\HttpFoundation\Request;
+use Softspring\CrudlBundle\Manager\CrudlEntityManagerInterface;
 
-interface OrderEntryManagerInterface extends AdminEntityManagerInterface
+interface OrderEntryManagerInterface extends CrudlEntityManagerInterface
 {
 
 }

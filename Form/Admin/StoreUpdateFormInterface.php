@@ -2,10 +2,9 @@
 
 namespace Softspring\ShopBundle\Form\Admin;
 
-use Softspring\AdminBundle\Form\AdminEntityUpdateFormInterface;
-use Symfony\Component\Form\FormTypeInterface;
+use Softspring\CrudlBundle\Form\EntityUpdateFormInterface;
 
-interface StoreUpdateFormInterface extends FormTypeInterface, AdminEntityUpdateFormInterface
+interface StoreUpdateFormInterface extends EntityUpdateFormInterface
 {
 
 }

@@ -2,10 +2,10 @@
 
 namespace Softspring\ShopBundle\Manager;
 
-use Softspring\AdminBundle\Manager\AdminEntityManagerInterface;
+use Softspring\CrudlBundle\Manager\CrudlEntityManagerInterface;
 use Softspring\ShopBundle\Model\OrderInterface;
 
-interface OrderManagerInterface extends AdminEntityManagerInterface
+interface OrderManagerInterface extends CrudlEntityManagerInterface
 {
     /**
      * @param string         $transition
