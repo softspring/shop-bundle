@@ -10,11 +10,10 @@
         {#        <a class="btn btn-primary" href="{{ url('sfs_shop_admin_orders_create') }}">{{ 'admin_orders.list.actions.create.button'|trans }}</a>#}
     </div>
 
-    {{ form_start(filterForm, {'attr': {'class': 'form-inline mx-3'}} )}}
+    {{ form_start(filterForm, {'attr': {'class': 'form-inline mb-3 mx-3'}} )}}
+    {#    {{ form_widget(filterForm) }}#}
     {{ form_row(filterForm.number) }}
-    <div class="my-3">
-        {{ form_row(filterForm.status, {'label_attr': {'class': 'checkbox-inline'}, 'attr': {'class': 'd-flex flex-wrap h-100'}}) }}
-    </div>
+    {{ form_row(filterForm.status, {'label_attr': {'class': 'checkbox-inline'}, 'attr': {'class': 'd-flex h-100'}}) }}
     {{ form_rest(filterForm) }}
     {{ form_end(filterForm) }}
 

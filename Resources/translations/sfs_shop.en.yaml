@@ -75,6 +75,9 @@ admin_stores:
             languages.header: "Languages"
             countries.header: "Countries"
         actions.header: "Actions"
+        actions:
+            update.button: "Update"
+            details.button: "Details"
     create:
         page_title: "Create store"
         title: "Create store"
