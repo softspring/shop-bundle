@@ -17,10 +17,10 @@ abstract class Order implements OrderInterface
      */
     protected $status;
 
-    /**
-     * @var \DateTime|null
-     */
-    protected $date;
+//    /**
+//     * @var \DateTime|null
+//     */
+//    protected $date;
 
     /**
      * @var Collection|OrderEntryInterface[]
@@ -78,21 +78,21 @@ abstract class Order implements OrderInterface
         $this->status = $status;
     }
 
-    /**
-     * @return \DateTime|null
-     */
-    public function getDate(): ?\DateTime
-    {
-        return $this->date;
-    }
-
-    /**
-     * @param \DateTime|null $date
-     */
-    public function setDate(?\DateTime $date): void
-    {
-        $this->date = $date;
-    }
+//    /**
+//     * @return \DateTime|null
+//     */
+//    public function getDate(): ?\DateTime
+//    {
+//        return $this->date;
+//    }
+//
+//    /**
+//     * @param \DateTime|null $date
+//     */
+//    public function setDate(?\DateTime $date): void
+//    {
+//        $this->date = $date;
+//    }
 
     /**
      * @return Collection|OrderEntryInterface[]

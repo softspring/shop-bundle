@@ -23,19 +23,18 @@ admin_orders:
             id.header: "Id"
             number.header: "Number"
             status.header: "Status"
-            date.header: "Date"
-            email.header: "Email"
-            address.header: "Address"
+            checkoutAt.header: "Date"
             entries.header: "Items"
+            total.header: "Total"
             actions.header: ""
         filter_form:
-            number:
-                label: "Number"
-            status:
-                label: "Status"
+            number.label: "Number"
+            status.label: "Status"
+            search.label: "Search"
         actions:
             create.button: "Create order"
             update.button: "Update"
+            details.button: "Details"
     create:
         page_title: "Create order"
         title: "Create order"
@@ -57,6 +56,7 @@ admin_orders:
         entries:
             table:
                 product.header: "Product"
+                model.header: "Model"
                 price.header: "Price"
                 quantity.header: "Quantity"
                 total.header: "Total"

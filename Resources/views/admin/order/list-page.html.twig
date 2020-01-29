@@ -3,18 +3,16 @@
 {% for order in entities %}
     <tr>
         <td>
-            <a href="{{ url('sfs_shop_admin_orders_read', {'entity':order}) }}">{{ order.id }}</a>
+            <a href="{{ url('sfs_shop_admin_orders_read', {'entity':order}) }}">{{ order.number }}</a>
         </td>
 
-        <td>{{ order.number }}</td>
         <td>{{ order.status }}</td>
-        <td>{#@TODO meter date#}</td>
-        <td>{#@TODO meter email#}</td>
-        <td>{#@TODO meter address#}</td>
-        <td>{#@TODO meter entries#}</td>
+        <td>{{ order.checkoutAt|date('d-m-Y') }}</td>
+        <td>{{ order.entries.count() }}</td>
+        <td class="text-right">{{ order.total|number_format(2) }}</td>
 
         <td align="right">
-            <a href="{{ url('sfs_shop_admin_orders_update', {'entity':order}) }}" class="text-nowrap">{{ 'admin_orders.list.actions.update.button'|trans }} <span class="mdi mdi-18px mdi-square-edit-outline align-middle"></span></a>
+            <a href="{{ url('sfs_shop_admin_orders_read', {'entity':order}) }}" class="text-nowrap">{{ 'admin_orders.list.actions.details.button'|trans }} <span class="mdi mdi-18px mdi-eye-outline align-middle"></span></a>
         </td>
     </tr>
 {% endfor %}

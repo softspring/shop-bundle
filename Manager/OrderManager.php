@@ -82,4 +82,14 @@ class OrderManager implements OrderManagerInterface
 
         return true;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getStatuses(): array
+    {
+        $workflow = $this->workflows->get($this->createEntity(), 'order');
+        $definition = $workflow->getDefinition();
+        return $definition->getPlaces();
+    }
 }

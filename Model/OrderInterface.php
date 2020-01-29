@@ -26,15 +26,15 @@ interface OrderInterface
      */
     public function setStatus(?string $status): void;
 
-    /**
-     * @return \DateTime|null
-     */
-    public function getDate(): ?\DateTime;
-
-    /**
-     * @param \DateTime|null $date
-     */
-    public function setDate(?\DateTime $date): void;
+//    /**
+//     * @return \DateTime|null
+//     */
+//    public function getDate(): ?\DateTime;
+//
+//    /**
+//     * @param \DateTime|null $date
+//     */
+//    public function setDate(?\DateTime $date): void;
 
     /**
      * @return Collection|OrderEntryInterface[]

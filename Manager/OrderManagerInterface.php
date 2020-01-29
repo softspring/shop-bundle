@@ -24,4 +24,9 @@ interface OrderManagerInterface extends CrudlEntityManagerInterface
      * @throws \Exception
      */
     public function transition(string $transition, OrderInterface $order): bool;
+
+    /**
+     * @return string[]
+     */
+    public function getStatuses(): array;
 }
