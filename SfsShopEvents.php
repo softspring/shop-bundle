@@ -90,7 +90,7 @@ class SfsShopEvents
     const ADMIN_CUSTOMERS_DELETE_VIEW = 'sfs_shop.admin.customers.delete_view';
 
     /**
-     * @Event("Softspring\CoreBundle\Event\GetResponseEvent")
+     * @Event("Softspring\CoreBundle\Event\GetResponseRequestEvent")
      */
     const ADMIN_ORDERS_LIST_INITIALIZE = 'sfs_shop.admin.orders.list_initialize';
 
