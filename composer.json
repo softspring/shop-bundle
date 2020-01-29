@@ -6,7 +6,7 @@
     "require": {
         "php": "^7.2",
         "softspring/catalog-bundle": "^1.0@dev",
-        "softspring/crudl-bundle": "^1.0",
+        "softspring/crudl-bundle": "^1.0.1",
         "softspring/doctrine-templates": "^1.1@dev",
         "symfony/workflow": "*"
     },

@@ -8,12 +8,12 @@ sfs_shop_admin_stores_create:
 
 sfs_shop_admin_stores_update:
     controller: sfs_shop.admin.store.controller::update
-    path: /{entity}/update
+    path: /{store}/update
 
 sfs_shop_admin_stores_delete:
     controller: sfs_shop.admin.store.controller::delete
-    path: /{entity}/delete
+    path: /{store}/delete
 
 sfs_shop_admin_stores_read:
     controller: sfs_shop.admin.store.controller::read
-    path: /{entity}
+    path: /{store}

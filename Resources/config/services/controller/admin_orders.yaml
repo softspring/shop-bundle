@@ -11,6 +11,7 @@ services:
             $updateForm: '@Softspring\ShopBundle\Form\Admin\OrderUpdateFormInterface'
             $deleteForm: '@Softspring\ShopBundle\Form\Admin\OrderDeleteFormInterface'
             $config:
+                entity_attribute: 'order'
                 list:
                     initialize_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_LIST_INITIALIZE
                     view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_LIST_VIEW

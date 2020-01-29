@@ -11,6 +11,7 @@ services:
             $updateForm: '@Softspring\ShopBundle\Form\Admin\StoreUpdateFormInterface'
             $deleteForm: '@Softspring\ShopBundle\Form\Admin\StoreDeleteFormInterface'
             $config:
+                entity_attribute: 'store'
                 list:
                     is_granted: 'ROLE_ADMIN_STORE_LIST'
                     view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_STORES_LIST_VIEW

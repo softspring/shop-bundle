@@ -8,12 +8,12 @@ sfs_shop_admin_customers_create:
 
 sfs_shop_admin_customers_update:
     controller: sfs_shop.admin.customer.controller::update
-    path: /{entity}/update
+    path: /{customer}/update
 
 sfs_shop_admin_customers_delete:
     controller: sfs_shop.admin.customer.controller::delete
-    path: /{entity}/delete
+    path: /{customer}/delete
 
 sfs_shop_admin_customers_read:
     controller: sfs_shop.admin.customer.controller::read
-    path: /{entity}
+    path: /{customer}

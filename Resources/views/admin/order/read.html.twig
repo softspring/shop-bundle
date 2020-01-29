@@ -1,4 +1,4 @@
-{% set order = entity %}
+{% set order = customer %}
 
 {% trans_default_domain 'sfs_shop' %}
 {% extends '@SfsShop/admin_layout.html.twig' %}
@@ -12,7 +12,7 @@
     {% if order.customer|default(false) %}
     <br/>
     Customer:
-        <a href="{{ url('sfs_shop_admin_customers_read', {'entity': order.customer}) }}">
+        <a href="{{ url('sfs_shop_admin_customers_read', {'customer': order.customer}) }}">
         {{ order.customer.name|default('') }}
         {{ order.customer.surname|default('') }}
         ({{ order.customer.email|default('') }})</a>
