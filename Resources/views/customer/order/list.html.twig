@@ -28,7 +28,7 @@
                     <td>{{ order.status }}</td>
                     <td>{{ order.total|number_format(2) }}</td>
                     <td>
-                        <a href="{{ url('sfs_shop_customer_orders_details', {'order':order.id}) }}"><span class="mdi mdi-eye-outline"></span> {{ 'customer.order.list.actions.details'|trans }}</a>
+                        <a href="{{ url('sfs_shop_customer_orders_details', {'order':order.id}) }}"><span class="mdi mdi-eye-outline"></span> {{ 'customer.order.list.actions.details.button'|trans }}</a>
                     </td>
                 </tr>
             {% endfor %}

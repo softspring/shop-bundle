@@ -125,23 +125,7 @@ customer:
                 status.header: "Status"
                 price.header: "Price"
             actions:
-                details.button: "Details"
-    subscription:
-        list:
-            empty: "You have not any subscription."
-            empty_button: "Shopping"
-            table:
-                subscription.header: "Subscription"
-                plan.header: "Plan"
-                start_date.header: "Start Date"
-                end_date.header: "End Date"
-                status.header: "Status"
-                price.header: "Price"
-                link.header: "Link"
-                link.yes: "Linked"
-                link.no: "Not linked"
-            actions:
-                details.button: "Details"
+                details.button: "details"
 
 admin_customers:
     list:
