@@ -84,7 +84,9 @@ class StoreOrderTransitionsListener
         if ($transition instanceof OrderTransitionUserInterface) {
             $token = $this->tokenStorage->getToken();
             if ($token && $user = $token->getUser()) {
-                $transition->setUser($user);
+                if ($user !== 'anon.') {
+                    $transition->setUser($user);
+                }
             }
         }
         $order->addTransition($transition);
