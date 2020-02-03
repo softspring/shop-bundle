@@ -86,10 +86,12 @@ class StoreRequestListener implements EventSubscriberInterface
                 throw new NotFoundHttpException('Empty _store');
             }
 
-            $store = $this->em->getRepository(StoreInterface::class)->findOneBy([$this->findParamName => $store]);
+            if (!$store instanceof StoreInterface) {
+                $store = $this->em->getRepository(StoreInterface::class)->findOneBy([$this->findParamName => $store]);
 
-            if (!$store) {
-                throw new NotFoundHttpException('Store not found');
+                if (!$store) {
+                    throw new NotFoundHttpException('Store not found');
+                }
             }
 
             if (!$store->isEnabled()) {
