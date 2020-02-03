@@ -99,7 +99,7 @@ class StoreRequestListener implements EventSubscriberInterface
             $request->attributes->set($this->storeRouteParamName, $store);
 
             $context = $this->router->getContext();
-            $context->setParameter('_store', $store);
+            $context->setParameter($this->storeRouteParamName, $store);
 
             $this->twigAppVariable->setStore($store);
         }

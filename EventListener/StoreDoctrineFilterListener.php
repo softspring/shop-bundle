@@ -46,8 +46,10 @@ class StoreDoctrineFilterListener implements EventSubscriberInterface
 
         if ($request->attributes->has($this->storeRouteParamName)) {
             $this->em->getConfiguration()->addFilter('store', StoreFilter::class);
+            /** @var StoreFilter $filter */
             $filter = $this->em->getFilters()->enable('store');
-            $filter->setParameter('_store', $request->attributes->get($this->storeRouteParamName));
+            $filter->setParameter('storeParamName', $this->storeRouteParamName);
+            $filter->setParameter($this->storeRouteParamName, $request->attributes->get($this->storeRouteParamName));
         }
     }
 }
