@@ -9,6 +9,7 @@ use Softspring\ShopBundle\Model\StoreLanguagesInterface;
 use Softspring\ShopBundle\Model\StoreSimpleCountriesInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
 use Symfony\Component\Form\Extension\Core\Type\LocaleType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -48,6 +49,7 @@ abstract class AbstractStoreForm extends AbstractType
     {
         $builder->add('id');
         $builder->add('enabled');
+        $builder->add('currency', CurrencyType::class);
 
         if ($this->manager->getEntityClassReflection()->implementsInterface(NamedInterface::class)) {
             $builder->add('name');

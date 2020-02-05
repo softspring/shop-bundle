@@ -10,6 +10,12 @@
                 <option name="default">0</option>
             </options>
         </field>
+        <field name="currency" column="currency" type="string" length="3" nullable="false">
+            <options>
+                <option name="fixed">true</option>
+                <option name="default">EUR</option>
+            </options>
+        </field>
     </mapped-superclass>
 
 </doctrine-mapping>

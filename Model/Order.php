@@ -38,6 +38,11 @@ abstract class Order implements OrderInterface
     protected $transitions;
 
     /**
+     * @var string|null
+     */
+    protected $currency;
+
+    /**
      * Order constructor.
      */
     public function __construct()
@@ -181,5 +186,21 @@ abstract class Order implements OrderInterface
             $this->getTransitions()->add($transition);
             $transition->setOrder($this);
         }
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCurrency(): ?string
+    {
+        return $this->currency;
+    }
+
+    /**
+     * @param string|null $currency
+     */
+    public function setCurrency(?string $currency): void
+    {
+        $this->currency = $currency;
     }
 }

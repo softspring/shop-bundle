@@ -72,6 +72,7 @@ admin_stores:
             id.header: "Store"
             name.header: "Name"
             enabled.header: "Enabled"
+            currency.header: "Currency"
             languages.header: "Languages"
             countries.header: "Countries"
         actions.header: "Actions"
@@ -87,6 +88,7 @@ admin_stores:
             name.label: "Name"
             languages.label: "Languages"
             countries.label: "Countries"
+            currency.label: "Currency"
         actions:
             create.button: "Create"
             cancel.button: "Cancel"
@@ -99,6 +101,7 @@ admin_stores:
             name.label: "Name"
             languages.label: "Languages"
             countries.label: "Countries"
+            currency.label: "Currency"
         actions:
             update.button: "Update"
             cancel.button: "Cancel"

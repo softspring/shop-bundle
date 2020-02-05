@@ -72,4 +72,14 @@ interface OrderInterface
      * @return float
      */
     public function getTotal(): float;
+
+    /**
+     * @return string|null
+     */
+    public function getCurrency(): ?string;
+
+    /**
+     * @param string|null $currency
+     */
+    public function setCurrency(?string $currency): void;
 }

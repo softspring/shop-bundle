@@ -5,6 +5,7 @@
         <td>{{ store.id }}</td>
         <td>{{ store.name }}</td>
         <td>{{ store.enabled ? 'yes' : 'no' }}</td>
+        <td>{{ store.currency }}</td>
 
         {% if store.languages is defined %}
             <td>{{ store.languages|join(',') }}</td>
