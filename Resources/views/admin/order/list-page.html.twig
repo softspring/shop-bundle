@@ -9,7 +9,7 @@
         <td>{{ order.status }}</td>
         <td>{{ order.checkoutAt|date('d-m-Y') }}</td>
         <td>{{ order.entries.count() }}</td>
-        <td class="text-right">{{ order.total|number_format(2) }}</td>
+        <td class="text-right">{{ order.total|number_format(2) }} {{ order.currency }}</td>
 
         <td align="right">
             <a href="{{ url('sfs_shop_admin_orders_read', {'order':order}) }}" class="text-nowrap">{{ 'admin_orders.list.actions.details.button'|trans }} <span class="mdi mdi-18px mdi-eye-outline align-middle"></span></a>

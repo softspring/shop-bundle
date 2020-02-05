@@ -26,9 +26,9 @@
                     {%  set totalPrice = totalPrice + entry.totalPrice %}
                     <tr>
                         <td>{{ entry.item.name }}</td>
-                        <td>{{ entry.item.price|number_format(2) }} <small>EUR</small></td>
+                        <td>{{ entry.item.price|number_format(2) }} <small>{{ cart.currency }}</small></td>
                         <td>{{ form_widget(form.entries[loop.index0].quantity, {'attr':{'onchange':'submit()', 'class': 'quantity'}}) }}</td>
-                        <td class="text-right">{{ entry.totalPrice|number_format(2) }} <small>EUR</small></td>
+                        <td class="text-right">{{ entry.totalPrice|number_format(2) }} <small>{{ cart.currency }}</small></td>
                         <td>
                             <a href="{{ url('sfs_shop_cart_remove', {'item':entry.item.id}) }}">remove <span class="mdi mdi-cart-remove"></span></a>
                         </td>
@@ -37,7 +37,7 @@
                 </tbody>
                 <tfooter>
                     <tr>
-                        <td colspan="4" align="right">Total <span class="font-weight-bold ml-3">{{ totalPrice|number_format(2) }}</span> <small>EUR</small></td>
+                        <td colspan="4" align="right">Total <span class="font-weight-bold ml-3">{{ totalPrice|number_format(2) }}</span> <small>{{ cart.currency }}</small></td>
                         <td></td>
                     </tr>
                 </tfooter>
