@@ -4,9 +4,12 @@ namespace Softspring\ShopBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Softspring\CrudlBundle\Manager\CrudlEntityManagerTrait;
+use Softspring\ShopBundle\Event\CartEvent;
 use Softspring\ShopBundle\Model\OrderInterface;
 use Softspring\ShopBundle\Model\OrderEntryInterface;
 use Softspring\ShopBundle\Model\SalableItemInterface;
+use Softspring\ShopBundle\SfsShopEvents;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Workflow\Registry;
@@ -31,17 +34,24 @@ class CartManager implements CartManagerInterface
     protected $orderEntryManager;
 
     /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispathcer;
+
+    /**
      * CartManager constructor.
      *
-     * @param EntityManagerInterface    $em
-     * @param Registry                  $workflows
+     * @param EntityManagerInterface     $em
+     * @param Registry                   $workflows
      * @param OrderEntryManagerInterface $orderEntryManager
+     * @param EventDispatcherInterface   $eventDispathcer
      */
-    public function __construct(EntityManagerInterface $em, Registry $workflows, OrderEntryManagerInterface $orderEntryManager)
+    public function __construct(EntityManagerInterface $em, Registry $workflows, OrderEntryManagerInterface $orderEntryManager, EventDispatcherInterface $eventDispathcer)
     {
         $this->em = $em;
         $this->workflows = $workflows;
         $this->orderEntryManager = $orderEntryManager;
+        $this->eventDispathcer = $eventDispathcer;
     }
 
     public function getTargetClass(): string
@@ -65,6 +75,8 @@ class CartManager implements CartManagerInterface
 
             $workflow = $this->workflows->get($cart, 'checkout');
             $cart->setStatus($workflow->getDefinition()->getInitialPlaces()[0]);
+
+            $this->eventDispathcer->dispatch(new CartEvent($cart), SfsShopEvents::CART_CREATING);
         }
 
         $this->saveEntity($cart);
