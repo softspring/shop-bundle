@@ -36,7 +36,7 @@ class CartManager implements CartManagerInterface
     /**
      * @var EventDispatcherInterface
      */
-    protected $eventDispathcer;
+    protected $eventDispatcher;
 
     /**
      * CartManager constructor.
@@ -44,14 +44,14 @@ class CartManager implements CartManagerInterface
      * @param EntityManagerInterface     $em
      * @param Registry                   $workflows
      * @param OrderEntryManagerInterface $orderEntryManager
-     * @param EventDispatcherInterface   $eventDispathcer
+     * @param EventDispatcherInterface   $eventDispatcher
      */
-    public function __construct(EntityManagerInterface $em, Registry $workflows, OrderEntryManagerInterface $orderEntryManager, EventDispatcherInterface $eventDispathcer)
+    public function __construct(EntityManagerInterface $em, Registry $workflows, OrderEntryManagerInterface $orderEntryManager, EventDispatcherInterface $eventDispatcher)
     {
         $this->em = $em;
         $this->workflows = $workflows;
         $this->orderEntryManager = $orderEntryManager;
-        $this->eventDispathcer = $eventDispathcer;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function getTargetClass(): string
@@ -76,7 +76,7 @@ class CartManager implements CartManagerInterface
             $workflow = $this->workflows->get($cart, 'checkout');
             $cart->setStatus($workflow->getDefinition()->getInitialPlaces()[0]);
 
-            $this->eventDispathcer->dispatch(new CartEvent($cart), SfsShopEvents::CART_CREATING);
+            $this->eventDispatcher->dispatch(new CartEvent($cart, null), SfsShopEvents::CART_CREATING);
         }
 
         $this->saveEntity($cart);
