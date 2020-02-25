@@ -5,22 +5,16 @@ namespace Softspring\ShopBundle\Model;
 interface SalableItemInterface
 {
     /**
+     * @param StoreInterface|null $store
+     *
      * @return float|null
      */
-    public function getPrice(): ?float;
+    public function getPrice(?StoreInterface $store): ?float;
 
     /**
-     * @param float|null $price
-     */
-    public function setPrice(?float $price): void;
-
-    /**
+     * @param StoreInterface|null $store
+     *
      * @return string|null
      */
-    public function getCurrency(): ?string;
-
-    /**
-     * @param string|null $currency
-     */
-    public function setCurrency(?string $currency): void;
+    public function getCurrency(?StoreInterface $store): ?string;
 }

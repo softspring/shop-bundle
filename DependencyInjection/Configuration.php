@@ -32,6 +32,13 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
 
+                ->arrayNode('price')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->defaultValue('App\Entity\ProductPrice')->end()
+                    ->end()
+                ->end()
+
                 ->arrayNode('order')
                     ->addDefaultsIfNotSet()
                     ->children()
