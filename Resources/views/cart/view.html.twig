@@ -26,7 +26,7 @@
                     {%  set totalPrice = totalPrice + entry.totalPrice %}
                     <tr>
                         <td>{{ entry.item.name }}</td>
-                        <td>{{ entry.item.price|number_format(2) }} <small>{{ cart.currency }}</small></td>
+                        <td>{{ entry.price|number_format(2) }} <small>{{ cart.currency }}</small></td>
                         <td>{{ form_widget(form.entries[loop.index0].quantity, {'attr':{'onchange':'submit()', 'class': 'quantity'}}) }}</td>
                         <td class="text-right">{{ entry.totalPrice|number_format(2) }} <small>{{ cart.currency }}</small></td>
                         <td>

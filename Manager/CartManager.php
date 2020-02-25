@@ -173,6 +173,7 @@ class CartManager implements CartManagerInterface
             $entry = $this->orderEntryManager->createEntity();
             $entry->setItem($item);
         }
+        $entry->setPrice($item->getPrice($cart->getStore()));
         $entry->setQuantity($quantity + (int)$entry->getQuantity());
         $cart->addEntry($entry);
 

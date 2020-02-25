@@ -15,6 +15,11 @@ abstract class OrderEntry implements OrderEntryInterface
     protected $item;
 
     /**
+     * @var float|null
+     */
+    protected $price;
+
+    /**
      * @var int|null
      */
     protected $quantity;
@@ -68,10 +73,26 @@ abstract class OrderEntry implements OrderEntryInterface
     }
 
     /**
+     * @return float|null
+     */
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param float|null $price
+     */
+    public function setPrice(?float $price): void
+    {
+        $this->price = $price;
+    }
+
+    /**
      * @return float
      */
     public function getTotalPrice(): float
     {
-        return $this->item->getPrice() * $this->getQuantity();
+        return $this->getPrice() * $this->getQuantity();
     }
 }

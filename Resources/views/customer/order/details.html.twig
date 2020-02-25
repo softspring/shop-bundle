@@ -21,7 +21,7 @@
         {% for entry in order.entries %}
             <tr>
                 <td>{{ entry.item.name }}</td>
-                <td>{{ entry.item.price }}€</td>
+                <td>{{ entry.price }} {{ order.currency }}</td>
                 <td>{{ entry.quantity }}</td>
                 <td>{{ entry.totalPrice }}€</td>
             </tr>

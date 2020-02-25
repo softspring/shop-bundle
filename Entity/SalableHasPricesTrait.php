@@ -68,7 +68,7 @@ trait SalableHasPricesTrait
             return $price->getStore() === $store;
         })->first();
 
-        return $price ? $price->getPrice() : null;
+        return $price ? $price->getPrice() : 0;
     }
 
     /**

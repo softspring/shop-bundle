@@ -25,6 +25,16 @@ interface OrderEntryInterface
     public function setQuantity(?int $quantity): void;
 
     /**
+     * @return float|null
+     */
+    public function getPrice(): ?float;
+
+    /**
+     * @param float|null $price
+     */
+    public function setPrice(?float $price): void;
+
+    /**
      * @return SalableItemInterface|null
      */
     public function getItem(): ?SalableItemInterface;
