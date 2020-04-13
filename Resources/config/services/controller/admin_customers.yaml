@@ -13,10 +13,12 @@ services:
             $config:
                 entity_attribute: 'customer'
                 list:
+                    is_granted: 'ROLE_SHOP_ADMIN_CUSTOMERS_LIST'
                     view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_LIST_VIEW
                     view: '@@SfsShop/admin/customer/list.html.twig'
                     view_page: '@@SfsShop/admin/customer/list-page.html.twig'
                 create:
+                    is_granted: 'ROLE_SHOP_ADMIN_CUSTOMERS_CREATE'
                     initialize_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_CREATE_INITIALIZE
                     form_valid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_CREATE_FORM_VALID
                     success_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_CREATE_SUCCESS
@@ -25,6 +27,7 @@ services:
                     success_redirect_to: 'sfs_shop_admin_customers_list'
                     view: '@@SfsShop/admin/customer/create.html.twig'
                 update:
+                    is_granted: 'ROLE_SHOP_ADMIN_CUSTOMERS_UPDATE'
                     param_converter_key: 'id'
                     initialize_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_UPDATE_INITIALIZE
                     form_valid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_UPDATE_FORM_VALID
@@ -34,6 +37,7 @@ services:
                     success_redirect_to: 'sfs_shop_admin_customers_list'
                     view: '@@SfsShop/admin/customer/update.html.twig'
                 delete:
+                    is_granted: 'ROLE_SHOP_ADMIN_CUSTOMERS_DELETE'
                     param_converter_key: 'id'
                     initialize_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_DELETE_INITIALIZE
                     form_valid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_DELETE_FORM_VALID
@@ -43,6 +47,7 @@ services:
                     success_redirect_to: 'sfs_shop_admin_customers_list'
                     view: '@@SfsShop/admin/customer/delete.html.twig'
                 read:
+                    is_granted: 'ROLE_SHOP_ADMIN_CUSTOMERS_DETAILS'
                     param_converter_key: 'id'
                     view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_CUSTOMERS_READ_VIEW
                     view: '@@SfsShop/admin/customer/read.html.twig'

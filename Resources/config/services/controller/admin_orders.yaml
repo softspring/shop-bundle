@@ -13,11 +13,13 @@ services:
             $config:
                 entity_attribute: 'order'
                 list:
+                    is_granted: 'ROLE_SHOP_ADMIN_ORDERS_LIST'
                     initialize_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_LIST_INITIALIZE
                     view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_LIST_VIEW
                     view: '@@SfsShop/admin/order/list.html.twig'
                     view_page: '@@SfsShop/admin/order/list-page.html.twig'
                 create:
+                    is_granted: 'ROLE_SHOP_ADMIN_ORDERS_CREATE'
                     initialize_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_CREATE_INITIALIZE
                     form_valid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_CREATE_FORM_VALID
                     success_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_CREATE_SUCCESS
@@ -26,6 +28,7 @@ services:
                     success_redirect_to: 'sfs_shop_admin_orders_list'
                     view: '@@SfsShop/admin/order/create.html.twig'
                 update:
+                    is_granted: 'ROLE_SHOP_ADMIN_ORDERS_UPDATE'
                     param_converter_key: 'id'
                     initialize_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_UPDATE_INITIALIZE
                     form_valid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_UPDATE_FORM_VALID
@@ -35,6 +38,7 @@ services:
                     success_redirect_to: 'sfs_shop_admin_orders_list'
                     view: '@@SfsShop/admin/order/update.html.twig'
                 delete:
+                    is_granted: 'ROLE_SHOP_ADMIN_ORDERS_DELETE'
                     param_converter_key: 'id'
                     initialize_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_DELETE_INITIALIZE
                     form_valid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_DELETE_FORM_VALID
@@ -44,6 +48,7 @@ services:
                     success_redirect_to: 'sfs_shop_admin_orders_list'
                     view: '@@SfsShop/admin/order/delete.html.twig'
                 read:
+                    is_granted: 'ROLE_SHOP_ADMIN_ORDERS_DETAILS'
                     param_converter_key: 'id'
                     view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_READ_VIEW
                     view: '@@SfsShop/admin/order/read.html.twig'
