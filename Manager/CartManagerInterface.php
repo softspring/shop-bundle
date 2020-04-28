@@ -22,4 +22,19 @@ interface CartManagerInterface extends CrudlEntityManagerInterface
     public function addItem(Request $request, SalableItemInterface $item): void;
 
     public function removeItem(Request $request, SalableItemInterface $item): void;
+
+    /**
+     * @return OrderInterface
+     */
+    public function createEntity();
+
+    /**
+     * @param OrderInterface $entity
+     */
+    public function saveEntity($entity): void;
+
+    /**
+     * @param OrderInterface $entity
+     */
+    public function deleteEntity($entity): void;
 }
