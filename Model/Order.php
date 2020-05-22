@@ -38,6 +38,31 @@ abstract class Order implements OrderInterface
     protected $transitions;
 
     /**
+     * @var float|null
+     */
+    protected $subtotalBeforeDiscounts;
+
+    /**
+     * @var float|null
+     */
+    protected $subtotal;
+
+    /**
+     * @var float|null
+     */
+    protected $taxes;
+
+    /**
+     * @var float|null
+     */
+    protected $shipping;
+
+    /**
+     * @var float|null
+     */
+    protected $total;
+
+    /**
      * @var string|null
      */
     protected $currency;
@@ -165,7 +190,7 @@ abstract class Order implements OrderInterface
     public function getTotal(): float
     {
         return array_sum($this->entries->map(function (OrderEntryInterface $entry) {
-            return $entry->getTotalPrice();
+            return $entry instanceof OrderEntryHasDiscountsInterface ? $entry->getTotalPriceWithDiscount() : $entry->getTotalPrice();
         })->toArray());
     }
 

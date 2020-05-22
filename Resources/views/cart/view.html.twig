@@ -21,12 +21,18 @@
                 </thead>
 
                 <tbody>
-                {% set totalPrice = 0 %}
                 {% for entry in cart.entries %}
-                    {%  set totalPrice = totalPrice + entry.totalPrice %}
                     <tr>
                         <td>{{ entry.item.name }}</td>
-                        <td>{{ entry.price|number_format(2) }} <small>{{ cart.currency }}</small></td>
+                        <td>
+                            {% if entry.price != entry.priceWithDiscount|default(false) %}
+                                <strike>{{ entry.price|number_format(2) }} <small>{{ cart.currency }}</small></strike>
+                                <br/>
+                                {{ entry.priceWithDiscount|number_format(2) }} <small>{{ cart.currency }}</small>
+                            {% else %}
+                                {{ entry.price|number_format(2) }} <small>{{ cart.currency }}</small>
+                            {% endif %}
+                        </td>
                         <td>{{ form_widget(form.entries[loop.index0].quantity, {'attr':{'onchange':'submit()', 'class': 'quantity'}}) }}</td>
                         <td class="text-right">{{ entry.totalPrice|number_format(2) }} <small>{{ cart.currency }}</small></td>
                         <td>
@@ -35,12 +41,12 @@
                     </tr>
                 {% endfor %}
                 </tbody>
-                <tfooter>
+                <tfoot>
                     <tr>
-                        <td colspan="4" align="right">Total <span class="font-weight-bold ml-3">{{ totalPrice|number_format(2) }}</span> <small>{{ cart.currency }}</small></td>
+                        <td colspan="4" align="right">Total <span class="font-weight-bold ml-3">{{ cart.total|number_format(2) }}</span> <small>{{ cart.currency }}</small></td>
                         <td></td>
                     </tr>
-                </tfooter>
+                </tfoot>
             </table>
 
             {{ form_rest(form) }}

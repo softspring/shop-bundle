@@ -2,6 +2,8 @@
 
 namespace Softspring\ShopBundle\Model;
 
+use Softspring\PaymentBundle\Model\DiscountInterface;
+
 abstract class OrderEntry implements OrderEntryInterface
 {
     /**
@@ -15,14 +17,19 @@ abstract class OrderEntry implements OrderEntryInterface
     protected $item;
 
     /**
-     * @var float|null
+     * @var float
      */
-    protected $price;
+    protected $price = 0;
 
     /**
-     * @var int|null
+     * @var int
      */
-    protected $quantity;
+    protected $quantity = 0;
+
+    /**
+     * @var float
+     */
+    protected $totalPrice = 0;
 
     /**
      * @return OrderInterface|null
@@ -57,35 +64,37 @@ abstract class OrderEntry implements OrderEntryInterface
     }
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getQuantity(): ?int
+    public function getQuantity(): int
     {
         return $this->quantity;
     }
 
     /**
-     * @param int|null $quantity
+     * @param int $quantity
      */
-    public function setQuantity(?int $quantity): void
+    public function setQuantity(int $quantity): void
     {
         $this->quantity = $quantity;
+        $this->updatePrices();
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getPrice(): ?float
+    public function getPrice(): float
     {
         return $this->price;
     }
 
     /**
-     * @param float|null $price
+     * @param float $price
      */
-    public function setPrice(?float $price): void
+    public function setPrice(float $price): void
     {
         $this->price = $price;
+        $this->updatePrices();
     }
 
     /**
@@ -93,6 +102,31 @@ abstract class OrderEntry implements OrderEntryInterface
      */
     public function getTotalPrice(): float
     {
-        return $this->getPrice() * $this->getQuantity();
+        return (float) $this->totalPrice;
+    }
+
+    protected function updatePrices()
+    {
+        if ($this instanceof OrderEntryHasDiscountsInterface) {
+            $this->priceWithDiscount = $this->getPrice();
+
+            foreach ($this->getDiscountRules() as $discountRule) {
+                $discount = $discountRule->getDiscount();
+
+                switch ($discount->getType()) {
+                    case DiscountInterface::TYPE_PERCENTAGE:
+                        $this->priceWithDiscount = $this->getPrice() - ($this->getPrice() * $discount->getValue() / 100);
+                        break;
+
+                    case DiscountInterface::TYPE_FIXED_AMOUNT:
+                        $this->priceWithDiscount = $this->getPrice() - $discount->getValue();
+                        break;
+                }
+            }
+
+            $this->totalPriceWithDiscount = $this->getPriceWithDiscount() * $this->getQuantity();
+        }
+
+        $this->totalPrice = $this->getPrice() * $this->getQuantity();
     }
 }

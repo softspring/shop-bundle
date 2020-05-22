@@ -15,24 +15,24 @@ interface OrderEntryInterface
     public function setOrder(?OrderInterface $order): void;
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getQuantity(): ?int;
+    public function getQuantity(): int;
 
     /**
-     * @param int|null $quantity
+     * @param int $quantity
      */
-    public function setQuantity(?int $quantity): void;
+    public function setQuantity(int $quantity): void;
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getPrice(): ?float;
+    public function getPrice(): float;
 
     /**
-     * @param float|null $price
+     * @param float $price
      */
-    public function setPrice(?float $price): void;
+    public function setPrice(float $price): void;
 
     /**
      * @return SalableItemInterface|null

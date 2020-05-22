@@ -10,7 +10,7 @@ services:
         resource: '../../../Controller/*'
         public: true
 
-    Softspring\ShopBundle\Entity\EntityListener\StoreOrderTransitionsListener:
+    Softspring\ShopBundle\EntityListener\StoreOrderTransitionsListener:
         tags:
             - { name: 'doctrine.orm.entity_listener', event: 'preUpdate', entity: 'Softspring\ShopBundle\Model\Order', lazy: true }
             - { name: 'doctrine.orm.entity_listener', event: 'prePersist', entity: 'Softspring\ShopBundle\Model\Order', lazy: true }

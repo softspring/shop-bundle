@@ -1,6 +1,6 @@
 <?php
 
-namespace Softspring\ShopBundle\Entity\EntityListener;
+namespace Softspring\ShopBundle\EntityListener;
 
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\Persistence\Event\LifecycleEventArgs;

@@ -4,7 +4,9 @@ namespace Softspring\ShopBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Softspring\CrudlBundle\Manager\CrudlEntityManagerTrait;
+use Softspring\PaymentBundle\Manager\DiscountRuleManagerInterface;
 use Softspring\ShopBundle\Event\CartEvent;
+use Softspring\ShopBundle\Model\OrderEntryHasDiscountsInterface;
 use Softspring\ShopBundle\Model\OrderInterface;
 use Softspring\ShopBundle\Model\OrderEntryInterface;
 use Softspring\ShopBundle\Model\SalableItemInterface;
@@ -39,19 +41,26 @@ class CartManager implements CartManagerInterface
     protected $eventDispatcher;
 
     /**
+     * @var DiscountRuleManagerInterface|null
+     */
+    protected $discountRuleManager;
+
+    /**
      * CartManager constructor.
      *
-     * @param EntityManagerInterface     $em
-     * @param Registry                   $workflows
-     * @param OrderEntryManagerInterface $orderEntryManager
-     * @param EventDispatcherInterface   $eventDispatcher
+     * @param EntityManagerInterface            $em
+     * @param Registry                          $workflows
+     * @param OrderEntryManagerInterface        $orderEntryManager
+     * @param EventDispatcherInterface          $eventDispatcher
+     * @param DiscountRuleManagerInterface|null $discountRuleManager
      */
-    public function __construct(EntityManagerInterface $em, Registry $workflows, OrderEntryManagerInterface $orderEntryManager, EventDispatcherInterface $eventDispatcher)
+    public function __construct(EntityManagerInterface $em, Registry $workflows, OrderEntryManagerInterface $orderEntryManager, EventDispatcherInterface $eventDispatcher, ?DiscountRuleManagerInterface $discountRuleManager)
     {
         $this->em = $em;
         $this->workflows = $workflows;
         $this->orderEntryManager = $orderEntryManager;
         $this->eventDispatcher = $eventDispatcher;
+        $this->discountRuleManager = $discountRuleManager;
     }
 
     public function getTargetClass(): string
@@ -169,13 +178,21 @@ class CartManager implements CartManagerInterface
 
         $entry = $cart->getEntryByItem($item);
         if (!$entry) {
-            /** @var OrderEntryInterface $entry */
             $entry = $this->orderEntryManager->createEntity();
             $entry->setItem($item);
         }
         $entry->setPrice($item->getPrice($cart->getStore()));
         $entry->setQuantity($quantity + (int)$entry->getQuantity());
+
         $cart->addEntry($entry);
+
+        if ($entry instanceof OrderEntryHasDiscountsInterface) {
+            if (!$this->discountRuleManager instanceof DiscountRuleManagerInterface) {
+                throw new \Exception('Discount rule manager is not registered');
+            }
+
+            $this->discountRuleManager->applyDiscountsToOrderEntry($entry);
+        }
 
         $this->saveEntity($cart);
     }
