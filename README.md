@@ -5,6 +5,7 @@
 [![Latest Unstable Version](https://poser.pugx.org/softspring/shop-bundle/v/unstable.svg)](https://packagist.org/packages/softspring/shop-bundle)
 [![License](https://poser.pugx.org/softspring/shop-bundle/license.svg)](https://packagist.org/packages/softspring/shop-bundle)
 [![Total Downloads](https://poser.pugx.org/softspring/shop-bundle/downloads)](https://packagist.org/packages/softspring/shop-bundle)
+[![Build status](https://travis-ci.com/softspring/shop-bundle.svg?branch=master)](https://travis-ci.com/softspring/shop-bundle)
 
 # Installation
 
