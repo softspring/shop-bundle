@@ -3,28 +3,15 @@
 namespace Softspring\ShopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Softspring\ShopBundle\Model\StoreSimpleCountriesTrait as StoreSimpleCountriesTraitModel;
 
 trait StoreSimpleCountriesTrait
 {
+    use StoreSimpleCountriesTraitModel;
+
     /**
      * @var array
      * @ORM\Column(name="countries", type="simple_array", nullable=false)
      */
     protected $countries = [];
-
-    /**
-     * @return array
-     */
-    public function getCountries(): array
-    {
-        return $this->countries;
-    }
-
-    /**
-     * @param array $countries
-     */
-    public function setCountries(array $countries): void
-    {
-        $this->countries = $countries;
-    }
 }

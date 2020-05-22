@@ -3,9 +3,8 @@
 namespace Softspring\ShopBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Softspring\CustomerBundle\Model\CustomerInterface;
 
-interface ShopCustomerInterface extends CustomerInterface
+interface ShopCustomerInterface
 {
     /**
      * @return Collection|OrderInterface[]
