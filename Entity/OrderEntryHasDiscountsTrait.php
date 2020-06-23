@@ -15,7 +15,7 @@ trait OrderEntryHasDiscountsTrait
      * @var DiscountRuleInterface[]|Collection
      * @ORM\ManyToMany(targetEntity="Softspring\PaymentBundle\Model\DiscountRuleInterface")
      * @ORM\JoinTable(name="shop_order_entry_discount_rules",
-     *      joinColumns={@ORM\JoinColumn(name="shop_order_entry_id", referencedColumnName="id")},
+     *      joinColumns={@ORM\JoinColumn(name="shop_order_entry_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="discount_rule_id", referencedColumnName="id")}
      * )
      */
