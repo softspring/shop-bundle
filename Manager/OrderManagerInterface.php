@@ -10,25 +10,27 @@ interface OrderManagerInterface extends CrudlEntityManagerInterface
     /**
      * @param string         $transition
      * @param OrderInterface $order
+     * @param string         $workflowName
      *
      * @return array
-     * @throws \Exception
      */
-    public function getOrderTransitionMetadata(string $transition, OrderInterface $order): array;
+    public function getOrderTransitionMetadata(string $transition, OrderInterface $order, string $workflowName = 'order'): array;
 
     /**
      * @param string         $transition
      * @param OrderInterface $order
+     * @param string         $workflowName
      *
      * @return bool
-     * @throws \Exception
      */
-    public function transition(string $transition, OrderInterface $order): bool;
+    public function transition(string $transition, OrderInterface $order, string $workflowName = 'order'): bool;
 
     /**
-     * @return string[]
+     * @param string $workflowName
+     *
+     * @return array
      */
-    public function getStatuses(): array;
+    public function getStatuses(string $workflowName = 'order'): array;
 
     /**
      * @return OrderInterface

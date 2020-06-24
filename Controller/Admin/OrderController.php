@@ -40,10 +40,11 @@ class OrderController extends AbstractController
      * @param OrderInterface $order
      * @param string         $transition
      * @param Request        $request
+     * @param string         $workflowName
      *
      * @return Response
      */
-    public function transition(OrderInterface $order, string $transition, Request $request): Response
+    public function transition(OrderInterface $order, string $transition, Request $request, string $workflowName): Response
     {
         $transitionMetadata = $this->orderManager->getOrderTransitionMetadata($transition, $order);
 
@@ -67,7 +68,7 @@ class OrderController extends AbstractController
                         return $response;
                     }
 
-                    if ($response = $this->applyTransition($transition, $transitionMetadata, $order, $request)) {
+                    if ($response = $this->applyTransition($transition, $transitionMetadata, $order, $workflowName, $request)) {
                         return $response;
                     }
                 } else {
@@ -79,7 +80,7 @@ class OrderController extends AbstractController
 
             $viewData['form'] = $form->createView();
         } else {
-            if ($response = $this->applyTransition($transition, $transitionMetadata, $order, $request)) {
+            if ($response = $this->applyTransition($transition, $transitionMetadata, $order, $workflowName, $request)) {
                 return $response;
             }
         }
@@ -93,19 +94,19 @@ class OrderController extends AbstractController
      * @param string         $transition
      * @param array          $transitionMetadata
      * @param OrderInterface $order
+     * @param string         $workflowName
      * @param Request        $request
      *
      * @return Response|null
-     * @throws \Exception
      */
-    private function applyTransition(string $transition, array $transitionMetadata, OrderInterface $order, Request $request): ?Response
+    private function applyTransition(string $transition, array $transitionMetadata, OrderInterface $order, string $workflowName, Request $request): ?Response
     {
         if ($response = $this->dispatchGetResponse("sfs_shop.admin.orders.transition.{$transition}.before", new GetResponseOrderTransitionEvent($transition, $transitionMetadata, $order, $request))) {
             return $response;
         }
 
         // if no form is required, apply transition directly
-        if (!$this->orderManager->transition($transition, $order)) {
+        if (!$this->orderManager->transition($transition, $order, $workflowName)) {
             // error
         }
 

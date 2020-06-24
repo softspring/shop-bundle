@@ -39,15 +39,11 @@ class OrderManager implements OrderManagerInterface
     }
 
     /**
-     * @param string         $transition
-     * @param OrderInterface $order
-     *
-     * @return array
-     * @throws \Exception
+     * @inheritDoc
      */
-    public function getOrderTransitionMetadata(string $transition, OrderInterface $order): array
+    public function getOrderTransitionMetadata(string $transition, OrderInterface $order, string $workflowName = 'order'): array
     {
-        $workflow = $this->workflows->get($order, 'order');
+        $workflow = $this->workflows->get($order, $workflowName);
 
         if (!$workflow->can($order, $transition)) {
             throw new \Exception('Transition is not enabled');
@@ -63,15 +59,11 @@ class OrderManager implements OrderManagerInterface
     }
 
     /**
-     * @param string         $transition
-     * @param OrderInterface $order
-     *
-     * @return bool
-     * @throws \Exception
+     * @inheritDoc
      */
-    public function transition(string $transition, OrderInterface $order): bool
+    public function transition(string $transition, OrderInterface $order, string $workflowName = 'order'): bool
     {
-        $workflow = $this->workflows->get($order, 'order');
+        $workflow = $this->workflows->get($order, $workflowName);
 
         if (!$workflow->can($order, $transition)) {
             return false;
@@ -86,9 +78,9 @@ class OrderManager implements OrderManagerInterface
     /**
      * @inheritDoc
      */
-    public function getStatuses(): array
+    public function getStatuses(string $workflowName = 'order'): array
     {
-        $workflow = $this->workflows->get($this->createEntity(), 'order');
+        $workflow = $this->workflows->get($this->createEntity(), $workflowName);
         $definition = $workflow->getDefinition();
         return $definition->getPlaces();
     }

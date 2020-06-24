@@ -43,6 +43,7 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('class')->defaultValue('App\Entity\Order')->end()
+                        ->scalarNode('process_workflow')->defaultValue('order')->end()
                         ->arrayNode('entry')
                             ->addDefaultsIfNotSet()
                             ->children()

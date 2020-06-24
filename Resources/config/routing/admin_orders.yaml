@@ -21,3 +21,5 @@ sfs_shop_admin_orders_read:
 sfs_shop_admin_orders_transition:
     controller: Softspring\ShopBundle\Controller\Admin\OrderController::transition
     path: /{order}/{transition}
+    defaults:
+        workflowName: '%sfs_shop.order.process_workflow%'
