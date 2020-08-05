@@ -46,7 +46,7 @@ class OrderController extends AbstractController
      */
     public function transition(OrderInterface $order, string $transition, Request $request, string $workflowName): Response
     {
-        $transitionMetadata = $this->orderManager->getOrderTransitionMetadata($transition, $order);
+        $transitionMetadata = $this->orderManager->getOrderTransitionMetadata($transition, $order, $workflowName);
 
         if ($response = $this->dispatchGetResponse("sfs_shop.admin.orders.transition.{$transition}.initialize", new GetResponseOrderTransitionEvent($transition, $transitionMetadata, $order, $request))) {
             return $response;
