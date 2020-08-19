@@ -6,11 +6,13 @@ use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\CoreBundle\Event\GetResponseFormEvent;
 use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\ShopBundle\Event\GetResponseOrderTransitionEvent;
+use Softspring\ShopBundle\Exception\OrderTransitionNotValid;
 use Softspring\ShopBundle\Manager\OrderManagerInterface;
 use Softspring\ShopBundle\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Workflow\Exception\TransitionException;
 
 class OrderController extends AbstractController
 {
@@ -46,48 +48,56 @@ class OrderController extends AbstractController
      */
     public function transition(OrderInterface $order, string $transition, Request $request, string $workflowName): Response
     {
-        $transitionMetadata = $this->orderManager->getOrderTransitionMetadata($transition, $order, $workflowName);
+        try {
+            $transitionMetadata = $this->orderManager->getOrderTransitionMetadata($transition, $order, $workflowName);
 
-        if ($response = $this->dispatchGetResponse("sfs_shop.admin.orders.transition.{$transition}.initialize", new GetResponseOrderTransitionEvent($transition, $transitionMetadata, $order, $request))) {
-            return $response;
-        }
+            if ($response = $this->dispatchGetResponse("sfs_shop.admin.orders.transition.{$transition}.initialize", new GetResponseOrderTransitionEvent($transition, $transitionMetadata, $order, $request))) {
+                return $response;
+            }
 
-        // if configured, check user role before running the transition
-        if (!empty($transitionMetadata['is_granted'])) {
-            $this->denyAccessUnlessGranted($transitionMetadata['is_granted'], $order);
-        }
+            // if configured, check user role before running the transition
+            if (!empty($transitionMetadata['is_granted'])) {
+                $this->denyAccessUnlessGranted($transitionMetadata['is_granted'], $order);
+            }
 
-        $viewData = new \ArrayObject(['order' => $order]);
+            $viewData = new \ArrayObject(['order' => $order]);
 
-        if (!empty($transitionMetadata['form'])) {
-            $form = $this->createForm($transitionMetadata['form'], $order)->handleRequest($request);
+            if (!empty($transitionMetadata['form'])) {
+                $form = $this->createForm($transitionMetadata['form'], $order)->handleRequest($request);
 
-            if ($form->isSubmitted()) {
-                if ($form->isValid()) {
-                    if ($response = $this->dispatchGetResponse("sfs_shop.admin.orders.transition.{$transition}.form_valid", new GetResponseFormEvent($form, $request))) {
-                        return $response;
+                if ($form->isSubmitted()) {
+                    if ($form->isValid()) {
+                        if ($response = $this->dispatchGetResponse("sfs_shop.admin.orders.transition.{$transition}.form_valid", new GetResponseFormEvent($form, $request))) {
+                            return $response;
+                        }
+
+                        if ($response = $this->applyTransition($transition, $transitionMetadata, $order, $workflowName, $request)) {
+                            return $response;
+                        }
+                    } else {
+                        if ($response = $this->dispatchGetResponse("sfs_shop.admin.orders.transition.{$transition}.form_invalid", new GetResponseFormEvent($form, $request))) {
+                            return $response;
+                        }
                     }
+                }
 
-                    if ($response = $this->applyTransition($transition, $transitionMetadata, $order, $workflowName, $request)) {
-                        return $response;
-                    }
-                } else {
-                    if ($response = $this->dispatchGetResponse("sfs_shop.admin.orders.transition.{$transition}.form_invalid", new GetResponseFormEvent($form, $request))) {
-                        return $response;
-                    }
+                $viewData['form'] = $form->createView();
+            } else {
+                if ($response = $this->applyTransition($transition, $transitionMetadata, $order, $workflowName, $request)) {
+                    return $response;
                 }
             }
 
-            $viewData['form'] = $form->createView();
-        } else {
-            if ($response = $this->applyTransition($transition, $transitionMetadata, $order, $workflowName, $request)) {
+            $this->eventDispatcher->dispatch(new ViewEvent($viewData), "sfs_shop.admin.orders.transition.{$transition}.view");
+
+            return $this->render('@SfsShop/admin/orders/' . $transition . '.html.twig', $viewData->getArrayCopy());
+        } catch (OrderTransitionNotValid $e) {
+            if ($response = $this->dispatchGetResponse("sfs_shop.admin.orders.transition.{$transition}.not_valid", new GetResponseOrderTransitionEvent($transition, [], $order, $request))) {
                 return $response;
             }
+
+            return $this->redirectToRoute('sfs_shop_admin_orders_read', ['order' => $order]);
         }
-
-        $this->eventDispatcher->dispatch(new ViewEvent($viewData), "sfs_shop.admin.orders.transition.{$transition}.view");
-
-        return $this->render('@SfsShop/admin/orders/'.$transition.'.html.twig', $viewData->getArrayCopy());
     }
 
     /**

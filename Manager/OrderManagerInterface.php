@@ -3,6 +3,7 @@
 namespace Softspring\ShopBundle\Manager;
 
 use Softspring\CrudlBundle\Manager\CrudlEntityManagerInterface;
+use Softspring\ShopBundle\Exception\OrderTransitionNotValid;
 use Softspring\ShopBundle\Model\OrderInterface;
 
 interface OrderManagerInterface extends CrudlEntityManagerInterface
@@ -13,6 +14,7 @@ interface OrderManagerInterface extends CrudlEntityManagerInterface
      * @param string         $workflowName
      *
      * @return array
+     * @throws OrderTransitionNotValid
      */
     public function getOrderTransitionMetadata(string $transition, OrderInterface $order, string $workflowName = 'order'): array;
 

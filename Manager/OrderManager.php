@@ -4,6 +4,7 @@ namespace Softspring\ShopBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Softspring\CrudlBundle\Manager\CrudlEntityManagerTrait;
+use Softspring\ShopBundle\Exception\OrderTransitionNotValid;
 use Softspring\ShopBundle\Model\OrderInterface;
 use Symfony\Component\Workflow\Registry;
 
@@ -46,7 +47,7 @@ class OrderManager implements OrderManagerInterface
         $workflow = $this->workflows->get($order, $workflowName);
 
         if (!$workflow->can($order, $transition)) {
-            throw new \Exception('Transition is not enabled');
+            throw new OrderTransitionNotValid($order, $transition);
         }
 
         foreach ($workflow->getEnabledTransitions($order) as $transitionItem) {
