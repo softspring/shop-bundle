@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Softspring\ShopBundle\Doctrine\Filter\StoreFilter;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 class StoreDoctrineFilterListener implements EventSubscriberInterface
@@ -40,7 +41,10 @@ class StoreDoctrineFilterListener implements EventSubscriberInterface
         ];
     }
 
-    public function onRequestEnableDoctrineStoreFilter(GetResponseEvent $event)
+    /**
+     * @param GetResponseEvent|RequestEvent $event
+     */
+    public function onRequestEnableDoctrineStoreFilter($event)
     {
         $request = $event->getRequest();
 
