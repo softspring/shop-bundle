@@ -19,6 +19,7 @@ admin_orders:
     list:
         page_title: "Orders"
         title: "Orders"
+        breadcrumb: "Orders"
         table:
             id.header: "Id"
             number.header: "Number"
@@ -38,6 +39,7 @@ admin_orders:
     create:
         page_title: "Create order"
         title: "Create order"
+        breadcrumb: "New"
         form:
         actions:
             create.button: "Create"
@@ -45,6 +47,7 @@ admin_orders:
     update:
         page_title: "Update order"
         title: "Update order"
+        breadcrumb: "Edit"
         form:
         actions:
             update.button: "Update"
@@ -53,6 +56,7 @@ admin_orders:
     read:
         page_title: "Order #%orderNumber%"
         title: "Order #%orderNumber%"
+        breadcrumb: "#%orderNumber%"
         entries:
             table:
                 product.header: "Product"
@@ -68,6 +72,8 @@ admin_orders:
 admin_stores:
     list:
         page_title: "Stores"
+        title: "Stores"
+        breadcrumb: "Stores"
         fields:
             id.header: "Store"
             name.header: "Name"
@@ -82,6 +88,7 @@ admin_stores:
     create:
         page_title: "Create store"
         title: "Create store"
+        breadcrumb: "New"
         form:
             id.label: "ID"
             enabled.label: "Enabled"
@@ -95,6 +102,7 @@ admin_stores:
     update:
         page_title: "Update store"
         title: "Update store"
+        breadcrumb: "Edit"
         form:
             id.label: "ID"
             enabled.label: "Enabled"
@@ -112,6 +120,7 @@ customer:
         details:
             page_title: "Order #%orderNumber%"
             title: "Order #%orderNumber%"
+            breadcrumb: "#%orderNumber%"
             entries:
                 table:
                     product.header: "Product"
@@ -134,11 +143,13 @@ admin_customers:
     list:
         page_title: "Customers"
         title: "Customers"
+        breadcrumb: "Customers"
         fields:
             name.header: "Name"
     create:
         page_title: "Create customer"
         title: "Create customer"
+        breadcrumb: "New"
         form:
             name.label: "Name"
         actions:
@@ -147,6 +158,7 @@ admin_customers:
     update:
         page_title: "Update customer"
         title: "Update customer"
+        breadcrumb: "Edit"
         form:
             name.label: "Name"
         actions:
