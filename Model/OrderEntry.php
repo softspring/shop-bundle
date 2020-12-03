@@ -14,7 +14,7 @@ abstract class OrderEntry implements OrderEntryInterface
     /**
      * @var SalableItemInterface|null
      */
-    protected $item;
+    protected $salableItem;
 
     /**
      * @var float
@@ -50,17 +50,17 @@ abstract class OrderEntry implements OrderEntryInterface
     /**
      * @return SalableItemInterface|null
      */
-    public function getItem(): ?SalableItemInterface
+    public function getSalableItem(): ?SalableItemInterface
     {
-        return $this->item;
+        return $this->salableItem;
     }
 
     /**
-     * @param SalableItemInterface|null $item
+     * @param SalableItemInterface|null $salableItem
      */
-    public function setItem(?SalableItemInterface $item): void
+    public function setSalableItem(?SalableItemInterface $salableItem): void
     {
-        $this->item = $item;
+        $this->salableItem = $salableItem;
     }
 
     /**
@@ -105,28 +105,36 @@ abstract class OrderEntry implements OrderEntryInterface
         return (float) $this->totalPrice;
     }
 
+    /**
+     * @param float $totalPrice
+     */
+    public function setTotalPrice(float $totalPrice): void
+    {
+        $this->totalPrice = $totalPrice;
+    }
+
     protected function updatePrices()
     {
         if ($this instanceof OrderEntryHasDiscountsInterface) {
-            $this->priceWithDiscount = $this->getPrice();
+            $this->setPriceWithDiscount($this->getPrice());
 
             foreach ($this->getDiscountRules() as $discountRule) {
                 $discount = $discountRule->getDiscount();
 
                 switch ($discount->getType()) {
                     case DiscountInterface::TYPE_PERCENTAGE:
-                        $this->priceWithDiscount = $this->getPrice() - ($this->getPrice() * $discount->getValue() / 100);
+                        $this->setPriceWithDiscount($this->getPrice() - ($this->getPrice() * $discount->getValue() / 100));
                         break;
 
                     case DiscountInterface::TYPE_FIXED_AMOUNT:
-                        $this->priceWithDiscount = $this->getPrice() - $discount->getValue();
+                        $this->setPriceWithDiscount($this->getPrice() - $discount->getValue());
                         break;
                 }
             }
 
-            $this->totalPriceWithDiscount = $this->getPriceWithDiscount() * $this->getQuantity();
+            $this->setTotalPriceWithDiscount($this->getPriceWithDiscount() * $this->getQuantity());
         }
 
-        $this->totalPrice = $this->getPrice() * $this->getQuantity();
+        $this->setTotalPrice($this->getPrice() * $this->getQuantity());
     }
 }

@@ -8,8 +8,8 @@ use Softspring\PaymentBundle\Manager\DiscountRuleManagerInterface;
 use Softspring\ShopBundle\Event\CartEvent;
 use Softspring\ShopBundle\Model\OrderEntryHasDiscountsInterface;
 use Softspring\ShopBundle\Model\OrderInterface;
-use Softspring\ShopBundle\Model\OrderEntryInterface;
 use Softspring\ShopBundle\Model\SalableItemInterface;
+use Softspring\ShopBundle\Model\StoreAwareInterface;
 use Softspring\ShopBundle\SfsShopEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -72,6 +72,7 @@ class CartManager implements CartManagerInterface
     {
         $session = $this->getSession($request);
 
+        /** @var OrderInterface $cart */
         $cart = $session->get('cart');
         $cart = $cart ? $this->getRepository()->findOneById($cart) : null;
 
@@ -179,9 +180,9 @@ class CartManager implements CartManagerInterface
         $entry = $cart->getEntryByItem($item);
         if (!$entry) {
             $entry = $this->orderEntryManager->createEntity();
-            $entry->setItem($item);
+            $entry->setSalableItem($item);
         }
-        $entry->setPrice($item->getPrice($cart->getStore()));
+        $entry->setPrice($item->getPrice($cart instanceof StoreAwareInterface ? $cart->getStore() : null));
         $entry->setQuantity($quantity + (int)$entry->getQuantity());
 
         $cart->addEntry($entry);

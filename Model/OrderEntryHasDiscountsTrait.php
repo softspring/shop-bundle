@@ -73,4 +73,20 @@ trait OrderEntryHasDiscountsTrait
     {
         return $this->totalPriceWithDiscount;
     }
+
+    /**
+     * @param float $priceWithDiscount
+     */
+    public function setPriceWithDiscount(float $priceWithDiscount): void
+    {
+        $this->priceWithDiscount = $priceWithDiscount;
+    }
+
+    /**
+     * @param float $totalPriceWithDiscount
+     */
+    public function setTotalPriceWithDiscount(float $totalPriceWithDiscount): void
+    {
+        $this->totalPriceWithDiscount = $totalPriceWithDiscount;
+    }
 }

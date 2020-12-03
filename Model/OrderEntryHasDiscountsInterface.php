@@ -24,5 +24,9 @@ interface OrderEntryHasDiscountsInterface
 
     public function getPriceWithDiscount(): float;
 
+    public function setPriceWithDiscount(float $priceWithDiscount): void;
+
     public function getTotalPriceWithDiscount(): float;
+
+    public function setTotalPriceWithDiscount(float $totalPriceWithDiscount): void;
 }
