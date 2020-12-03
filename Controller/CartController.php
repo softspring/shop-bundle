@@ -8,7 +8,7 @@ use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\ShopBundle\Event\GetCartItemEvent;
 use Softspring\ShopBundle\Event\GetResponseCartEvent;
 use Softspring\ShopBundle\Event\GetResponseCartTransitionEvent;
-use Softspring\ShopBundle\Form\CartUpdateForm;
+use Softspring\ShopBundle\Form\CartUpdateFormInterface;
 use Softspring\ShopBundle\Manager\CartManagerInterface;
 use Softspring\ShopBundle\Model\OrderInterface;
 use Softspring\ShopBundle\Model\SalableItemInterface;
@@ -31,15 +31,15 @@ class CartController extends AbstractController
     protected $eventDispatcher;
 
     /**
-     * CartController constructor.
-     *
-     * @param CartManagerInterface     $cartManager
-     * @param EventDispatcherInterface $eventDispatcher
+     * @var CartUpdateFormInterface
      */
-    public function __construct(CartManagerInterface $cartManager, EventDispatcherInterface $eventDispatcher)
+    protected $cartUpdateForm;
+
+    public function __construct(CartManagerInterface $cartManager, EventDispatcherInterface $eventDispatcher, CartUpdateFormInterface $cartUpdateForm)
     {
         $this->cartManager = $cartManager;
         $this->eventDispatcher = $eventDispatcher;
+        $this->cartUpdateForm = $cartUpdateForm;
     }
 
     /**
@@ -101,10 +101,12 @@ class CartController extends AbstractController
     {
         $cart = $this->cartManager->getCart($request);
 
-        $form = $this->createForm(CartUpdateForm::class, $cart, [
+        $form = $this->createForm(get_class($this->cartUpdateForm), $cart, [
             'action' => $this->generateUrl('sfs_shop_cart_update'),
             'method' => 'POST',
-        ])->handleRequest($request);
+        ]);
+
+        $form->handleRequest($request);
 
         return $form;
     }
