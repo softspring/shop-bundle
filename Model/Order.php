@@ -160,7 +160,7 @@ abstract class Order implements OrderInterface
     public function getEntryByItem(SalableItemInterface $item): ?OrderEntryInterface
     {
         $filteredEntries = $this->getEntries()->filter(function (OrderEntryInterface $entry) use ($item) {
-            return $entry->getItem() === $item;
+            return $entry->getSalableItem() === $item;
         });
 
         $item = $filteredEntries->first();

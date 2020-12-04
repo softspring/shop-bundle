@@ -56,7 +56,7 @@ class OrderTest extends TestCase
 //        $price = new PriceSimpleExample();
 //        $price->setPrice(3);
 //        $item->addPrice($price);
-        $entry1->getSalableItem($item);
+        $entry1->setSalableItem($item);
 
 //        $this->assertEquals(0, $order->getTotal());
 //        $entry1->setQuantity(1);
