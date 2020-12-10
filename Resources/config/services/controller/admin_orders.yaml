@@ -1,3 +1,11 @@
+parameters:
+    sfs_shop.admin.orders.list_view: '@@SfsShop/admin/order/list.html.twig'
+    sfs_shop.admin.orders.list_page_view: '@@SfsShop/admin/order/list-page.html.twig'
+    sfs_shop.admin.orders.create_view: '@@SfsShop/admin/order/create.html.twig'
+    sfs_shop.admin.orders.update_view: '@@SfsShop/admin/order/update.html.twig'
+    sfs_shop.admin.orders.delete_view: '@@SfsShop/admin/order/delete.html.twig'
+    sfs_shop.admin.orders.read_view: '@@SfsShop/admin/order/read.html.twig'
+
 services:
     sfs_shop.admin.order.controller:
         class: Softspring\CrudlBundle\Controller\CrudlController
@@ -16,8 +24,8 @@ services:
                     is_granted: 'ROLE_SHOP_ADMIN_ORDERS_LIST'
                     initialize_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_LIST_INITIALIZE
                     view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_LIST_VIEW
-                    view: '@@SfsShop/admin/order/list.html.twig'
-                    view_page: '@@SfsShop/admin/order/list-page.html.twig'
+                    view: '%sfs_shop.admin.orders.list_view%'
+                    view_page: '%sfs_shop.admin.orders.list_page_view%'
                 create:
                     is_granted: 'ROLE_SHOP_ADMIN_ORDERS_CREATE'
                     initialize_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_CREATE_INITIALIZE
@@ -26,7 +34,7 @@ services:
                     form_invalid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_CREATE_FORM_INVALID
                     view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_CREATE_VIEW
                     success_redirect_to: 'sfs_shop_admin_orders_list'
-                    view: '@@SfsShop/admin/order/create.html.twig'
+                    view: '%sfs_shop.admin.orders.create_view%'
                 update:
                     is_granted: 'ROLE_SHOP_ADMIN_ORDERS_UPDATE'
                     param_converter_key: 'id'
@@ -36,7 +44,7 @@ services:
                     form_invalid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_UPDATE_FORM_INVALID
                     view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_UPDATE_VIEW
                     success_redirect_to: 'sfs_shop_admin_orders_list'
-                    view: '@@SfsShop/admin/order/update.html.twig'
+                    view: '%sfs_shop.admin.orders.update_view%'
                 delete:
                     is_granted: 'ROLE_SHOP_ADMIN_ORDERS_DELETE'
                     param_converter_key: 'id'
@@ -46,9 +54,9 @@ services:
                     form_invalid_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_DELETE_FORM_INVALID
                     view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_DELETE_VIEW
                     success_redirect_to: 'sfs_shop_admin_orders_list'
-                    view: '@@SfsShop/admin/order/delete.html.twig'
+                    view: '%sfs_shop.admin.orders.delete_view%'
                 read:
                     is_granted: 'ROLE_SHOP_ADMIN_ORDERS_DETAILS'
                     param_converter_key: 'id'
                     view_event_name: !php/const Softspring\ShopBundle\SfsShopEvents::ADMIN_ORDERS_READ_VIEW
-                    view: '@@SfsShop/admin/order/read.html.twig'
+                    view: '%sfs_shop.admin.orders.read_view%'
