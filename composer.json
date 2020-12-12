@@ -5,7 +5,6 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
-        "softspring/catalog-bundle": "^1.0@dev",
         "softspring/crudl-bundle": "^1.0.1",
         "softspring/doctrine-templates": "^1.1@dev",
         "symfony/workflow": "*"
@@ -15,6 +14,9 @@
         "doctrine/common": "^2.12",
         "doctrine/orm": "^2.7",
         "symfony/http-foundation": "^5.0"
+    },
+    "suggest": {
+        "softspring/catalog-bundle": "Catalog models and base controllers"
     },
     "autoload": {
         "psr-4": {
