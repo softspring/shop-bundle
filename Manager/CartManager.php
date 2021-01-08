@@ -101,7 +101,7 @@ class CartManager implements CartManagerInterface
         $workflow = $this->workflows->get($cart, 'checkout');
 
         if (!$workflow->can($cart, $transition)) {
-            throw new \Exception('Transition is not enabled');
+            throw new \Exception(sprintf('Transition "%s" is not enabled', $transition));
         }
 
         foreach ($workflow->getEnabledTransitions($cart) as $transitionItem) {
